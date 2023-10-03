@@ -122,6 +122,16 @@ public class Produto {
     private Double margemLucro2;
     private Double margemLucro3;
     private Double margemLucro4;
+    private Double margemFopo;
+    private Double margemIdeal;
+    // Campos de terceiros para associacao em MAP
+    private String codigoNcm;
+    private String codigoCest;
+    private String unidadeMedida;
+    private String categoriaNome;
+    private String subcategoriaNome;
+    private String fabricanteNome;
+    private String cstCsosn;
 
     public Produto() {
     }
@@ -549,7 +559,10 @@ public class Produto {
     }
 
     public Double getEstoque() {
-        return estoque;
+        if (estoque == null || estoque.equals("") || estoque < 0) {
+            return 0.0;
+        }
+        return estoque ;
     }
 
     public void setEstoque(Double estoque) {
@@ -767,13 +780,15 @@ public class Produto {
     public String getRmsMed() {
         return formatarRmsMed(rmsMed);
     }
+
     private String formatarRmsMed(String rms) {
-        if(rms != null) {
+        if (rms != null) {
             return rms.replace(".", "").replace("-", "").replace("/", "").replace(",", "");
         } else {
-           return "";
+            return "";
         }
     }
+
     public void setRmsMed(String rmsMed) {
         this.rmsMed = rmsMed;
     }
@@ -979,7 +994,7 @@ public class Produto {
     }
 
     public String getTriGenero() {
-        return tribGenero == null ? "" : tribGenero;
+        return codigoNcm == null ? "" : codigoNcm.substring(0, 2);
     }
 
     public void setTribGenero(String tribGenero) {
@@ -1083,7 +1098,7 @@ public class Produto {
     }
 
     public Integer getIdUnidadeEmbalagem() {
-        return idUnidadeEmbalagem == null ? 1 : idUnidadeEmbalagem;
+        return idUnidadeEmbalagem == null ? 0 : idUnidadeEmbalagem;
     }
 
     public void setIdUnidadeEmbalagem(Integer idUnidadeEmbalagem) {
@@ -1123,7 +1138,11 @@ public class Produto {
     }
 
     public Double getMargemIdeal() {
-        return 0.0;
+        return margemIdeal == null ? 0.0 : margemIdeal;
+    }
+    
+    public double getMargemFpop() {
+        return margemFopo == null ? 0.0 : margemFopo;
     }
 
     private Double calcularMargemLucro(Double precoVenda, Double precoCusto) {
@@ -1131,6 +1150,101 @@ public class Produto {
             return ((precoVenda - precoCusto) / precoCusto) * 100;
         }
         return 0.0;
+    }
+
+    // Metodos Acessores para implementar id em MEP
+    public String getCodigoNcm() {
+        if (codigoNcm == null || codigoNcm.equals("")) {
+            return "00000000";
+        }
+        return codigoNcm;
+    }
+
+    public void setCodigoNcm(String codigoNcm) {
+        this.codigoNcm = codigoNcm;
+    }
+
+    public String getCodigoCest() {
+        if (codigoCest == null || codigoCest.equals("")) {
+            return "0000000";
+        }
+        return codigoCest;
+    }
+
+    public void setCodigoCest(String codigoCest) {
+        this.codigoCest = codigoCest;
+    }
+
+    public String getUnidadeMedida() {
+        if (unidadeMedida == null || unidadeMedida.equals("")) {
+            return "UN";
+        }
+        return unidadeMedida;
+    }
+
+    public void setUnidadeMedida(String unidadeMedida) {
+        this.unidadeMedida = unidadeMedida;
+    }
+
+    public String getCategoriaNome() {
+        if (categoriaNome == null || categoriaNome.equals("")) {
+            return "PADRAO";
+        }
+        return categoriaNome;
+    }
+
+    public void setCategoriaNome(String categoriaNome) {
+        this.categoriaNome = categoriaNome;
+    }
+
+    public String getSubcategoriaNome() {
+        if (subcategoriaNome == null || subcategoriaNome.equals("")) {
+            return "PADRAO";
+        }
+        return subcategoriaNome;
+    }
+
+    public void setSubcategoriaNome(String subcategoriaNome) {
+        this.subcategoriaNome = subcategoriaNome;
+    }
+
+    public String getFabricanteNome() {
+        if (fabricanteNome == null || fabricanteNome.equals("")) {
+            return "PADRAO";
+        }
+        return fabricanteNome;
+    }
+
+    public void setFabricanteNome(String fabricanteNome) {
+        this.fabricanteNome = fabricanteNome;
+    }
+
+    public String getCstCsosn(String regime) {
+        if (regime.equalsIgnoreCase("simples")) {
+            return  formatarCsosnRegime(cstCsosn);
+        } else {
+            return formatarCstRegime(cstCsosn);
+        }
+    }
+
+    public void setCstCsosn(String cstCsosn) {
+        this.cstCsosn = cstCsosn;
+    }
+
+    private String formatarCstRegime(String cstCson) {
+        if (cstCson == null || cstCson.equals("") || cstCson.length() != 2) {
+            return "00";
+        } else {
+            return cstCson;
+        }
+    }
+    
+    private String formatarCsosnRegime(String cstCson) {
+        if (cstCson == null || cstCson.equals("") || cstCson.length() != 3) {
+            return "102";
+        } else {
+            return cstCson;
+        }
     }
 
     @Override

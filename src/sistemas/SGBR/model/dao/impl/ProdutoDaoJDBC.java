@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeMap;
 import sistemas.LC_SISTEMAS.model.entidades.Produto;
 import sistemas.SGBR.model.dao.ProdutoDao;
 import util.DataHoraUtil;
@@ -30,6 +31,14 @@ public class ProdutoDaoJDBC implements ProdutoDao {
         this.conn1 = conn1;
         this.conn2 = conn2;
     }
+
+    private TreeMap<String, String> mapaNcm;
+    private TreeMap<String, String> mapaCest;
+    private TreeMap<String, String> mapaUnidade;
+    private TreeMap<String, String> mapaCategoria;
+    private TreeMap<String, String> mapaSubcategoria;
+    private TreeMap<String, String> mapaFabricante;
+    private TreeMap<String, String> mapaCstCsosn;
 
     @Override
     public List<Produto> findAll() {
@@ -56,9 +65,9 @@ public class ProdutoDaoJDBC implements ProdutoDao {
             // Gerar log com produtos não migrados.
             String path = "C:/Users/supor/Documents/TESTE-PROGRAMA-JAVA-MIGRACAO/Produtos-não-migrados.txt";
             gerarTxtProdutosNulos(produtosNulos, path);
-            
+
             return lista;
-            
+
         } catch (SQLException e) {
             throw new DbException("Erro ao carregar lista de produtos em findAll: " + e.getMessage());
         } finally {
@@ -70,30 +79,36 @@ public class ProdutoDaoJDBC implements ProdutoDao {
     @Override
     public void insert(Produto produto) {
         PreparedStatement st = null;
+        mapaNcm = getMapaNcm();
+        mapaCest = getMapaCest();
+        mapaUnidade = getMapaUnidade();
+        mapaCategoria = getMapaCategoria();
+        mapaFabricante = getMapaFabricante();
+        mapaSubcategoria = getMapaSubCategoria();
         
         try {
-            st = conn2.prepareStatement("INSERT INTO produto(codigo, referencia, codigo_barras, nome, descricao, id_grupotributacao, id_categoria, id_cfop, id_cst, id_ncm, id_cest, id_fabricante, id_fornecedor, id_unidade, id_unidadeatacado2, id_unidadeatacado3, id_unidadeatacado4, id_unidadeembalagem, id_subcategoria, id_empresa, pode_desconto, pode_fracionado, pode_balanca, pode_lote, pode_comissao, pode_lerpeso, pode_atualizarncm, datahora_cadastro, datahora_alteracao, preco_compra, valor_compra, preco_custo, custo_medio, preco_venda, desconto_max, preco_venda2, qtd_minimapv2, desconto_max2, preco_venda3, qtd_minimapv3, desconto_max3, preco_venda4, qtd_minimapv4, desconto_max4, preco_antigo, valor_frete, ipi, preco_promocao, data_promocaoinicial, data_promocaofinal, comissao, comissao_valor, fidelidade_pontos, estoque, estoque_minimo, estoque_max, estoque_tara, qtd_embalagem, qtd_diasvalidade, peso_bruto, peso_liquido, tipo_produto, origem_produto, ex_tipi, ativo, observacoes, local, ref_cruzada1, ref_cruzada2, ref_cruzada3, ref_cruzada4, ref_cruzada5, ref_cruzada6, cod_ean, codigo_med, tipo_med, tabela_med, linha_med, ref_anvisa_med, portaria_med, rms_med, edicao_pharmacos, comb_cprodanp, comb_descanp, comb_percentualgaspetroleo, comb_percentualgasnaturalnacional, comb_percentualgasnaturalimportado, comb_valorpartida, med_classeterapeutica, med_unidademedida, med_usoprolongado, med_podeatualizar, med_precovendafpop, med_apresentacaofpop, trib_issaliqsaida, trib_icmsaliqsaida, trib_icmsaliqredbasecalcsaida, trib_icmsobs, trib_icmsfcpaliq, trib_ipisaida, trib_ipialiqsaida, trib_pissaida, trib_pisaliqsaida, trib_cofinssaida, trib_cofinsaliqsaida, trib_genero, imendes_codigointerno, imendes_produtonome, margem_lucro, margem_lucro2, margem_lucro3, margem_lucro4, margem_ideal) "
-            + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-            
+            st = conn2.prepareStatement("INSERT INTO produto(codigo, referencia, codigo_barras, nome, descricao, id_grupotributacao, id_categoria, id_cfop, id_cst, id_ncm, id_cest, id_fabricante, id_fornecedor, id_unidade, id_unidadeatacado2, id_unidadeatacado3, id_unidadeatacado4, id_unidadeembalagem, id_subcategoria, id_empresa, pode_desconto, pode_fracionado, pode_balanca, pode_lote, pode_comissao, pode_lerpeso, pode_atualizarncm, datahora_cadastro, datahora_alteracao, preco_compra, valor_compra, preco_custo, custo_medio, preco_venda, desconto_max, preco_venda2, qtd_minimapv2, desconto_max2, preco_venda3, qtd_minimapv3, desconto_max3, preco_venda4, qtd_minimapv4, desconto_max4, preco_antigo, valor_frete, ipi, preco_promocao, data_promocaoinicial, data_promocaofinal, comissao, comissao_valor, fidelidade_pontos, estoque, estoque_minimo, estoque_max, estoque_tara, qtd_embalagem, qtd_diasvalidade, peso_bruto, peso_liquido, tipo_produto, origem_produto, ex_tipi, ativo, observacoes, local, ref_cruzada1, ref_cruzada2, ref_cruzada3, ref_cruzada4, ref_cruzada5, ref_cruzada6, cod_ean, codigo_med, tipo_med, tabela_med, linha_med, ref_anvisa_med, portaria_med, rms_med, edicao_pharmacos, comb_cprodanp, comb_descanp, comb_percentualgaspetroleo, comb_percentualgasnaturalnacional, comb_percentualgasnaturalimportado, comb_valorpartida, med_classeterapeutica, med_unidademedida, med_usoprolongado, med_podeatualizar, med_precovendafpop, med_apresentacaofpop, trib_issaliqsaida, trib_icmsaliqsaida, trib_icmsaliqredbasecalcsaida, trib_icmsobs, trib_icmsfcpaliq, trib_ipisaida, trib_ipialiqsaida, trib_pissaida, trib_pisaliqsaida, trib_cofinssaida, trib_cofinsaliqsaida, trib_genero, imendes_codigointerno, imendes_produtonome, margem_lucro, margem_lucro2, margem_lucro3, margem_lucro4, margem_ideal, med_margemfpop) "
+                    + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
             st.setString(1, produto.getCodigo());
             st.setString(2, produto.getReferencia());
             st.setString(3, produto.getCodigoBarras());
             st.setString(4, produto.getNome());
             st.setString(5, produto.getDescricao());
             st.setInt(6, produto.getIdGrupoTributacao());
-            st.setInt(7, produto.getIdCategoria());
+            st.setString(7, mapaCategoria.get(produto.getCategoriaNome()));
             st.setInt(8, produto.getIdCfop());
             st.setInt(9, produto.getIdCst());
-            st.setInt(10, produto.getIdNcm());
-            st.setInt(11, produto.getIdCest());
-            st.setInt(12, produto.getIdFabricante());
+            st.setString(10, mapaNcm.get(produto.getCodigoNcm()));
+            st.setString(11, mapaCest.get(produto.getCodigoCest()));
+            st.setString(12, mapaFabricante.get(produto.getFabricanteNome()));
             st.setInt(13, produto.getIdFornecedor());
-            st.setInt(14, produto.getIdUnidade());
+            st.setString(14, mapaUnidade.get(produto.getUnidadeMedida()));
             st.setInt(15, produto.getIdUnidadeAtacado2());
             st.setInt(16, produto.getIdUnidadeAtacado3());
             st.setInt(17, produto.getIdUnidadeAtacado4());
             st.setInt(18, produto.getIdUnidadeEmbalagem());
-            st.setInt(19, produto.getIdSubcategoria());
+            st.setString(19, mapaSubcategoria.get(produto.getSubcategoriaNome()));
             st.setInt(20, produto.getIdEmpresa());
             st.setString(21, produto.getPodeDesconto());
             st.setString(22, produto.getPodeFracionado());
@@ -188,10 +203,11 @@ public class ProdutoDaoJDBC implements ProdutoDao {
             st.setDouble(111, produto.getMargemLucro3());
             st.setDouble(112, produto.getMargemLucro4());
             st.setDouble(113, produto.getMargemIdeal());
+            st.setDouble(114, produto.getMargemFpop());
             st.executeUpdate();
             System.out.println("PRODUTOS inserido: " + produto);
-            
-        } catch(SQLException e) {
+
+        } catch (SQLException e) {
             throw new DbException("Erro ao inserir produto em insert: " + e.getMessage());
         } finally {
             MysqlConnector.closeStatement(st);
@@ -235,6 +251,14 @@ public class ProdutoDaoJDBC implements ProdutoDao {
         obj.setRmsMed(rs.getString("codigoanvisa"));
         obj.setTribIcmsfcpAliq(rs.getDouble("aliquotafcp"));
         obj.setLocal(rs.getString("localizacao"));
+        // Adicionar valores para usar em MAP
+        obj.setCodigoNcm(rs.getString("ncm"));
+        obj.setCodigoCest(rs.getString("cest"));
+        obj.setUnidadeMedida(rs.getString("unidade"));
+        obj.setCategoriaNome(rs.getString("grupo"));
+        obj.setSubcategoriaNome(rs.getString("subgrupo"));
+        obj.setFabricanteNome(rs.getString("marca"));
+        obj.setCstCsosn(rs.getString("csosn"));
         return obj;
     }
 
@@ -248,4 +272,135 @@ public class ProdutoDaoJDBC implements ProdutoDao {
         }
     }
 
+    public TreeMap<String, String> getMapaNcm() {
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        TreeMap<String, String> map = new TreeMap();
+        
+        try {
+            st = conn2.prepareStatement("select id, codigo from ncm");
+            rs = st.executeQuery();
+            
+            while (rs.next()) {
+                map.put(rs.getString("codigo"), rs.getString("id"));
+            }
+            
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        } finally {
+            MysqlConnector.closeResultSet(rs);
+            MysqlConnector.closeStatement(st);
+        }
+        return map;
+    }
+    
+    public TreeMap<String, String> getMapaCest() {
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        TreeMap<String, String> map = new TreeMap();
+        
+        try {
+            st = conn2.prepareStatement("select id, cest from cest");
+            rs = st.executeQuery();
+            
+            while (rs.next()) {
+                map.put(rs.getString("cest"), rs.getString("id"));
+            }
+            
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        } finally {
+            MysqlConnector.closeResultSet(rs);
+            MysqlConnector.closeStatement(st);
+        }
+        return map;
+    }
+
+    private TreeMap<String, String> getMapaUnidade() {
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        TreeMap<String, String> map = new TreeMap();
+        
+        try {
+            st = conn2.prepareStatement("select id, descricao from unidade");
+            rs = st.executeQuery();
+            
+            while (rs.next()) {
+                map.put(rs.getString("descricao"), rs.getString("id"));
+            }
+            
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        } finally {
+            MysqlConnector.closeResultSet(rs);
+            MysqlConnector.closeStatement(st);
+        }
+        return map;
+    }
+    
+    private TreeMap<String, String> getMapaCategoria() {
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        TreeMap<String, String> map = new TreeMap();
+        
+        try {
+            st = conn2.prepareStatement("select id, nome from categoria");
+            rs = st.executeQuery();
+            
+            while (rs.next()) {
+                map.put(rs.getString("nome"), rs.getString("id"));
+            }
+            
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        } finally {
+            MysqlConnector.closeResultSet(rs);
+            MysqlConnector.closeStatement(st);
+        }
+        return map;
+    }
+    
+    private TreeMap<String, String> getMapaSubCategoria() {
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        TreeMap<String, String> map = new TreeMap();
+        
+        try {
+            st = conn2.prepareStatement("select id, nome from subcategoria");
+            rs = st.executeQuery();
+            
+            while (rs.next()) {
+                map.put(rs.getString("nome"), rs.getString("id"));
+            }
+            
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        } finally {
+            MysqlConnector.closeResultSet(rs);
+            MysqlConnector.closeStatement(st);
+        }
+        return map;
+    }
+
+    private TreeMap<String, String> getMapaFabricante() {
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        TreeMap<String, String> map = new TreeMap();
+        
+        try {
+            st = conn2.prepareStatement("select id, nome from fabricante");
+            rs = st.executeQuery();
+            
+            while (rs.next()) {
+                map.put(rs.getString("nome"), rs.getString("id"));
+            }
+            
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        } finally {
+            MysqlConnector.closeResultSet(rs);
+            MysqlConnector.closeStatement(st);
+        }
+        return map;
+    }
 }
