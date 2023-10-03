@@ -72,8 +72,8 @@ public class ProdutoDaoJDBC implements ProdutoDao {
         PreparedStatement st = null;
         
         try {
-            st = conn2.prepareStatement("INSERT INTO produto(codigo, referencia, codigo_barras, nome, descricao, id_grupotributacao, id_categoria, id_cfop, id_cst, id_ncm, id_cest, id_fabricante, id_fornecedor, id_unidade, id_unidadeatacado2, id_unidadeatacado3, id_unidadeatacado4, id_unidadeembalagem, id_subcategoria, id_empresa, pode_desconto, pode_fracionado, pode_balanca, pode_lote, pode_comissao, pode_lerpeso, pode_atualizarncm, datahora_cadastro, datahora_alteracao, preco_compra, valor_compra, preco_custo, custo_medio, preco_venda, desconto_max, preco_venda2, qtd_minimapv2, desconto_max2, preco_venda3, qtd_minimapv3, desconto_max3, preco_venda4, qtd_minimapv4, desconto_max4, preco_antigo, valor_frete, ipi, preco_promocao, data_promocaoinicial, data_promocaofinal, comissao, comissao_valor, fidelidade_pontos, estoque, estoque_minimo, estoque_max, estoque_tara, qtd_embalagem, qtd_diasvalidade, peso_bruto, peso_liquido, tipo_produto, origem_produto, ex_tipi, ativo, observacoes, local, ref_cruzada1, ref_cruzada2, ref_cruzada3, ref_cruzada4, ref_cruzada5, ref_cruzada6, cod_ean, codigo_med, tipo_med, tabela_med, linha_med, ref_anvisa_med, portaria_med, rms_med, edicao_pharmacos, comb_cprodanp, comb_descanp, comb_percentualgaspetroleo, comb_percentualgasnaturalnacional, comb_percentualgasnaturalimportado, comb_valorpartida, med_classeterapeutica, med_unidademedida, med_usoprolongado, med_podeatualizar, med_precovendafpop, med_apresentacaofpop, trib_issaliqsaida, trib_icmsaliqsaida, trib_icmsaliqredbasecalcsaida, trib_icmsobs, trib_icmsfcpaliq, trib_ipisaida, trib_ipialiqsaida, trib_pissaida, trib_pisaliqsaida, trib_cofinssaida, trib_cofinsaliqsaida, trib_genero, imendes_codigointerno, imendes_produtonome) "
-            + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            st = conn2.prepareStatement("INSERT INTO produto(codigo, referencia, codigo_barras, nome, descricao, id_grupotributacao, id_categoria, id_cfop, id_cst, id_ncm, id_cest, id_fabricante, id_fornecedor, id_unidade, id_unidadeatacado2, id_unidadeatacado3, id_unidadeatacado4, id_unidadeembalagem, id_subcategoria, id_empresa, pode_desconto, pode_fracionado, pode_balanca, pode_lote, pode_comissao, pode_lerpeso, pode_atualizarncm, datahora_cadastro, datahora_alteracao, preco_compra, valor_compra, preco_custo, custo_medio, preco_venda, desconto_max, preco_venda2, qtd_minimapv2, desconto_max2, preco_venda3, qtd_minimapv3, desconto_max3, preco_venda4, qtd_minimapv4, desconto_max4, preco_antigo, valor_frete, ipi, preco_promocao, data_promocaoinicial, data_promocaofinal, comissao, comissao_valor, fidelidade_pontos, estoque, estoque_minimo, estoque_max, estoque_tara, qtd_embalagem, qtd_diasvalidade, peso_bruto, peso_liquido, tipo_produto, origem_produto, ex_tipi, ativo, observacoes, local, ref_cruzada1, ref_cruzada2, ref_cruzada3, ref_cruzada4, ref_cruzada5, ref_cruzada6, cod_ean, codigo_med, tipo_med, tabela_med, linha_med, ref_anvisa_med, portaria_med, rms_med, edicao_pharmacos, comb_cprodanp, comb_descanp, comb_percentualgaspetroleo, comb_percentualgasnaturalnacional, comb_percentualgasnaturalimportado, comb_valorpartida, med_classeterapeutica, med_unidademedida, med_usoprolongado, med_podeatualizar, med_precovendafpop, med_apresentacaofpop, trib_issaliqsaida, trib_icmsaliqsaida, trib_icmsaliqredbasecalcsaida, trib_icmsobs, trib_icmsfcpaliq, trib_ipisaida, trib_ipialiqsaida, trib_pissaida, trib_pisaliqsaida, trib_cofinssaida, trib_cofinsaliqsaida, trib_genero, imendes_codigointerno, imendes_produtonome, margem_lucro, margem_lucro2, margem_lucro3, margem_lucro4, margem_ideal) "
+            + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
             
             st.setString(1, produto.getCodigo());
             st.setString(2, produto.getReferencia());
@@ -183,6 +183,11 @@ public class ProdutoDaoJDBC implements ProdutoDao {
             st.setString(106, produto.getTriGenero());
             st.setString(107, ""); // IMENDES CODIGO
             st.setString(108, ""); // IMENDES PRODUTO NOME
+            st.setDouble(109, produto.getMargemLucro());
+            st.setDouble(110, produto.getMargemLucro2());
+            st.setDouble(111, produto.getMargemLucro3());
+            st.setDouble(112, produto.getMargemLucro4());
+            st.setDouble(113, produto.getMargemIdeal());
             st.executeUpdate();
             System.out.println("PRODUTOS inserido: " + produto);
             
@@ -230,25 +235,6 @@ public class ProdutoDaoJDBC implements ProdutoDao {
         obj.setRmsMed(rs.getString("codigoanvisa"));
         obj.setTribIcmsfcpAliq(rs.getDouble("aliquotafcp"));
         obj.setLocal(rs.getString("localizacao"));
-        // PADRONIZACAO DE obj
-        obj.setQtdMinimaPv2(0.0);
-        obj.setQtdMinimaPv3(0.0);
-        obj.setQtdMinimaPv4(0.0);
-        obj.setDescontoMax2(0.0);
-        obj.setDescontoMax3(0.0);
-        obj.setDescontoMax4(0.0);
-        obj.setPrecoVenda3(0.0);
-        obj.setPrecoVenda4(0.0);
-        obj.setPrecoAntigo(0.0);
-        obj.setValorFrete(0.0);
-        obj.setPrecoPromocao(0.0);
-        obj.setComissaoValor(0.0);
-        obj.setEstoqueTara(0.0);
-        obj.setQtdEmbalagem(1.0);
-        obj.setPesoLiquido(0.0);
-        obj.setCombPercentualGasNaturalImportado(0.0);
-        obj.setMedPrecoVendaFpop(0.0);
-        obj.setTribIssAliqSaida(0.0);
         return obj;
     }
 

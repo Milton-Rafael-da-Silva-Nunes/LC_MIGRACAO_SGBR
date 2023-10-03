@@ -8,7 +8,7 @@ import util.DataHoraUtil;
  * @author supor
  */
 public class Produto {
-    
+
     private Integer id;
     private String codigo;
     private String referencia;
@@ -103,21 +103,25 @@ public class Produto {
     private Double tribCofinsAliqSaida;
     private String tribGenero;
     // IDS
-    private Integer idGrupoTributacao = 1;
-    private Integer idCategoria = 1;
-    private Integer idCfop = 289;
-    private Integer idCst = 14;
-    private Integer idNcm = 1;
-    private Integer idCest = 1;
-    private Integer idFabricante = 1;
-    private Integer idFornecedor = 1;
-    private Integer idUnidade = 1;
-    private Integer idUnidadeAtacado2 = 0;
-    private Integer idUnidadeAtacado3 = 0;
-    private Integer idUnidadeAtacado4 = 0;
-    private Integer idUnidadeEmbalagem = 1;
-    private Integer idSubcategoria = 1;
-    private Integer idEmpresa = 1;
+    private Integer idGrupoTributacao;
+    private Integer idCategoria;
+    private Integer idCfop;
+    private Integer idCst;
+    private Integer idNcm;
+    private Integer idCest;
+    private Integer idFabricante;
+    private Integer idFornecedor;
+    private Integer idUnidade;
+    private Integer idUnidadeAtacado2;
+    private Integer idUnidadeAtacado3;
+    private Integer idUnidadeAtacado4;
+    private Integer idUnidadeEmbalagem;
+    private Integer idSubcategoria;
+    private Integer idEmpresa;
+    private Double margemLucro;
+    private Double margemLucro2;
+    private Double margemLucro3;
+    private Double margemLucro4;
 
     public Produto() {
     }
@@ -242,7 +246,7 @@ public class Produto {
     }
 
     public String getCodigo() {
-        return codigo;
+        return codigo == null ? "" : codigo;
     }
 
     public void setCodigo(String codigo) {
@@ -250,6 +254,9 @@ public class Produto {
     }
 
     public String getReferencia() {
+        if (referencia == null || (codigoBarras != null && referencia.equals(codigoBarras))) {
+            return "";
+        }
         return referencia;
     }
 
@@ -258,7 +265,7 @@ public class Produto {
     }
 
     public String getCodigoBarras() {
-        return codigoBarras;
+        return codigoBarras == null ? "" : codigoBarras;
     }
 
     public void setCodigoBarras(String codigoBarras) {
@@ -266,7 +273,7 @@ public class Produto {
     }
 
     public String getNome() {
-        return nome;
+        return nome.toUpperCase().trim();
     }
 
     public void setNome(String nome) {
@@ -274,7 +281,7 @@ public class Produto {
     }
 
     public String getDescricao() {
-        return descricao;
+        return descricao == null ? "" : descricao.toUpperCase().trim();
     }
 
     public void setDescricao(String descricao) {
@@ -282,7 +289,7 @@ public class Produto {
     }
 
     public String getPodeDesconto() {
-        return podeDesconto;
+        return podeDesconto == null ? "S" : podeDesconto;
     }
 
     public void setPodeDesconto(String podeDesconto) {
@@ -290,15 +297,15 @@ public class Produto {
     }
 
     public String getPodeFracionado() {
-        return podeFracionado;
+        return podeFracionado == null ? "N" : podeFracionado;
     }
 
     public void setPodeFracionado(String podeFracionado) {
         this.podeFracionado = podeFracionado;
-    }    
+    }
 
     public String getPodeBalanca() {
-        return podeBalanca;
+        return podeBalanca == null ? "N" : podeBalanca;
     }
 
     public void setPodeBalanca(String podeBalanca) {
@@ -306,7 +313,7 @@ public class Produto {
     }
 
     public String getPodeLote() {
-        return podeLote;
+        return podeLote == null ? "N" : podeLote;
     }
 
     public void setPodeLote(String podeLote) {
@@ -314,7 +321,7 @@ public class Produto {
     }
 
     public String getPodeComissao() {
-        return podeComissao;
+        return podeComissao == null ? "S" : podeComissao;
     }
 
     public void setPodeComissao(String podeComissao) {
@@ -322,7 +329,7 @@ public class Produto {
     }
 
     public String getPodeLerPeso() {
-        return podeLerPeso;
+        return podeLerPeso == null ? "N" : podeLerPeso;
     }
 
     public void setPodeLerPeso(String podeLerPeso) {
@@ -330,7 +337,7 @@ public class Produto {
     }
 
     public String getPodeAtualizarNcm() {
-        return podeAtualizarNcm;
+        return podeAtualizarNcm == null ? "S" : podeAtualizarNcm;
     }
 
     public void setPodeAtualizarNcm(String podeAtualizarNcm) {
@@ -350,7 +357,7 @@ public class Produto {
     }
 
     public Double getPrecoCompra() {
-        return precoCompra;
+        return precoCompra == null ? 0.0 : precoCompra;
     }
 
     public void setPrecoCompra(Double precoCompra) {
@@ -358,7 +365,7 @@ public class Produto {
     }
 
     public Double getValorCompra() {
-        return valorCompra;
+        return valorCompra == null ? 0.0 : valorCompra;
     }
 
     public void setValorCompra(Double valorCompra) {
@@ -366,7 +373,7 @@ public class Produto {
     }
 
     public Double getPrecoCusto() {
-        return precoCusto;
+        return precoCusto == null ? 0.0 : precoCusto;
     }
 
     public void setPrecoCusto(Double precoCusto) {
@@ -374,7 +381,7 @@ public class Produto {
     }
 
     public Double getCustoMedio() {
-        return custoMedio;
+        return custoMedio == null ? precoCusto : custoMedio;
     }
 
     public void setCustoMedio(Double custoMedio) {
@@ -382,7 +389,7 @@ public class Produto {
     }
 
     public Double getPrecoVenda() {
-        return precoVenda;
+        return precoVenda == null ? 0.0 : precoVenda;
     }
 
     public void setPrecoVenda(Double precoVenda) {
@@ -390,7 +397,7 @@ public class Produto {
     }
 
     public Double getDescontoMax() {
-        return descontoMax;
+        return descontoMax == null ? 0.0 : descontoMax;
     }
 
     public void setDescontoMax(Double descontoMax) {
@@ -398,7 +405,7 @@ public class Produto {
     }
 
     public Double getPrecoVenda2() {
-        return precoVenda2;
+        return precoVenda2 == null ? 0.0 : precoVenda2;
     }
 
     public void setPrecoVenda2(Double precoVenda2) {
@@ -406,7 +413,7 @@ public class Produto {
     }
 
     public Double getQtdMinimaPv2() {
-        return qtdMinimaPv2;
+        return qtdMinimaPv2 == null ? 0.0 : qtdMinimaPv2;
     }
 
     public void setQtdMinimaPv2(Double qtdMinimaPv2) {
@@ -414,7 +421,7 @@ public class Produto {
     }
 
     public Double getDescontoMax2() {
-        return descontoMax2;
+        return descontoMax2 == null ? 0.0 : descontoMax2;
     }
 
     public void setDescontoMax2(Double descontoMax2) {
@@ -422,7 +429,7 @@ public class Produto {
     }
 
     public Double getPrecoVenda3() {
-        return precoVenda3;
+        return precoVenda3 == null ? 0.0 : precoVenda3;
     }
 
     public void setPrecoVenda3(Double precoVenda3) {
@@ -430,7 +437,7 @@ public class Produto {
     }
 
     public Double getQtdMinimaPv3() {
-        return qtdMinimaPv3;
+        return qtdMinimaPv3 == null ? 0.0 : qtdMinimaPv3;
     }
 
     public void setQtdMinimaPv3(Double qtdMinimaPv3) {
@@ -438,7 +445,7 @@ public class Produto {
     }
 
     public Double getDescontoMax3() {
-        return descontoMax3;
+        return descontoMax3 == null ? 0.0 : descontoMax3;
     }
 
     public void setDescontoMax3(Double descontoMax3) {
@@ -446,7 +453,7 @@ public class Produto {
     }
 
     public Double getPrecoVenda4() {
-        return precoVenda4;
+        return precoVenda4 == null ? 0.0 : precoVenda4;
     }
 
     public void setPrecoVenda4(Double precoVenda4) {
@@ -454,7 +461,7 @@ public class Produto {
     }
 
     public Double getQtdMinimaPv4() {
-        return qtdMinimaPv4;
+        return qtdMinimaPv4 == null ? 0.0 : qtdMinimaPv4;
     }
 
     public void setQtdMinimaPv4(Double qtdMinimaPv4) {
@@ -462,7 +469,7 @@ public class Produto {
     }
 
     public Double getDescontoMax4() {
-        return descontoMax4;
+        return descontoMax4 == null ? 0.0 : descontoMax4;
     }
 
     public void setDescontoMax4(Double descontoMax4) {
@@ -470,7 +477,7 @@ public class Produto {
     }
 
     public Double getPrecoAntigo() {
-        return precoAntigo;
+        return precoAntigo == null ? 0.0 : precoAntigo;
     }
 
     public void setPrecoAntigo(Double precoAntigo) {
@@ -478,7 +485,7 @@ public class Produto {
     }
 
     public Double getValorFrete() {
-        return valorFrete;
+        return valorFrete == null ? 0.0 : valorFrete;
     }
 
     public void setValorFrete(Double valorFrete) {
@@ -486,7 +493,7 @@ public class Produto {
     }
 
     public String getIpi() {
-        return ipi;
+        return ipi == null ? "0.0" : ipi;
     }
 
     public void setIpi(String ipi) {
@@ -494,7 +501,7 @@ public class Produto {
     }
 
     public Double getPrecoPromocao() {
-        return precoPromocao;
+        return precoPromocao == null ? 0.0 : precoPromocao;
     }
 
     public void setPrecoPromocao(Double precoPromocao) {
@@ -518,7 +525,7 @@ public class Produto {
     }
 
     public Integer getComissao() {
-        return comissao;
+        return comissao == null ? 0 : comissao;
     }
 
     public void setComissao(Integer comissao) {
@@ -526,7 +533,7 @@ public class Produto {
     }
 
     public Double getComissaoValor() {
-        return comissaoValor;
+        return comissaoValor == null ? 0.0 : comissaoValor;
     }
 
     public void setComissaoValor(Double comissaoValor) {
@@ -534,7 +541,7 @@ public class Produto {
     }
 
     public String getFidelidadePontos() {
-        return fidelidadePontos;
+        return fidelidadePontos == null ? "0.0" : fidelidadePontos;
     }
 
     public void setFidelidadePontos(String fidelidadePontos) {
@@ -566,7 +573,7 @@ public class Produto {
     }
 
     public Double getEstoqueTara() {
-        return estoqueTara;
+        return estoqueTara == null ? 0.0 : estoqueTara;
     }
 
     public void setEstoqueTara(Double estoqueTara) {
@@ -574,7 +581,7 @@ public class Produto {
     }
 
     public Double getQtdEmbalagem() {
-        return qtdEmbalagem;
+        return qtdEmbalagem == null ? 1.0 : qtdEmbalagem;
     }
 
     public void setQtdEmbalagem(Double qtdEmbalagem) {
@@ -582,7 +589,7 @@ public class Produto {
     }
 
     public String getQtdDiasValidade() {
-        return qtdDiasValidade;
+        return qtdDiasValidade == null ? "0" : qtdDiasValidade;
     }
 
     public void setQtdDiasValidade(String qtdDiasValidade) {
@@ -590,7 +597,7 @@ public class Produto {
     }
 
     public Double getPesoBruto() {
-        return pesoBruto;
+        return pesoBruto == null ? 0.0 : pesoBruto;
     }
 
     public void setPesoBruto(Double pesoBruto) {
@@ -598,7 +605,7 @@ public class Produto {
     }
 
     public Double getPesoLiquido() {
-        return pesoLiquido;
+        return pesoLiquido == null ? 0.0 : pesoLiquido;
     }
 
     public void setPesoLiquido(Double pesoLiquido) {
@@ -606,7 +613,7 @@ public class Produto {
     }
 
     public String getTipoProduto() {
-        return tipoProduto;
+        return tipoProduto == null ? "PRODUTO" : tipoProduto;
     }
 
     public void setTipoProduto(String tipoProduto) {
@@ -614,7 +621,7 @@ public class Produto {
     }
 
     public String getOrigemProduto() {
-        return origemProduto;
+        return origemProduto == null ? "0" : origemProduto;
     }
 
     public void setOrigemProduto(String origemProduto) {
@@ -622,7 +629,7 @@ public class Produto {
     }
 
     public String getExTipi() {
-        return exTipi;
+        return exTipi == null ? "" : exTipi;
     }
 
     public void setExTipi(String exTipi) {
@@ -638,7 +645,7 @@ public class Produto {
     }
 
     public String getObservacoes() {
-        return observacoes;
+        return observacoes == null ? "Migracao: " + DataHoraUtil.getDataAtual() : observacoes;
     }
 
     public void setObservacoes(String observacoes) {
@@ -646,7 +653,7 @@ public class Produto {
     }
 
     public String getLocal() {
-        return local;
+        return local == null ? "" : local;
     }
 
     public void setLocal(String local) {
@@ -654,7 +661,7 @@ public class Produto {
     }
 
     public String getRefCruzada1() {
-        return refCruzada1;
+        return refCruzada1 == null ? "" : refCruzada1;
     }
 
     public void setRefCruzada1(String refCruzada1) {
@@ -662,7 +669,7 @@ public class Produto {
     }
 
     public String getRefCruzada2() {
-        return refCruzada2;
+        return refCruzada2 == null ? "" : refCruzada2;
     }
 
     public void setRefCruzada2(String refCruzada2) {
@@ -670,7 +677,7 @@ public class Produto {
     }
 
     public String getRefCruzada3() {
-        return refCruzada3;
+        return refCruzada3 == null ? "" : refCruzada3;
     }
 
     public void setRefCruzada3(String refCruzada3) {
@@ -678,7 +685,7 @@ public class Produto {
     }
 
     public String getRefCruzada4() {
-        return refCruzada4;
+        return refCruzada4 == null ? "" : refCruzada4;
     }
 
     public void setRefCruzada4(String refCruzada4) {
@@ -686,7 +693,7 @@ public class Produto {
     }
 
     public String getRefCruzada5() {
-        return refCruzada5;
+        return refCruzada5 == null ? "" : refCruzada5;
     }
 
     public void setRefCruzada5(String refCruzada5) {
@@ -694,7 +701,7 @@ public class Produto {
     }
 
     public String getRefCruzada6() {
-        return refCruzada6;
+        return refCruzada6 == null ? "" : refCruzada6;
     }
 
     public void setRefCruzada6(String refCruzada6) {
@@ -718,7 +725,7 @@ public class Produto {
     }
 
     public String getTipoMed() {
-        return tipoMed;
+        return tipoMed == null ? "" : tipoMed;
     }
 
     public void setTipoMed(String tipoMed) {
@@ -726,7 +733,7 @@ public class Produto {
     }
 
     public String getTabelaMed() {
-        return tabelaMed;
+        return tabelaMed == null ? "" : tabelaMed;
     }
 
     public void setTabelaMed(String tabelaMed) {
@@ -734,7 +741,7 @@ public class Produto {
     }
 
     public String getLinhaMed() {
-        return linhaMed;
+        return linhaMed == null ? "" : linhaMed;
     }
 
     public void setLinhaMed(String linhaMed) {
@@ -750,7 +757,7 @@ public class Produto {
     }
 
     public String getPortariaMed() {
-        return portariaMed;
+        return portariaMed == null ? "" : portariaMed;
     }
 
     public void setPortariaMed(String portariaMed) {
@@ -758,9 +765,15 @@ public class Produto {
     }
 
     public String getRmsMed() {
-        return rmsMed;
+        return formatarRmsMed(rmsMed);
     }
-
+    private String formatarRmsMed(String rms) {
+        if(rms != null) {
+            return rms.replace(".", "").replace("-", "").replace("/", "").replace(",", "");
+        } else {
+           return "";
+        }
+    }
     public void setRmsMed(String rmsMed) {
         this.rmsMed = rmsMed;
     }
@@ -782,7 +795,7 @@ public class Produto {
     }
 
     public String getCombCprodAnp() {
-        return combCprodAnp;
+        return combCprodAnp == null ? "" : combCprodAnp;
     }
 
     public void setCombCprodAnp(String combCprodAnp) {
@@ -790,7 +803,7 @@ public class Produto {
     }
 
     public String getCombDescAnp() {
-        return combDescAnp;
+        return combDescAnp == null ? "" : combDescAnp;
     }
 
     public void setCombDescAnp(String combDescAnp) {
@@ -798,7 +811,7 @@ public class Produto {
     }
 
     public Double getCombPercentualGasPetroleo() {
-        return combPercentualGasPetroleo;
+        return combPercentualGasPetroleo == null ? 0.0 : combPercentualGasPetroleo;
     }
 
     public void setCombPercentualGasPetroleo(Double combPercentualGasPetroleo) {
@@ -806,7 +819,7 @@ public class Produto {
     }
 
     public Double getCombPercentualGasNatuaralNacional() {
-        return combPercentualGasNatuaralNacional;
+        return combPercentualGasNatuaralNacional == null ? 0.0 : combPercentualGasNatuaralNacional;
     }
 
     public void setCombPercentualGasNatuaralNacional(Double combPercentualGasNatuaralNacional) {
@@ -814,7 +827,7 @@ public class Produto {
     }
 
     public Double getCombPercentualGasNaturalImportado() {
-        return combPercentualGasNaturalImportado;
+        return combPercentualGasNaturalImportado == null ? 0.0 : combPercentualGasNaturalImportado;
     }
 
     public void setCombPercentualGasNaturalImportado(Double combPercentualGasNaturalImportado) {
@@ -822,7 +835,7 @@ public class Produto {
     }
 
     public Double getCombValorPartilha() {
-        return combValorPartilha;
+        return combValorPartilha == null ? 0.0 : combValorPartilha;
     }
 
     public void setCombValorPartilha(Double combValorPartilha) {
@@ -830,7 +843,7 @@ public class Produto {
     }
 
     public String getMedClasseTerapeutica() {
-        return medClasseTerapeutica;
+        return medClasseTerapeutica == null ? "" : medClasseTerapeutica;
     }
 
     public void setMedClasseTerapeutica(String medClasseTerapeutica) {
@@ -838,7 +851,7 @@ public class Produto {
     }
 
     public String getMedUnidadeMedida() {
-        return medUnidadeMedida;
+        return medUnidadeMedida == null ? "" : medUnidadeMedida;
     }
 
     public void setMedUnidadeMedida(String medUnidadeMedida) {
@@ -846,7 +859,7 @@ public class Produto {
     }
 
     public String getMedUsoProlongado() {
-        return medUsoProlongado;
+        return medUsoProlongado == null ? "" : medUsoProlongado;
     }
 
     public void setMedUsoProlongado(String medUsoProlongado) {
@@ -854,7 +867,7 @@ public class Produto {
     }
 
     public String getMedPodeAtualizar() {
-        return medPodeAtualizar;
+        return medPodeAtualizar == null ? "S" : medPodeAtualizar;
     }
 
     public void setMedPodeAtualizar(String medPodeAtualizar) {
@@ -862,7 +875,7 @@ public class Produto {
     }
 
     public Double getMedPrecoVendaFpop() {
-        return medPrecoVendaFpop;
+        return medPrecoVendaFpop == null ? 0.0 : medPrecoVendaFpop;
     }
 
     public void setMedPrecoVendaFpop(Double medPrecoVendaFpop) {
@@ -870,7 +883,7 @@ public class Produto {
     }
 
     public String getMedApresentacaoFpop() {
-        return medApresentacaoFpop;
+        return medApresentacaoFpop == null ? "0.0" : medApresentacaoFpop;
     }
 
     public void setMedApresentacaoFpop(String medApresentacaoFpop) {
@@ -878,7 +891,7 @@ public class Produto {
     }
 
     public Double getTribIssAliqSaida() {
-        return tribIssAliqSaida;
+        return tribIssAliqSaida == null ? 0.0 : tribIssAliqSaida;
     }
 
     public void setTribIssAliqSaida(Double tribIssAliqSaida) {
@@ -886,7 +899,7 @@ public class Produto {
     }
 
     public Double getTribIcmsAliqsaida() {
-        return tribIcmsAliqsaida;
+        return tribIcmsAliqsaida == null ? 0.0 : tribIcmsAliqsaida;
     }
 
     public void setTribIcmsAliqsaida(Double tribIcmsAliqsaida) {
@@ -894,7 +907,7 @@ public class Produto {
     }
 
     public Double getTribIcmsAliqRedBaseCalcSaida() {
-        return tribIcmsAliqRedBaseCalcSaida;
+        return tribIcmsAliqRedBaseCalcSaida == null ? 0.0 : tribIcmsAliqRedBaseCalcSaida;
     }
 
     public void setTribIcmsAliqRedBaseCalcSaida(Double tribIcmsAliqRedBaseCalcSaida) {
@@ -902,7 +915,7 @@ public class Produto {
     }
 
     public String getTribIcmsObs() {
-        return tribIcmsObs;
+        return tribIcmsObs == null ? "" : tribIcmsObs;
     }
 
     public void setTribIcmsObs(String tribIcmsObs) {
@@ -910,7 +923,7 @@ public class Produto {
     }
 
     public Double getTribIcmsfcpAliq() {
-        return tribIcmsfcpAliq;
+        return tribIcmsfcpAliq == null ? 0.0 : tribIcmsfcpAliq;
     }
 
     public void setTribIcmsfcpAliq(Double tribIcmsfcpAliq) {
@@ -918,7 +931,7 @@ public class Produto {
     }
 
     public String getTribIpiSaida() {
-        return tribIpiSaida;
+        return tribIpiSaida == null ? "" : tribIpiSaida;
     }
 
     public void setTribIpiSaida(String tribIpiSaida) {
@@ -926,7 +939,7 @@ public class Produto {
     }
 
     public Double getTribIpiAliqSaida() {
-        return tribIpiAliqSaida;
+        return tribIpiAliqSaida == null ? 0.0 : tribIpiAliqSaida;
     }
 
     public void setTribIpiAliqSaida(Double tribIpiAliqSaida) {
@@ -934,7 +947,7 @@ public class Produto {
     }
 
     public String getTribPisSaida() {
-        return tribPisSaida;
+        return tribPisSaida == null ? "07" : tribPisSaida;
     }
 
     public void setTribPisSaida(String tribPisSaida) {
@@ -942,7 +955,7 @@ public class Produto {
     }
 
     public Double getTribPisAliqSaida() {
-        return tribPisAliqSaida;
+        return tribPisAliqSaida == null ? 0.0 : tribPisAliqSaida;
     }
 
     public void setTribPisAliqSaida(Double tribPisAliqSaida) {
@@ -950,7 +963,7 @@ public class Produto {
     }
 
     public String getTribCofinsSaida() {
-        return tribCofinsSaida;
+        return tribCofinsSaida == null ? "07" : tribCofinsSaida;
     }
 
     public void setTribCofinsSaida(String tribCofinsSaida) {
@@ -958,7 +971,7 @@ public class Produto {
     }
 
     public Double getTribCofinsAliqSaida() {
-        return tribCofinsAliqSaida;
+        return tribCofinsAliqSaida == null ? 0.0 : tribCofinsAliqSaida;
     }
 
     public void setTribCofinsAliqSaida(Double tribCofinsAliqSaida) {
@@ -966,7 +979,7 @@ public class Produto {
     }
 
     public String getTriGenero() {
-        return tribGenero;
+        return tribGenero == null ? "" : tribGenero;
     }
 
     public void setTribGenero(String tribGenero) {
@@ -974,7 +987,7 @@ public class Produto {
     }
 
     public Integer getIdGrupoTributacao() {
-        return idGrupoTributacao;
+        return idGrupoTributacao == null ? 1 : idGrupoTributacao;
     }
 
     public void setIdGrupoTributacao(Integer idGrupoTributacao) {
@@ -982,7 +995,7 @@ public class Produto {
     }
 
     public Integer getIdCategoria() {
-        return idCategoria;
+        return idCategoria == null ? 1 : idCategoria;
     }
 
     public void setIdCategoria(Integer idCategoria) {
@@ -990,7 +1003,7 @@ public class Produto {
     }
 
     public Integer getIdCfop() {
-        return idCfop;
+        return idCfop == null ? 289 : idCfop;
     }
 
     public void setIdCfop(Integer idCfop) {
@@ -998,7 +1011,7 @@ public class Produto {
     }
 
     public Integer getIdCst() {
-        return idCst;
+        return idCst == null ? 14 : idCst;
     }
 
     public void setIdCst(Integer idCst) {
@@ -1006,7 +1019,7 @@ public class Produto {
     }
 
     public Integer getIdNcm() {
-        return idNcm;
+        return idNcm == null ? 1 : idNcm;
     }
 
     public void setIdNcm(Integer idNcm) {
@@ -1014,7 +1027,7 @@ public class Produto {
     }
 
     public Integer getIdCest() {
-        return idCest;
+        return idCest == null ? 1 : idCest;
     }
 
     public void setIdCest(Integer idCest) {
@@ -1022,7 +1035,7 @@ public class Produto {
     }
 
     public Integer getIdFabricante() {
-        return idFabricante;
+        return idFabricante == null ? 1 : idFabricante;
     }
 
     public void setIdFabricante(Integer idFabricante) {
@@ -1030,7 +1043,7 @@ public class Produto {
     }
 
     public Integer getIdFornecedor() {
-        return idFornecedor;
+        return idFornecedor == null ? 1 : idFornecedor;
     }
 
     public void setIdFornecedor(Integer idFornecedor) {
@@ -1038,7 +1051,7 @@ public class Produto {
     }
 
     public Integer getIdUnidade() {
-        return idUnidade;
+        return idUnidade == null ? 1 : idUnidade;
     }
 
     public void setIdUnidade(Integer idUnidade) {
@@ -1046,7 +1059,7 @@ public class Produto {
     }
 
     public Integer getIdUnidadeAtacado2() {
-        return idUnidadeAtacado2;
+        return idUnidadeAtacado2 == null ? 0 : idUnidadeAtacado2;
     }
 
     public void setIdUnidadeAtacado2(Integer idUnidadeAtacado2) {
@@ -1054,7 +1067,7 @@ public class Produto {
     }
 
     public Integer getIdUnidadeAtacado3() {
-        return idUnidadeAtacado3;
+        return idUnidadeAtacado3 == null ? 0 : idUnidadeAtacado3;
     }
 
     public void setIdUnidadeAtacado3(Integer idUnidadeAtacado3) {
@@ -1062,7 +1075,7 @@ public class Produto {
     }
 
     public Integer getIdUnidadeAtacado4() {
-        return idUnidadeAtacado4;
+        return idUnidadeAtacado4 == null ? 0 : idUnidadeAtacado4;
     }
 
     public void setIdUnidadeAtacado4(Integer idUnidadeAtacado4) {
@@ -1070,7 +1083,7 @@ public class Produto {
     }
 
     public Integer getIdUnidadeEmbalagem() {
-        return idUnidadeEmbalagem;
+        return idUnidadeEmbalagem == null ? 1 : idUnidadeEmbalagem;
     }
 
     public void setIdUnidadeEmbalagem(Integer idUnidadeEmbalagem) {
@@ -1078,7 +1091,7 @@ public class Produto {
     }
 
     public Integer getIdSubcategoria() {
-        return idSubcategoria;
+        return idSubcategoria == null ? 1 : idSubcategoria;
     }
 
     public void setIdSubcategoria(Integer idSubcategoria) {
@@ -1086,15 +1099,42 @@ public class Produto {
     }
 
     public Integer getIdEmpresa() {
-        return idEmpresa;
+        return idEmpresa == null ? 1 : idEmpresa;
     }
 
     public void setIdEmpresa(Integer idEmpresa) {
         this.idEmpresa = idEmpresa;
     }
 
+    public Double getMargemLucro() {
+        return calcularMargemLucro(precoVenda, precoCusto);
+    }
+
+    public Double getMargemLucro2() {
+        return calcularMargemLucro(precoVenda2, precoCusto);
+    }
+
+    public Double getMargemLucro3() {
+        return calcularMargemLucro(precoVenda3, precoCusto);
+    }
+
+    public Double getMargemLucro4() {
+        return calcularMargemLucro(precoVenda4, precoCusto);
+    }
+
+    public Double getMargemIdeal() {
+        return 0.0;
+    }
+
+    private Double calcularMargemLucro(Double precoVenda, Double precoCusto) {
+        if (precoVenda != null && precoVenda > 0) {
+            return ((precoVenda - precoCusto) / precoCusto) * 100;
+        }
+        return 0.0;
+    }
+
     @Override
     public String toString() {
-        return codigo + " - " +  codigoBarras + " > " + nome;
+        return codigo + " - " + codigoBarras + " > " + nome;
     }
 }
