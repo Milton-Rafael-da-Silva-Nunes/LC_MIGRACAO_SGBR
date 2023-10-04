@@ -117,17 +117,16 @@ public class Program {
             for (Fornecedor obj : listaFornecedor) {
                 fornecedordao.insert(obj);
             }
+            // DELETAR Colunas em fornecedores
+            fornecedordao.deletarColunasAdicionais();
             
             System.out.println("\n**** TESTE - findAll PRODUTO ****");
+            String regime = "SIMPLES";
             for (Produto obj : listaProduto) {
-                produtodao.insert(obj);
+                produtodao.insert(obj, regime);
             }
             System.out.println("Total de produtos Migrados: " + listaProduto.size());
             
-            // CIDADE e ESTADO fornecedores
-            fornecedordao.updateCidadeEstado();
-            fornecedordao.deletarColunasAdicionais();
-
             System.out.println("");
         } catch (Exception ex) {
             Logger.getLogger(Program.class.getName()).log(Level.SEVERE, null, ex);

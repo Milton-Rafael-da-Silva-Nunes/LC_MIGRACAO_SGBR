@@ -33,7 +33,7 @@ public class UnidadeDaoJDBC implements UnidadeDao {
         ResultSet rs = null;
 
         try {
-            st = conn1.prepareStatement("SELECT unidade FROM testoque GROUP BY unidade");
+            st = conn1.prepareStatement("SELECT unidade FROM testoque WHERE unidade IS NOT NULL AND unidade <> '' GROUP BY unidade");
             rs = st.executeQuery();
 
             List<Unidade> lista = new ArrayList<>();
@@ -70,8 +70,8 @@ public class UnidadeDaoJDBC implements UnidadeDao {
                 st.executeUpdate();
                 System.out.println("UNIDADE inserida: " + unidade.getUnidade());
             }
-        } catch (SQLException ex) {
-            throw new DbException("Erro ao inserir unidades em metodo insert: " + ex.getMessage());
+        } catch (SQLException e) {
+            throw new DbException("Erro ao inserir unidade em metodo insert: " + e.getMessage());
         } finally {
             MysqlConnector.closeStatement(st);
         }
@@ -79,15 +79,9 @@ public class UnidadeDaoJDBC implements UnidadeDao {
 
     // Metodo para instanciar OBJ e separar responsabilidade.
     private Unidade instanciacaoUnidade(ResultSet rs) throws SQLException {
-        String unidade = rs.getString("unidade");
-
-        if (unidade != null && !unidade.equals("")) {
-            Unidade obj = new Unidade();
-            obj.setUnidade(unidade);
-            return obj;
-        } else {
-            return new Unidade("UN");
-        }
+        Unidade obj = new Unidade();
+        obj.setUnidade(rs.getString("unidade"));
+        return obj;
     }
 
     // Metodo para verificar se a unidade já existe na tabela do LC SISTEMAS.

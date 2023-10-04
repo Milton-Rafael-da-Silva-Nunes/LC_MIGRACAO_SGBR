@@ -53,5 +53,33 @@ public class ObjetoUtil {
             return "S";
         }
     }
+    
+    public static String removerAcentos(String texto) {
+        if (texto == null) {
+            texto = "";
+        }
 
+        String acentuado = "çÇáéíóúýÁÉÍÓÚÝàèìòùÀÈÌÒÙãõñäëïöüÿÄËÏÖÜÃÕÑâêîôûÂÊÎÔÛ®";
+        String semAcento = "cCaeiouyAEIOUYaeiouAEIOUaonaeiouyAEIOUAONaeiouAEIOU ";
+        char[] tabela;
+
+        tabela = new char[256];
+        for (int i = 0; i < tabela.length; ++i) {
+            tabela[i] = (char) i;
+        }
+        for (int i = 0; i < acentuado.length(); ++i) {
+            tabela[acentuado.charAt(i)] = semAcento.charAt(i);
+        }
+
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < texto.length(); ++i) {
+            char ch = texto.charAt(i);
+            if (ch < 256) {
+                sb.append(tabela[ch]);
+            } else {
+                sb.append(ch);
+            }
+        }
+        return sb.toString();
+    }
 }

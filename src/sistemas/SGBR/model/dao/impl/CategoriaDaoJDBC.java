@@ -61,7 +61,7 @@ public class CategoriaDaoJDBC implements CategoriaDao {
             st = conn2.prepareStatement("INSERT INTO categoria(nome, comissao, pode_gourmet, datahora_alteracao, ativo) "
                     + "VALUES (?, ?, ?, ?, ?)");
 
-            if (!categoriaExiste(categoria.getNome())) {
+            if (!categoriaExiste(categoria.getNome())) { // Verificar se a categoria já existe antes de inserir no LC.
                 st.setString(1, categoria.getNome());
                 st.setDouble(2, 0.0);
                 st.setString(3, "SIM");
@@ -80,7 +80,7 @@ public class CategoriaDaoJDBC implements CategoriaDao {
     // Metodo para instanciar OBJ e separar responsabilidade.
     private Categoria instanciacaoCategoria(ResultSet rs) throws SQLException {
         Categoria obj = new Categoria();
-        obj.setNome(rs.getString("grupo").trim());
+        obj.setNome(rs.getString("grupo"));
         return obj;
     }
 

@@ -2,6 +2,7 @@ package sistemas.LC_SISTEMAS.model.entidades;
 
 import java.sql.Date;
 import util.DataHoraUtil;
+import util.ObjetoUtil;
 
 /**
  *
@@ -23,7 +24,7 @@ public class Produto {
     private String podeLerPeso;
     private String podeAtualizarNcm;
     private String dataHoraCadastro; // SOMENTE get
-    private Date dataHoraAtualizacao;
+    //private String dataHoraAtualizacao; // SOMENTE get
     private Double precoCompra;
     private Double valorCompra;
     private Double precoCusto;
@@ -101,28 +102,27 @@ public class Produto {
     private Double tribPisAliqSaida;
     private String tribCofinsSaida;
     private Double tribCofinsAliqSaida;
-    private String tribGenero;
     // IDS
-    private Integer idGrupoTributacao;
-    private Integer idCategoria;
-    private Integer idCfop;
-    private Integer idCst;
-    private Integer idNcm;
-    private Integer idCest;
-    private Integer idFabricante;
-    private Integer idFornecedor;
-    private Integer idUnidade;
-    private Integer idUnidadeAtacado2;
-    private Integer idUnidadeAtacado3;
-    private Integer idUnidadeAtacado4;
-    private Integer idUnidadeEmbalagem;
-    private Integer idSubcategoria;
-    private Integer idEmpresa;
-    private Double margemLucro;
-    private Double margemLucro2;
-    private Double margemLucro3;
-    private Double margemLucro4;
-    private Double margemFopo;
+    private Integer idGrupoTributacao = 1;
+    private Integer idFornecedor = 1;
+    private Integer idUnidadeAtacado2 = 0;
+    private Integer idUnidadeAtacado3 = 0;
+    private Integer idUnidadeAtacado4 = 0;
+    private Integer idUnidadeEmbalagem = 0;
+    private Integer idEmpresa = 1;
+    //private Integer idCfop;
+    //private Integer idCategoria;
+    //private Integer idCst;
+    //private Integer idNcm;
+    //private Integer idCest;
+    //private Integer idFabricante;
+    //private Integer idSubcategoria;
+    //private Integer idUnidade;
+    //private Double margemLucro;
+    //private Double margemLucro2;
+    //private Double margemLucro3;
+    //private Double margemLucro4;
+    private Double margemFpo;
     private Double margemIdeal;
     // Campos de terceiros para associacao em MAP
     private String codigoNcm;
@@ -132,11 +132,12 @@ public class Produto {
     private String subcategoriaNome;
     private String fabricanteNome;
     private String cstCsosn;
+    private String fornecedorNome;
 
     public Produto() {
     }
 
-    public Produto(Integer id, String codigo, String referencia, String codigoBarras, String nome, String descricao, String podeDesconto, String podeFracionado, String podeBalanca, String podeLote, String podeComissao, String podeLerPeso, String podeAtualizarNcm, String dataHoraCadastro, Date dataHoraAtualizacao, Double precoCompra, Double valorCompra, Double precoCusto, Double custoMedio, Double precoVenda, Double descontoMax, Double precoVenda2, Double qtdMinimaPv2, Double descontoMax2, Double precoVenda3, Double qtdMinimaPv3, Double descontoMax3, Double precoVenda4, Double qtdMinimaPv4, Double descontoMax4, Double precoAntigo, Double valorFrete, String ipi, Double precoPromocao, String dataPromocaoInicial, String dataPromocaoFinal, Integer comissao, Double comissaoValor, String fidelidadePontos, Double estoque, Double estoqueMinimo, Double estoqueMax, Double estoqueTara, Double qtdEmbalagem, String qtdDiasValidade, Double pesoBruto, Double pesoLiquido, String tipoProduto, String origemProduto, String exTipi, Integer ativo, String observacoes, String local, String refCruzada1, String refCruzada2, String refCruzada3, String refCruzada4, String refCruzada5, String refCruzada6, String codEan, String codigoMed, String tipoMed, String tabelaMed, String linhaMed, String refAnvisaMed, String portariaMed, String rmsMed, Date datVigenciaMed, String edicaoPharmacos, String combCprodAnp, String combDescAnp, Double combPercentualGasPetroleo, Double combPercentualGasNatuaralNacional, Double combPercentualGasNaturalImportado, Double combValorPartilha, String medClasseTerapeutica, String medUnidadeMedida, String medUsoProlongado, String medPodeAtualizar, Double medPrecoVendaFpop, String medApresentacaoFpop, Double tribIssAliqSaida, Double tribIcmsAliqsaida, Double tribIcmsAliqRedBaseCalcSaida, String tribIcmsObs, Double tribIcmsfcpAliq, String tribIpiSaida, Double tribIpiAliqSaida, String tribPisSaida, Double tribPisAliqSaida, String tribCofinsSaida, Double tribCofinsAliqSaida, String tribGenero, Integer idGrupoTributacao, Integer idCategoria, Integer idCfop, Integer idCst, Integer idNcm, Integer idCest, Integer idFabricante, Integer idFornecedor, Integer idUnidade, Integer idUnidadeAtacado2, Integer idUnidadeAtacado3, Integer idUnidadeAtacado4, Integer idUnidadeEmbalagem, Integer idSubcategoria, Integer idEmpresa) {
+    public Produto(Integer id, String codigo, String referencia, String codigoBarras, String nome, String descricao, String podeDesconto, String podeFracionado, String podeBalanca, String podeLote, String podeComissao, String podeLerPeso, String podeAtualizarNcm, String dataHoraCadastro, Double precoCompra, Double valorCompra, Double precoCusto, Double custoMedio, Double precoVenda, Double descontoMax, Double precoVenda2, Double qtdMinimaPv2, Double descontoMax2, Double precoVenda3, Double qtdMinimaPv3, Double descontoMax3, Double precoVenda4, Double qtdMinimaPv4, Double descontoMax4, Double precoAntigo, Double valorFrete, String ipi, Double precoPromocao, String dataPromocaoInicial, String dataPromocaoFinal, Integer comissao, Double comissaoValor, String fidelidadePontos, Double estoque, Double estoqueMinimo, Double estoqueMax, Double estoqueTara, Double qtdEmbalagem, String qtdDiasValidade, Double pesoBruto, Double pesoLiquido, String tipoProduto, String origemProduto, String exTipi, Integer ativo, String observacoes, String local, String refCruzada1, String refCruzada2, String refCruzada3, String refCruzada4, String refCruzada5, String refCruzada6, String codEan, String codigoMed, String tipoMed, String tabelaMed, String linhaMed, String refAnvisaMed, String portariaMed, String rmsMed, Date datVigenciaMed, String edicaoPharmacos, String combCprodAnp, String combDescAnp, Double combPercentualGasPetroleo, Double combPercentualGasNatuaralNacional, Double combPercentualGasNaturalImportado, Double combValorPartilha, String medClasseTerapeutica, String medUnidadeMedida, String medUsoProlongado, String medPodeAtualizar, Double medPrecoVendaFpop, String medApresentacaoFpop, Double tribIssAliqSaida, Double tribIcmsAliqsaida, Double tribIcmsAliqRedBaseCalcSaida, String tribIcmsObs, Double tribIcmsfcpAliq, String tribIpiSaida, Double tribIpiAliqSaida, String tribPisSaida, Double tribPisAliqSaida, String tribCofinsSaida, Double tribCofinsAliqSaida) {
         this.id = id;
         this.codigo = codigo;
         this.referencia = referencia;
@@ -151,7 +152,6 @@ public class Produto {
         this.podeLerPeso = podeLerPeso;
         this.podeAtualizarNcm = podeAtualizarNcm;
         this.dataHoraCadastro = dataHoraCadastro;
-        this.dataHoraAtualizacao = dataHoraAtualizacao;
         this.precoCompra = precoCompra;
         this.valorCompra = valorCompra;
         this.precoCusto = precoCusto;
@@ -229,22 +229,6 @@ public class Produto {
         this.tribPisAliqSaida = tribPisAliqSaida;
         this.tribCofinsSaida = tribCofinsSaida;
         this.tribCofinsAliqSaida = tribCofinsAliqSaida;
-        this.tribGenero = tribGenero;
-        this.idGrupoTributacao = idGrupoTributacao;
-        this.idCategoria = idCategoria;
-        this.idCfop = idCfop;
-        this.idCst = idCst;
-        this.idNcm = idNcm;
-        this.idCest = idCest;
-        this.idFabricante = idFabricante;
-        this.idFornecedor = idFornecedor;
-        this.idUnidade = idUnidade;
-        this.idUnidadeAtacado2 = idUnidadeAtacado2;
-        this.idUnidadeAtacado3 = idUnidadeAtacado3;
-        this.idUnidadeAtacado4 = idUnidadeAtacado4;
-        this.idUnidadeEmbalagem = idUnidadeEmbalagem;
-        this.idSubcategoria = idSubcategoria;
-        this.idEmpresa = idEmpresa;
     }
 
     public Integer getId() {
@@ -256,7 +240,7 @@ public class Produto {
     }
 
     public String getCodigo() {
-        return codigo == null ? "" : codigo;
+        return codigo == null ? "" : codigo.trim().replace("  ", "");
     }
 
     public void setCodigo(String codigo) {
@@ -267,7 +251,7 @@ public class Produto {
         if (referencia == null || (codigoBarras != null && referencia.equals(codigoBarras))) {
             return "";
         }
-        return referencia;
+        return referencia.trim().replace("  ", "");
     }
 
     public void setReferencia(String referencia) {
@@ -275,7 +259,7 @@ public class Produto {
     }
 
     public String getCodigoBarras() {
-        return codigoBarras == null ? "" : codigoBarras;
+        return codigoBarras == null ? "" : codigoBarras.trim().replace("  ", "");
     }
 
     public void setCodigoBarras(String codigoBarras) {
@@ -283,7 +267,7 @@ public class Produto {
     }
 
     public String getNome() {
-        return nome.toUpperCase().trim();
+        return nome.toUpperCase().trim().replace("  ", "");
     }
 
     public void setNome(String nome) {
@@ -291,7 +275,7 @@ public class Produto {
     }
 
     public String getDescricao() {
-        return descricao == null ? "" : descricao.toUpperCase().trim();
+        return descricao == null ? "" : descricao.toUpperCase().trim().replace("  ", "");
     }
 
     public void setDescricao(String descricao) {
@@ -355,15 +339,11 @@ public class Produto {
     }
 
     public String getDataHoraCadastro() {
+        return dataHoraCadastro;
+    }
+
+    public String getDataHoraAtualizacao() {
         return DataHoraUtil.getDataHoraAtual();
-    }
-
-    public Date getDataHoraAtualizacao() {
-        return dataHoraAtualizacao;
-    }
-
-    public void setDataHoraAtualizacao(Date dataHoraAtualizacao) {
-        this.dataHoraAtualizacao = dataHoraAtualizacao;
     }
 
     public Double getPrecoCompra() {
@@ -562,7 +542,7 @@ public class Produto {
         if (estoque == null || estoque.equals("") || estoque < 0) {
             return 0.0;
         }
-        return estoque ;
+        return estoque;
     }
 
     public void setEstoque(Double estoque) {
@@ -997,128 +977,41 @@ public class Produto {
         return codigoNcm == null ? "" : codigoNcm.substring(0, 2);
     }
 
-    public void setTribGenero(String tribGenero) {
-        this.tribGenero = tribGenero;
-    }
-
     public Integer getIdGrupoTributacao() {
-        return idGrupoTributacao == null ? 1 : idGrupoTributacao;
-    }
-
-    public void setIdGrupoTributacao(Integer idGrupoTributacao) {
-        this.idGrupoTributacao = idGrupoTributacao;
-    }
-
-    public Integer getIdCategoria() {
-        return idCategoria == null ? 1 : idCategoria;
-    }
-
-    public void setIdCategoria(Integer idCategoria) {
-        this.idCategoria = idCategoria;
+        return idGrupoTributacao;
     }
 
     public Integer getIdCfop() {
-        return idCfop == null ? 289 : idCfop;
-    }
-
-    public void setIdCfop(Integer idCfop) {
-        this.idCfop = idCfop;
-    }
-
-    public Integer getIdCst() {
-        return idCst == null ? 14 : idCst;
-    }
-
-    public void setIdCst(Integer idCst) {
-        this.idCst = idCst;
-    }
-
-    public Integer getIdNcm() {
-        return idNcm == null ? 1 : idNcm;
-    }
-
-    public void setIdNcm(Integer idNcm) {
-        this.idNcm = idNcm;
-    }
-
-    public Integer getIdCest() {
-        return idCest == null ? 1 : idCest;
-    }
-
-    public void setIdCest(Integer idCest) {
-        this.idCest = idCest;
-    }
-
-    public Integer getIdFabricante() {
-        return idFabricante == null ? 1 : idFabricante;
-    }
-
-    public void setIdFabricante(Integer idFabricante) {
-        this.idFabricante = idFabricante;
+        if (cstCsosn != null) {
+            if (cstCsosn.equals("500") || cstCsosn.equals("60")) {
+                return 355;
+            }
+        }
+        return 289;
     }
 
     public Integer getIdFornecedor() {
-        return idFornecedor == null ? 1 : idFornecedor;
-    }
-
-    public void setIdFornecedor(Integer idFornecedor) {
-        this.idFornecedor = idFornecedor;
-    }
-
-    public Integer getIdUnidade() {
-        return idUnidade == null ? 1 : idUnidade;
-    }
-
-    public void setIdUnidade(Integer idUnidade) {
-        this.idUnidade = idUnidade;
+        return idFornecedor;
     }
 
     public Integer getIdUnidadeAtacado2() {
-        return idUnidadeAtacado2 == null ? 0 : idUnidadeAtacado2;
-    }
-
-    public void setIdUnidadeAtacado2(Integer idUnidadeAtacado2) {
-        this.idUnidadeAtacado2 = idUnidadeAtacado2;
+        return idUnidadeAtacado2;
     }
 
     public Integer getIdUnidadeAtacado3() {
-        return idUnidadeAtacado3 == null ? 0 : idUnidadeAtacado3;
-    }
-
-    public void setIdUnidadeAtacado3(Integer idUnidadeAtacado3) {
-        this.idUnidadeAtacado3 = idUnidadeAtacado3;
+        return idUnidadeAtacado3;
     }
 
     public Integer getIdUnidadeAtacado4() {
-        return idUnidadeAtacado4 == null ? 0 : idUnidadeAtacado4;
-    }
-
-    public void setIdUnidadeAtacado4(Integer idUnidadeAtacado4) {
-        this.idUnidadeAtacado4 = idUnidadeAtacado4;
+        return idUnidadeAtacado4;
     }
 
     public Integer getIdUnidadeEmbalagem() {
-        return idUnidadeEmbalagem == null ? 0 : idUnidadeEmbalagem;
-    }
-
-    public void setIdUnidadeEmbalagem(Integer idUnidadeEmbalagem) {
-        this.idUnidadeEmbalagem = idUnidadeEmbalagem;
-    }
-
-    public Integer getIdSubcategoria() {
-        return idSubcategoria == null ? 1 : idSubcategoria;
-    }
-
-    public void setIdSubcategoria(Integer idSubcategoria) {
-        this.idSubcategoria = idSubcategoria;
+        return idUnidadeEmbalagem;
     }
 
     public Integer getIdEmpresa() {
-        return idEmpresa == null ? 1 : idEmpresa;
-    }
-
-    public void setIdEmpresa(Integer idEmpresa) {
-        this.idEmpresa = idEmpresa;
+        return idEmpresa;
     }
 
     public Double getMargemLucro() {
@@ -1140,9 +1033,9 @@ public class Produto {
     public Double getMargemIdeal() {
         return margemIdeal == null ? 0.0 : margemIdeal;
     }
-    
+
     public double getMargemFpop() {
-        return margemFopo == null ? 0.0 : margemFopo;
+        return margemFpo == null ? 0.0 : margemFpo;
     }
 
     private Double calcularMargemLucro(Double precoVenda, Double precoCusto) {
@@ -1179,7 +1072,7 @@ public class Produto {
         if (unidadeMedida == null || unidadeMedida.equals("")) {
             return "UN";
         }
-        return unidadeMedida;
+        return unidadeMedida.replace("Ç", "C").replace("ç", "c");
     }
 
     public void setUnidadeMedida(String unidadeMedida) {
@@ -1220,30 +1113,67 @@ public class Produto {
     }
 
     public String getCstCsosn(String regime) {
-        if (regime.equalsIgnoreCase("simples")) {
-            return  formatarCsosnRegime(cstCsosn);
-        } else {
-            return formatarCstRegime(cstCsosn);
-        }
+        return formatarCstCsosnRegime(cstCsosn, regime);
     }
 
     public void setCstCsosn(String cstCsosn) {
         this.cstCsosn = cstCsosn;
     }
 
-    private String formatarCstRegime(String cstCson) {
-        if (cstCson == null || cstCson.equals("") || cstCson.length() != 2) {
-            return "00";
-        } else {
-            return cstCson;
-        }
+    public String getFornecedorNome() {
+        return fornecedorNome == null ? "PADRAO" : fornecedorNome;
     }
-    
-    private String formatarCsosnRegime(String cstCson) {
-        if (cstCson == null || cstCson.equals("") || cstCson.length() != 3) {
-            return "102";
+
+    public void setFornecedorNome(String fornecedorNome) {
+        this.fornecedorNome = fornecedorNome;
+    }
+
+    private String formatarCstCsosnRegime(String cstCsosn, String regime) {
+        if (cstCsosn == null || cstCsosn.isEmpty()) {
+            cstCsosn = (regime.equalsIgnoreCase("simples")) ? "102" : "00";
+        }
+
+        if (regime.equalsIgnoreCase("simples")) {
+            switch (cstCsosn) {
+                case "00":
+                case "10":
+                case "20":
+                case "70":
+                    return "102";
+                case "30":
+                case "40":
+                case "50":
+                case "51":
+                    return "300";
+                case "41":
+                    return "400";
+                case "60":
+                    return "500";
+                case "90":
+                    return "900";
+                default:
+                    return cstCsosn;
+            }
         } else {
-            return cstCson;
+            switch (cstCsosn) {
+                case "101":
+                case "102":
+                case "103":
+                case "201":
+                case "202":
+                case "203":
+                    return "00";
+                case "300":
+                    return "40";
+                case "400":
+                    return "41";
+                case "500":
+                    return "60";
+                case "900":
+                    return "90";
+                default:
+                    return cstCsosn;
+            }
         }
     }
 

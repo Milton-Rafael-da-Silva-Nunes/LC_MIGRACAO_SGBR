@@ -58,13 +58,13 @@ public class FornecedorDaoJDBC implements FornecedorDao {
     public void insert(Fornecedor fornecedor) {
         PreparedStatement st = null;
 
-        adicionarIdFornecedor();
+        adicionarCodigoCidadeFornecedor();
         try {
 
-            st = conn2.prepareStatement("INSERT INTO fornecedor(controle, id_empresa, id_estado, id_cidade, id_planocontas, tipo, tipo_fornecedor, nome, razao_social, cnpj_cpf, ie, endereco, numero, bairro, cep, fone, fax, email_site, obs, ativo, codigoCidade) "
-                    + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            st = conn2.prepareStatement("INSERT INTO fornecedor(codigoCidade, id_empresa, id_estado, id_cidade, id_planocontas, tipo, tipo_fornecedor, nome, razao_social, cnpj_cpf, ie, endereco, numero, bairro, cep, fone, fax, email_site, obs, ativo) "
+                    + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
-            st.setInt(1, fornecedor.getId());
+            st.setString(1, fornecedor.getCodigoCidade());
             st.setInt(2, 1);
             st.setInt(3, 14); // Estado padrão
             st.setInt(4, 184);// Cidade padrão
@@ -84,8 +84,8 @@ public class FornecedorDaoJDBC implements FornecedorDao {
             st.setString(18, fornecedor.getEmail());
             st.setString(19, fornecedor.getObs());
             st.setInt(20, fornecedor.getAtivo());
-            st.setString(21, fornecedor.getCodigoCidade());
             st.executeUpdate();
+            updateCidadeEstado(); // Update id_cidade e id_estado
             System.out.println("FORNECEDOR inserido: " + fornecedor);
 
         } catch (SQLException e) {
@@ -120,39 +120,39 @@ public class FornecedorDaoJDBC implements FornecedorDao {
     public void deletarColunasAdicionais() {
         PreparedStatement st = null;
         ResultSet rs = null;
-        
+
         try {
             DatabaseMetaData metaData = conn2.getMetaData();
-            rs = metaData.getColumns(null, null, "fornecedor", "controle");
-            
-            if(rs.next()) {
-                st = conn2.prepareStatement("ALTER TABLE fornecedor DROP COLUMN controle, DROP COLUMN codigoCidade");
+            rs = metaData.getColumns(null, null, "fornecedor", "codigoCidade");
+
+            if (rs.next()) {
+                st = conn2.prepareStatement("ALTER TABLE fornecedor DROP COLUMN codigoCidade");
                 st.executeUpdate();
             }
-            
+
         } catch (SQLException e) {
-            throw new DbException("Erro ao deletar coluna 'controle/codigoCidade' em fornecedor: " + e.getMessage());
+            throw new DbException("Erro ao deletar coluna 'codigoCidade' em fornecedor: " + e.getMessage());
         } finally {
             MysqlConnector.closeStatement(st);
             MysqlConnector.closeResultSet(rs);
         }
     }
 
-    private void adicionarIdFornecedor() {
+    private void adicionarCodigoCidadeFornecedor() {
         PreparedStatement st = null;
         ResultSet rs = null;
 
         try {
             DatabaseMetaData metaData = conn2.getMetaData();
-            rs = metaData.getColumns(null, null, "fornecedor", "controle");
+            rs = metaData.getColumns(null, null, "fornecedor", "codigoCidade");
 
             if (!rs.next()) {
-                st = conn2.prepareStatement("ALTER TABLE fornecedor ADD COLUMN controle VARCHAR(10) AFTER id, ADD COLUMN codigoCidade VARCHAR(20)AFTER controle");
+                st = conn2.prepareStatement("ALTER TABLE fornecedor ADD COLUMN codigoCidade VARCHAR(20)AFTER id");
                 st.executeUpdate();
             }
 
         } catch (SQLException e) {
-            throw new DbException("Erro ao adicionar coluna 'controle/codigoCidade' em fornecedor: " + e.getMessage());
+            throw new DbException("Erro ao adicionar coluna 'codigoCidade' em fornecedor: " + e.getMessage());
         } finally {
             MysqlConnector.closeStatement(st);
             MysqlConnector.closeResultSet(rs);

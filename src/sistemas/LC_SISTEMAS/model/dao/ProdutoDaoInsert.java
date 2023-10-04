@@ -8,5 +8,5 @@ import sistemas.LC_SISTEMAS.model.entidades.Produto;
  */
 public interface ProdutoDaoInsert {
  
-    void insert(Produto produto);
+    void insert(Produto produto, String regime);
 }

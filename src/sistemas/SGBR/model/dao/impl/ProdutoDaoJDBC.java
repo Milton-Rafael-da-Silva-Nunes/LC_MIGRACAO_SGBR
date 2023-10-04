@@ -39,6 +39,7 @@ public class ProdutoDaoJDBC implements ProdutoDao {
     private TreeMap<String, String> mapaSubcategoria;
     private TreeMap<String, String> mapaFabricante;
     private TreeMap<String, String> mapaCstCsosn;
+    private TreeMap<String, String> mapaFornecedor;
 
     @Override
     public List<Produto> findAll() {
@@ -77,17 +78,20 @@ public class ProdutoDaoJDBC implements ProdutoDao {
     }
 
     @Override
-    public void insert(Produto produto) {
+    public void insert(Produto produto, String regime) {
         PreparedStatement st = null;
+        
         mapaNcm = getMapaNcm();
         mapaCest = getMapaCest();
         mapaUnidade = getMapaUnidade();
         mapaCategoria = getMapaCategoria();
         mapaFabricante = getMapaFabricante();
         mapaSubcategoria = getMapaSubCategoria();
+        mapaCstCsosn = getMapaCstCsosn();
+        mapaFornecedor = getMapaFornecedor();
         
         try {
-            st = conn2.prepareStatement("INSERT INTO produto(codigo, referencia, codigo_barras, nome, descricao, id_grupotributacao, id_categoria, id_cfop, id_cst, id_ncm, id_cest, id_fabricante, id_fornecedor, id_unidade, id_unidadeatacado2, id_unidadeatacado3, id_unidadeatacado4, id_unidadeembalagem, id_subcategoria, id_empresa, pode_desconto, pode_fracionado, pode_balanca, pode_lote, pode_comissao, pode_lerpeso, pode_atualizarncm, datahora_cadastro, datahora_alteracao, preco_compra, valor_compra, preco_custo, custo_medio, preco_venda, desconto_max, preco_venda2, qtd_minimapv2, desconto_max2, preco_venda3, qtd_minimapv3, desconto_max3, preco_venda4, qtd_minimapv4, desconto_max4, preco_antigo, valor_frete, ipi, preco_promocao, data_promocaoinicial, data_promocaofinal, comissao, comissao_valor, fidelidade_pontos, estoque, estoque_minimo, estoque_max, estoque_tara, qtd_embalagem, qtd_diasvalidade, peso_bruto, peso_liquido, tipo_produto, origem_produto, ex_tipi, ativo, observacoes, local, ref_cruzada1, ref_cruzada2, ref_cruzada3, ref_cruzada4, ref_cruzada5, ref_cruzada6, cod_ean, codigo_med, tipo_med, tabela_med, linha_med, ref_anvisa_med, portaria_med, rms_med, edicao_pharmacos, comb_cprodanp, comb_descanp, comb_percentualgaspetroleo, comb_percentualgasnaturalnacional, comb_percentualgasnaturalimportado, comb_valorpartida, med_classeterapeutica, med_unidademedida, med_usoprolongado, med_podeatualizar, med_precovendafpop, med_apresentacaofpop, trib_issaliqsaida, trib_icmsaliqsaida, trib_icmsaliqredbasecalcsaida, trib_icmsobs, trib_icmsfcpaliq, trib_ipisaida, trib_ipialiqsaida, trib_pissaida, trib_pisaliqsaida, trib_cofinssaida, trib_cofinsaliqsaida, trib_genero, imendes_codigointerno, imendes_produtonome, margem_lucro, margem_lucro2, margem_lucro3, margem_lucro4, margem_ideal, med_margemfpop) "
+            st = conn2.prepareStatement("INSERT INTO produto(codigo, referencia, codigo_barras, nome, descricao, id_grupotributacao, id_categoria, id_cst, id_cfop, id_ncm, id_cest, id_fabricante, id_fornecedor, id_unidade, id_unidadeatacado2, id_unidadeatacado3, id_unidadeatacado4, id_unidadeembalagem, id_subcategoria, id_empresa, pode_desconto, pode_fracionado, pode_balanca, pode_lote, pode_comissao, pode_lerpeso, pode_atualizarncm, datahora_cadastro, datahora_alteracao, preco_compra, valor_compra, preco_custo, custo_medio, preco_venda, desconto_max, preco_venda2, qtd_minimapv2, desconto_max2, preco_venda3, qtd_minimapv3, desconto_max3, preco_venda4, qtd_minimapv4, desconto_max4, preco_antigo, valor_frete, ipi, preco_promocao, data_promocaoinicial, data_promocaofinal, comissao, comissao_valor, fidelidade_pontos, estoque, estoque_minimo, estoque_max, estoque_tara, qtd_embalagem, qtd_diasvalidade, peso_bruto, peso_liquido, tipo_produto, origem_produto, ex_tipi, ativo, observacoes, local, ref_cruzada1, ref_cruzada2, ref_cruzada3, ref_cruzada4, ref_cruzada5, ref_cruzada6, cod_ean, codigo_med, tipo_med, tabela_med, linha_med, ref_anvisa_med, portaria_med, rms_med, edicao_pharmacos, comb_cprodanp, comb_descanp, comb_percentualgaspetroleo, comb_percentualgasnaturalnacional, comb_percentualgasnaturalimportado, comb_valorpartida, med_classeterapeutica, med_unidademedida, med_usoprolongado, med_podeatualizar, med_precovendafpop, med_apresentacaofpop, trib_issaliqsaida, trib_icmsaliqsaida, trib_icmsaliqredbasecalcsaida, trib_icmsobs, trib_icmsfcpaliq, trib_ipisaida, trib_ipialiqsaida, trib_pissaida, trib_pisaliqsaida, trib_cofinssaida, trib_cofinsaliqsaida, trib_genero, imendes_codigointerno, imendes_produtonome, margem_lucro, margem_lucro2, margem_lucro3, margem_lucro4, margem_ideal, med_margemfpop) "
                     + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
             st.setString(1, produto.getCodigo());
@@ -97,12 +101,12 @@ public class ProdutoDaoJDBC implements ProdutoDao {
             st.setString(5, produto.getDescricao());
             st.setInt(6, produto.getIdGrupoTributacao());
             st.setString(7, mapaCategoria.get(produto.getCategoriaNome()));
-            st.setInt(8, produto.getIdCfop());
-            st.setInt(9, produto.getIdCst());
+            st.setString(8, mapaCstCsosn.get(produto.getCstCsosn(regime)));
+            st.setInt(9, produto.getIdCfop());
             st.setString(10, mapaNcm.get(produto.getCodigoNcm()));
             st.setString(11, mapaCest.get(produto.getCodigoCest()));
             st.setString(12, mapaFabricante.get(produto.getFabricanteNome()));
-            st.setInt(13, produto.getIdFornecedor());
+            st.setString(13, mapaFornecedor.get(produto.getFornecedorNome()));
             st.setString(14, mapaUnidade.get(produto.getUnidadeMedida()));
             st.setInt(15, produto.getIdUnidadeAtacado2());
             st.setInt(16, produto.getIdUnidadeAtacado3());
@@ -259,6 +263,7 @@ public class ProdutoDaoJDBC implements ProdutoDao {
         obj.setSubcategoriaNome(rs.getString("subgrupo"));
         obj.setFabricanteNome(rs.getString("marca"));
         obj.setCstCsosn(rs.getString("csosn"));
+        obj.setFornecedorNome(rs.getString("fornecedor"));
         return obj;
     }
 
@@ -393,6 +398,50 @@ public class ProdutoDaoJDBC implements ProdutoDao {
             
             while (rs.next()) {
                 map.put(rs.getString("nome"), rs.getString("id"));
+            }
+            
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        } finally {
+            MysqlConnector.closeResultSet(rs);
+            MysqlConnector.closeStatement(st);
+        }
+        return map;
+    }
+    
+    private TreeMap<String, String> getMapaCstCsosn() {
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        TreeMap<String, String> map = new TreeMap();
+        
+        try {
+            st = conn2.prepareStatement("select id, codigotributario from cst");
+            rs = st.executeQuery();
+            
+            while (rs.next()) {
+                map.put(rs.getString("codigotributario"), rs.getString("id"));
+            }
+            
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        } finally {
+            MysqlConnector.closeResultSet(rs);
+            MysqlConnector.closeStatement(st);
+        }
+        return map;
+    }
+    
+    private TreeMap<String, String> getMapaFornecedor() {
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        TreeMap<String, String> map = new TreeMap();
+        
+        try {
+            st = conn2.prepareStatement("select id, razao_social from fornecedor");
+            rs = st.executeQuery();
+            
+            while (rs.next()) {
+                map.put(rs.getString("razao_social"), rs.getString("id"));
             }
             
         } catch (SQLException e) {
