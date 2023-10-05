@@ -8,6 +8,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -84,7 +85,7 @@ public class MysqlConnector {
             throw new DbException("\nNão Foi Possivel Conctar ao Servidor\nVerifique a Conecxao\n\n\n" + ex.getMessage());
         }
     }
-    
+
     public static void closeConnection(Connection conn) {
         if (conn != null) {
             try {
@@ -96,9 +97,9 @@ public class MysqlConnector {
             }
         }
     }
-    
+
     public static void closeStatement(Statement st) {
-        if(st != null) {
+        if (st != null) {
             try {
                 st.close();
             } catch (SQLException e) {
@@ -107,9 +108,9 @@ public class MysqlConnector {
             }
         }
     }
-    
+
     public static void closeResultSet(ResultSet rs) {
-        if(rs != null) {
+        if (rs != null) {
             try {
                 rs.close();
             } catch (SQLException e) {

@@ -9,6 +9,4 @@ import sistemas.LC_SISTEMAS.model.entidades.Fornecedor;
 public interface FornecedorDaoInsert {
     
     void insert(Fornecedor fornecedor);
-    void updateCidadeEstado();
-    void deletarColunasAdicionais();
 }

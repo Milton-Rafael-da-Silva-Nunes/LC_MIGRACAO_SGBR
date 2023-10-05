@@ -54,7 +54,7 @@ public class CategoriaDaoJDBC implements CategoriaDao {
     }
 
     @Override
-    public void insert(Categoria categoria) {
+    public void insert(Categoria categoria){
         PreparedStatement st = null;
 
         try {
@@ -74,7 +74,7 @@ public class CategoriaDaoJDBC implements CategoriaDao {
             throw new DbException("Erro ao inserir categoria em metodo insert: " + e.getMessage());
         } finally {
             MysqlConnector.closeStatement(st);
-        }
+       }
     }
 
     // Metodo para instanciar OBJ e separar responsabilidade.

@@ -146,6 +146,9 @@ public class Fornecedor {
     }
 
     public String getCodigoCidade() {
+        if(codigoCidade == null || codigoCidade.equals("")) {
+            return "1501402"; // CIDADE Belem-PA
+        }
         return codigoCidade;
     }
 

@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
@@ -80,7 +81,7 @@ public class ProdutoDaoJDBC implements ProdutoDao {
     @Override
     public void insert(Produto produto, String regime) {
         PreparedStatement st = null;
-        
+
         mapaNcm = getMapaNcm();
         mapaCest = getMapaCest();
         mapaUnidade = getMapaUnidade();
@@ -89,10 +90,10 @@ public class ProdutoDaoJDBC implements ProdutoDao {
         mapaSubcategoria = getMapaSubCategoria();
         mapaCstCsosn = getMapaCstCsosn();
         mapaFornecedor = getMapaFornecedor();
-        
+
         try {
             st = conn2.prepareStatement("INSERT INTO produto(codigo, referencia, codigo_barras, nome, descricao, id_grupotributacao, id_categoria, id_cst, id_cfop, id_ncm, id_cest, id_fabricante, id_fornecedor, id_unidade, id_unidadeatacado2, id_unidadeatacado3, id_unidadeatacado4, id_unidadeembalagem, id_subcategoria, id_empresa, pode_desconto, pode_fracionado, pode_balanca, pode_lote, pode_comissao, pode_lerpeso, pode_atualizarncm, datahora_cadastro, datahora_alteracao, preco_compra, valor_compra, preco_custo, custo_medio, preco_venda, desconto_max, preco_venda2, qtd_minimapv2, desconto_max2, preco_venda3, qtd_minimapv3, desconto_max3, preco_venda4, qtd_minimapv4, desconto_max4, preco_antigo, valor_frete, ipi, preco_promocao, data_promocaoinicial, data_promocaofinal, comissao, comissao_valor, fidelidade_pontos, estoque, estoque_minimo, estoque_max, estoque_tara, qtd_embalagem, qtd_diasvalidade, peso_bruto, peso_liquido, tipo_produto, origem_produto, ex_tipi, ativo, observacoes, local, ref_cruzada1, ref_cruzada2, ref_cruzada3, ref_cruzada4, ref_cruzada5, ref_cruzada6, cod_ean, codigo_med, tipo_med, tabela_med, linha_med, ref_anvisa_med, portaria_med, rms_med, edicao_pharmacos, comb_cprodanp, comb_descanp, comb_percentualgaspetroleo, comb_percentualgasnaturalnacional, comb_percentualgasnaturalimportado, comb_valorpartida, med_classeterapeutica, med_unidademedida, med_usoprolongado, med_podeatualizar, med_precovendafpop, med_apresentacaofpop, trib_issaliqsaida, trib_icmsaliqsaida, trib_icmsaliqredbasecalcsaida, trib_icmsobs, trib_icmsfcpaliq, trib_ipisaida, trib_ipialiqsaida, trib_pissaida, trib_pisaliqsaida, trib_cofinssaida, trib_cofinsaliqsaida, trib_genero, imendes_codigointerno, imendes_produtonome, margem_lucro, margem_lucro2, margem_lucro3, margem_lucro4, margem_ideal, med_margemfpop) "
-                    + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                    + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
 
             st.setString(1, produto.getCodigo());
             st.setString(2, produto.getReferencia());
@@ -208,11 +209,112 @@ public class ProdutoDaoJDBC implements ProdutoDao {
             st.setDouble(112, produto.getMargemLucro4());
             st.setDouble(113, produto.getMargemIdeal());
             st.setDouble(114, produto.getMargemFpop());
-            st.executeUpdate();
+            int linhas = st.executeUpdate();
             System.out.println("PRODUTOS inserido: " + produto);
+
+            // Logica para setar a ID do retorno do produto inserido.
+            if (linhas > 0) {
+                ResultSet rs = st.getGeneratedKeys();
+                if (rs.next()) {
+                    int id = rs.getInt(1);
+                    produto.setId(id);
+                }
+                MysqlConnector.closeResultSet(rs);
+            } else {
+                throw new DbException("Erro inesperado! \n\n\nNenhuma linha efetada!");
+            }
 
         } catch (SQLException e) {
             throw new DbException("Erro ao inserir produto em insert: " + e.getMessage());
+        } finally {
+            MysqlConnector.closeStatement(st);
+        }
+    }
+
+    @Override
+    public void insertEstoqueProduto(Produto produto) {
+        ajusteEstoque(produto);
+        estoqueSaldo(produto);
+        //estoque(produto, ajusteEstoque(produto));
+    }
+
+    private void estoqueSaldo(Produto produto) {
+        PreparedStatement st = null;
+        try {
+
+            if (produto.getEstoque() > 0) {
+
+                st = conn2.prepareStatement("INSERT INTO estoquesaldo(id_empresa, id_produto, id_localestoque, quantidade, datahora_alteracao) "
+                        + "VALUES (?, ?, ?, ?, ?)");
+
+                st.setInt(1, 1);
+                st.setInt(2, produto.getId());
+                st.setInt(3, 1);
+                st.setDouble(4, produto.getEstoque());
+                st.setString(5, DataHoraUtil.getDataHoraAtual());
+                st.executeUpdate();
+            }
+
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        } finally {
+            MysqlConnector.closeStatement(st);
+        }
+    }
+
+    private void ajusteEstoque(Produto produto) {
+        PreparedStatement st = null;
+        try {
+            
+            if (produto.getEstoque() > 0) {
+                st = conn2.prepareStatement("INSERT INTO ajusteestoque(id_empresa, id_localestoque, id_produto, id_usuario, id_lote, estoque_desejado, estoque_antigo, diferenca, data_hora, obs, status) "
+                        + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
+                st.setInt(1, 1);
+                st.setInt(2, 1);
+                st.setInt(3, produto.getId());
+                st.setInt(4, 1);
+                st.setInt(5, 1);
+                st.setDouble(6, produto.getEstoque());
+                st.setDouble(7, 0.0);
+                st.setDouble(8, produto.getEstoque());
+                st.setString(9, DataHoraUtil.getDataHoraAtual());
+                st.setString(10, "MIGRACAO: " + DataHoraUtil.getDataAtual());
+                st.setString(11, "AEC");
+                
+                st.executeUpdate();
+            }
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        } finally {
+            MysqlConnector.closeStatement(st);
+        }
+    }
+
+    private void estoque(Produto produto, Integer idAjusteEstoque) {
+        PreparedStatement st = null;
+        try {
+            if(idAjusteEstoque > 0) {
+                
+            st = conn2.prepareStatement("INSERT INTO estoque(id_empresa, id_localestoque, id_controle, id_produto, id_lote, quantidade, data_hora, operacao, tipo, descricao_tipo, descricao) " 
+                    + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            
+                st.setInt(1, 1);
+                st.setInt(2, 1);
+                st.setInt(3, idAjusteEstoque);
+                st.setInt(4, produto.getId());
+                st.setInt(5, 0);
+                st.setDouble(6, produto.getEstoque());
+                st.setString(7, DataHoraUtil.getDataHoraAtual());
+                st.setString(8, "E");
+                st.setString(9, "AE");
+                st.setString(10, "AJUSTE DE ESTOQUE RAPIDO");
+                st.setString(11, "AJUSTE DE ESTOQUE RAPIDO");
+                
+                st.executeUpdate();
+            }
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
         } finally {
             MysqlConnector.closeStatement(st);
         }
@@ -277,19 +379,19 @@ public class ProdutoDaoJDBC implements ProdutoDao {
         }
     }
 
-    public TreeMap<String, String> getMapaNcm() {
+    private TreeMap<String, String> getMapaNcm() {
         PreparedStatement st = null;
         ResultSet rs = null;
         TreeMap<String, String> map = new TreeMap();
-        
+
         try {
             st = conn2.prepareStatement("select id, codigo from ncm");
             rs = st.executeQuery();
-            
+
             while (rs.next()) {
                 map.put(rs.getString("codigo"), rs.getString("id"));
             }
-            
+
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
         } finally {
@@ -298,20 +400,20 @@ public class ProdutoDaoJDBC implements ProdutoDao {
         }
         return map;
     }
-    
-    public TreeMap<String, String> getMapaCest() {
+
+    private TreeMap<String, String> getMapaCest() {
         PreparedStatement st = null;
         ResultSet rs = null;
         TreeMap<String, String> map = new TreeMap();
-        
+
         try {
             st = conn2.prepareStatement("select id, cest from cest");
             rs = st.executeQuery();
-            
+
             while (rs.next()) {
                 map.put(rs.getString("cest"), rs.getString("id"));
             }
-            
+
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
         } finally {
@@ -325,15 +427,15 @@ public class ProdutoDaoJDBC implements ProdutoDao {
         PreparedStatement st = null;
         ResultSet rs = null;
         TreeMap<String, String> map = new TreeMap();
-        
+
         try {
             st = conn2.prepareStatement("select id, descricao from unidade");
             rs = st.executeQuery();
-            
+
             while (rs.next()) {
                 map.put(rs.getString("descricao"), rs.getString("id"));
             }
-            
+
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
         } finally {
@@ -342,20 +444,20 @@ public class ProdutoDaoJDBC implements ProdutoDao {
         }
         return map;
     }
-    
+
     private TreeMap<String, String> getMapaCategoria() {
         PreparedStatement st = null;
         ResultSet rs = null;
         TreeMap<String, String> map = new TreeMap();
-        
+
         try {
             st = conn2.prepareStatement("select id, nome from categoria");
             rs = st.executeQuery();
-            
+
             while (rs.next()) {
                 map.put(rs.getString("nome"), rs.getString("id"));
             }
-            
+
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
         } finally {
@@ -364,20 +466,20 @@ public class ProdutoDaoJDBC implements ProdutoDao {
         }
         return map;
     }
-    
+
     private TreeMap<String, String> getMapaSubCategoria() {
         PreparedStatement st = null;
         ResultSet rs = null;
         TreeMap<String, String> map = new TreeMap();
-        
+
         try {
             st = conn2.prepareStatement("select id, nome from subcategoria");
             rs = st.executeQuery();
-            
+
             while (rs.next()) {
                 map.put(rs.getString("nome"), rs.getString("id"));
             }
-            
+
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
         } finally {
@@ -391,15 +493,15 @@ public class ProdutoDaoJDBC implements ProdutoDao {
         PreparedStatement st = null;
         ResultSet rs = null;
         TreeMap<String, String> map = new TreeMap();
-        
+
         try {
             st = conn2.prepareStatement("select id, nome from fabricante");
             rs = st.executeQuery();
-            
+
             while (rs.next()) {
                 map.put(rs.getString("nome"), rs.getString("id"));
             }
-            
+
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
         } finally {
@@ -408,20 +510,20 @@ public class ProdutoDaoJDBC implements ProdutoDao {
         }
         return map;
     }
-    
+
     private TreeMap<String, String> getMapaCstCsosn() {
         PreparedStatement st = null;
         ResultSet rs = null;
         TreeMap<String, String> map = new TreeMap();
-        
+
         try {
             st = conn2.prepareStatement("select id, codigotributario from cst");
             rs = st.executeQuery();
-            
+
             while (rs.next()) {
                 map.put(rs.getString("codigotributario"), rs.getString("id"));
             }
-            
+
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
         } finally {
@@ -430,20 +532,20 @@ public class ProdutoDaoJDBC implements ProdutoDao {
         }
         return map;
     }
-    
+
     private TreeMap<String, String> getMapaFornecedor() {
         PreparedStatement st = null;
         ResultSet rs = null;
         TreeMap<String, String> map = new TreeMap();
-        
+
         try {
             st = conn2.prepareStatement("select id, razao_social from fornecedor");
             rs = st.executeQuery();
-            
+
             while (rs.next()) {
                 map.put(rs.getString("razao_social"), rs.getString("id"));
             }
-            
+
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
         } finally {
@@ -452,4 +554,5 @@ public class ProdutoDaoJDBC implements ProdutoDao {
         }
         return map;
     }
+
 }
