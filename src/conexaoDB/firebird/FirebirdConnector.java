@@ -18,7 +18,7 @@ public class FirebirdConnector {
     private static String caminho;
     private static String usuario;
     private static String senha;
-    private static String charset = "UTF-8"; // Codificação padrão
+    private static String charset = "UTF8"; // Codificação padrão
 
     public FirebirdConnector() {
     }

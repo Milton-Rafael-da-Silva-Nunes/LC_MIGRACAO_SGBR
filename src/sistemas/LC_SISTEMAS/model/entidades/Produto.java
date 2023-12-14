@@ -2,7 +2,6 @@ package sistemas.LC_SISTEMAS.model.entidades;
 
 import java.sql.Date;
 import util.DataHoraUtil;
-import util.ObjetoUtil;
 
 /**
  *
@@ -24,7 +23,7 @@ public class Produto {
     private String podeLerPeso;
     private String podeAtualizarNcm;
     private String dataHoraCadastro; // SOMENTE get
-    //private String dataHoraAtualizacao; // SOMENTE get
+    private String dataHoraAtualizacao; // SOMENTE get
     private Double precoCompra;
     private Double valorCompra;
     private Double precoCusto;
@@ -110,14 +109,14 @@ public class Produto {
     private Integer idUnidadeAtacado4 = 0;
     private Integer idUnidadeEmbalagem = 0;
     private Integer idEmpresa = 1;
-    //private Integer idCfop;
-    //private Integer idCategoria;
-    //private Integer idCst;
-    //private Integer idNcm;
-    //private Integer idCest;
-    //private Integer idFabricante;
-    //private Integer idSubcategoria;
-    //private Integer idUnidade;
+    private Integer idCfop = 289;
+    private Integer idCategoria = 0;
+    private Integer idCst = 14;
+    private Integer idNcm = 1;
+    private Integer idCest = 1;
+    private Integer idFabricante = 1;
+    private Integer idSubcategoria = 0;
+    private Integer idUnidade = 1;
     //private Double margemLucro;
     //private Double margemLucro2;
     //private Double margemLucro3;

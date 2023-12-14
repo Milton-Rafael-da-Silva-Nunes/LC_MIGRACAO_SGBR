@@ -65,8 +65,10 @@ public class ProdutoDaoJDBC implements ProdutoDao {
             }
 
             // Gerar log com produtos não migrados.
-            String path = "C:/Users/supor/Documents/TESTE-PROGRAMA-JAVA-MIGRACAO/Produtos-não-migrados.txt";
-            gerarTxtProdutosNulos(produtosNulos, path);
+            String path = "C:/Users/supor/Documents/Produtos-não-migrados.txt";
+            if (produtosNulos.size() > 1) {
+                gerarTxtProdutosNulos(produtosNulos, path);
+            }
 
             return lista;
 
@@ -233,9 +235,9 @@ public class ProdutoDaoJDBC implements ProdutoDao {
 
     @Override
     public void insertEstoqueProduto(Produto produto) {
-        ajusteEstoque(produto);
         estoqueSaldo(produto);
-        //estoque(produto, ajusteEstoque(produto));
+        int idAjusteEstoque = ajusteEstoque(produto);
+        estoque(idAjusteEstoque, produto);
     }
 
     private void estoqueSaldo(Produto produto) {
@@ -262,43 +264,55 @@ public class ProdutoDaoJDBC implements ProdutoDao {
         }
     }
 
-    private void ajusteEstoque(Produto produto) {
+    private int ajusteEstoque(Produto produto) {
         PreparedStatement st = null;
+        ResultSet generatedKeys = null;
+        int idAjusteEstoque = -1;
+
         try {
-            
             if (produto.getEstoque() > 0) {
                 st = conn2.prepareStatement("INSERT INTO ajusteestoque(id_empresa, id_localestoque, id_produto, id_usuario, id_lote, estoque_desejado, estoque_antigo, diferenca, data_hora, obs, status) "
-                        + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                        + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS);
 
                 st.setInt(1, 1);
                 st.setInt(2, 1);
                 st.setInt(3, produto.getId());
                 st.setInt(4, 1);
-                st.setInt(5, 1);
+                st.setInt(5, 0);
                 st.setDouble(6, produto.getEstoque());
                 st.setDouble(7, 0.0);
                 st.setDouble(8, produto.getEstoque());
                 st.setString(9, DataHoraUtil.getDataHoraAtual());
                 st.setString(10, "MIGRACAO: " + DataHoraUtil.getDataAtual());
                 st.setString(11, "AEC");
-                
+
+                // Execute a inserção no "AJUSTEESTOQUE" e obtenha as chaves geradas (incluindo a ID)
                 st.executeUpdate();
+                generatedKeys = st.getGeneratedKeys();
+
+                // Verifica se há chaves geradas
+                if (generatedKeys.next()) {
+                    idAjusteEstoque = generatedKeys.getInt(1);
+                }
             }
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
         } finally {
+            MysqlConnector.closeResultSet(generatedKeys);
             MysqlConnector.closeStatement(st);
         }
+
+        return idAjusteEstoque;
     }
 
-    private void estoque(Produto produto, Integer idAjusteEstoque) {
+    private void estoque(int idAjusteEstoque, Produto produto) {
         PreparedStatement st = null;
         try {
-            if(idAjusteEstoque > 0) {
-                
-            st = conn2.prepareStatement("INSERT INTO estoque(id_empresa, id_localestoque, id_controle, id_produto, id_lote, quantidade, data_hora, operacao, tipo, descricao_tipo, descricao) " 
-                    + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-            
+            if (idAjusteEstoque > 0) {
+
+                st = conn2.prepareStatement("INSERT INTO estoque(id_empresa, id_localestoque, id_controle, id_produto, id_lote, quantidade, data_hora, operacao, tipo, descricao_tipo, descricao) "
+                        + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
                 st.setInt(1, 1);
                 st.setInt(2, 1);
                 st.setInt(3, idAjusteEstoque);
@@ -310,7 +324,7 @@ public class ProdutoDaoJDBC implements ProdutoDao {
                 st.setString(9, "AE");
                 st.setString(10, "AJUSTE DE ESTOQUE RAPIDO");
                 st.setString(11, "AJUSTE DE ESTOQUE RAPIDO");
-                
+
                 st.executeUpdate();
             }
         } catch (SQLException e) {
@@ -360,7 +374,7 @@ public class ProdutoDaoJDBC implements ProdutoDao {
         // Adicionar valores para usar em MAP
         obj.setCodigoNcm(rs.getString("ncm"));
         obj.setCodigoCest(rs.getString("cest"));
-        obj.setUnidadeMedida(rs.getString("unidade"));
+        obj.setUnidadeMedida(ObjetoUtil.removerCaracteresEspeciais(rs.getString("unidade")));
         obj.setCategoriaNome(rs.getString("grupo"));
         obj.setSubcategoriaNome(rs.getString("subgrupo"));
         obj.setFabricanteNome(rs.getString("marca"));

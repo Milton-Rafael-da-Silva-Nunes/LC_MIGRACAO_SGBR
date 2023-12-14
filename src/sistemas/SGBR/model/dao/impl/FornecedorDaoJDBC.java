@@ -92,7 +92,6 @@ public class FornecedorDaoJDBC implements FornecedorDao {
             System.out.println("FORNECEDOR inserido: " + fornecedor);
 
         } catch (SQLException e) {
-
             throw new DbException("Erro ao inserir fornecedor em insert: " + e.getMessage());
         } finally {
             MysqlConnector.closeStatement(st);
@@ -102,10 +101,10 @@ public class FornecedorDaoJDBC implements FornecedorDao {
     private Fornecedor instanciacaoFornecedor(ResultSet rs) throws SQLException {
         Fornecedor obj = new Fornecedor();
         obj.setId(rs.getInt("controle"));
-        obj.setRazaoSocial(rs.getString("razaosocial"));
-        obj.setNome(rs.getString("nomefantasia"));
-        obj.setEndereco(ObjetoUtil.validarString(rs.getString("endereco")));
-        obj.setBairro(ObjetoUtil.validarString(rs.getString("bairro")));
+        obj.setRazaoSocial(ObjetoUtil.removerCaracteresEspeciais(rs.getString("razaosocial")));
+        obj.setNome(ObjetoUtil.removerCaracteresEspeciais(rs.getString("nomefantasia")));
+        obj.setEndereco(ObjetoUtil.removerCaracteresEspeciais(ObjetoUtil.validarString(rs.getString("endereco"))));
+        obj.setBairro(ObjetoUtil.removerCaracteresEspeciais(ObjetoUtil.validarString(rs.getString("bairro"))));
         obj.setCodigoCidade(rs.getString("codigocidadeibge"));
         obj.setCep(ObjetoUtil.validarString(rs.getString("cep")));
         obj.setRg(ObjetoUtil.validarString(rs.getString("rg")));

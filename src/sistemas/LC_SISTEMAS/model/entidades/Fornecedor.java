@@ -130,6 +130,9 @@ public class Fornecedor {
     }
 
     public String getNumero() {
+        if(numero.length()>10) {
+            return numero.substring(0, 10);
+        }
         return numero;
     }
 

@@ -42,18 +42,34 @@ public class ObjetoUtil {
             return "0";
         } else if (ativo.equalsIgnoreCase("nao")) {
             return "0";
+        } else if (ativo.equalsIgnoreCase("não")) {
+            return "0";
         }
         return ativo;
     }
 
     public final static String getPodeBalanca(String balanca) {
-        if (balanca == null || balanca.equals("") || balanca.equals("0") || balanca.equalsIgnoreCase("nao")) {
-            return "N";
-        } else {
+        if (balanca.equalsIgnoreCase("s") || balanca.equals("1") || balanca.equalsIgnoreCase("sim")) {
             return "S";
+        } else {
+            return "N";
         }
     }
-    
+
+    public static String removerCaracteresEspeciais(String texto) {
+        if (texto == null) {
+            return "";
+        }
+
+        // Remover acentos
+        texto = removerAcentos(texto);
+
+        // Substituir caracteres não ASCII por uma string vazia
+        texto = texto.replaceAll("[^\\p{ASCII}]", "");
+
+        return texto;
+    }
+
     public static String removerAcentos(String texto) {
         if (texto == null) {
             texto = "";

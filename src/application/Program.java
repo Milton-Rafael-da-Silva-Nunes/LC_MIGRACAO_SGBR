@@ -42,7 +42,7 @@ public class Program {
         Connection conn1 = null;
         Connection conn2 = null;
         String porta = "3050";
-        String caminho = "C:\\Users\\supor\\Documents\\TESTE-PROGRAMA-JAVA-MIGRACAO\\BASESGMASTER.FDB";
+        String caminho = "C:\\Users\\supor\\Documents\\BASESGMASTER.FDB";
         String usuario = "SYSDBA";
         String senha = "masterkey";
 
@@ -112,8 +112,6 @@ public class Program {
             for (Fornecedor obj : listaFornecedor) {
                 fornecedordao.insert(obj);
             }
-            // DELETAR Colunas em fornecedores
-            //fornecedordao.deletarColunasAdicionais();
 
             System.out.println("\n**** TESTE - findAll PRODUTO ****");
             String regime = "SIMPLES";

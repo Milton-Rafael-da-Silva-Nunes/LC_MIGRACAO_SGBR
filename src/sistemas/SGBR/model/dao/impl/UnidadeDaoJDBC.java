@@ -12,6 +12,7 @@ import java.util.List;
 import sistemas.SGBR.model.dao.UnidadeDao;
 import sistemas.LC_SISTEMAS.model.entidades.Unidade;
 import util.DataHoraUtil;
+import static util.ObjetoUtil.removerCaracteresEspeciais;
 
 /**
  *
@@ -71,6 +72,7 @@ public class UnidadeDaoJDBC implements UnidadeDao {
                 System.out.println("UNIDADE inserida: " + unidade.getUnidade());
             }
         } catch (SQLException e) {
+            e.printStackTrace();
             throw new DbException("Erro ao inserir unidade em metodo insert: " + e.getMessage());
         } finally {
             MysqlConnector.closeStatement(st);
@@ -80,7 +82,7 @@ public class UnidadeDaoJDBC implements UnidadeDao {
     // Metodo para instanciar OBJ e separar responsabilidade.
     private Unidade instanciacaoUnidade(ResultSet rs) throws SQLException {
         Unidade obj = new Unidade();
-        obj.setUnidade(rs.getString("unidade"));
+        obj.setUnidade(removerCaracteresEspeciais(rs.getString("unidade")));
         return obj;
     }
 
@@ -90,7 +92,7 @@ public class UnidadeDaoJDBC implements UnidadeDao {
         ResultSet rs = null;
 
         try {
-            st = conn2.prepareStatement("SELECT 1 FROM unidade WHERE descricao = ?");
+            st = conn2.prepareStatement("SELECT 1 FROM unidade WHERE descricao = ? COLLATE utf8_general_ci");
             st.setString(1, descricao);
             rs = st.executeQuery();
 
