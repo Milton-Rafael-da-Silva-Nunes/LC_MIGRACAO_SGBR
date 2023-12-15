@@ -3,6 +3,7 @@ package sistemas.SGBR.model.dao;
 import java.sql.Connection;
 import sistemas.SGBR.model.dao.impl.CategoriaDaoJDBC;
 import sistemas.SGBR.model.dao.impl.CestDaoJDBC;
+import sistemas.SGBR.model.dao.impl.ClienteDaoJDBC;
 import sistemas.SGBR.model.dao.impl.CsosnDaoJDBC;
 import sistemas.SGBR.model.dao.impl.EmpresaDaoJDBC;
 import sistemas.SGBR.model.dao.impl.FabricanteDaoJDBC;
@@ -59,5 +60,9 @@ public class FabricaDao {
     
     public static ProdutoDao criarProdutoDao(Connection conn1, Connection conn2) {
         return new ProdutoDaoJDBC(conn1, conn2);
+    }
+    
+    public static ClienteDao criarClienteDao(Connection conn1, Connection conn2) {
+        return new ClienteDaoJDBC(conn1, conn2);
     }
 }

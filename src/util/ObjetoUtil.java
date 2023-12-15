@@ -16,6 +16,35 @@ public class ObjetoUtil {
         return cpf.isEmpty() ? cnpj : cpf;
     }
 
+    public final static String validarSexo(String sexo) {
+        if (sexo == null) {
+            return "";
+        } else {
+            if (sexo.equalsIgnoreCase("f")) {
+                return "Feminino";
+            } else if (sexo.equalsIgnoreCase("m")) {
+                return "Masculino";
+            } else {
+                return "";
+            }
+        }
+    }
+
+    public final static String validarTipo(String tipo) {
+        if (tipo == null || tipo.isEmpty()) {
+            return "F";
+        } else {
+            String tipoSemAcentos = removerAcentos(tipo.toLowerCase());
+            if (tipoSemAcentos.equals("fisica")) {
+                return "F";
+            } else if (tipoSemAcentos.equals("juridica")) {
+                return "J";
+            } else {
+                return null;
+            }
+        }
+    }
+
     public final static String validarString(String texto) {
         if (texto == null) {
             return "";
@@ -23,12 +52,18 @@ public class ObjetoUtil {
         return texto;
     }
 
-    public final static String getObs(String tel, String cel, String fax) {
+    public final static String validarNomeFantasia(String nome, String fantasia) {
+        return (fantasia != null && !fantasia.isEmpty()) ? fantasia : nome;
+    }
+
+    public final static String getObs(String tel, String cel, String fax, String obs) {
         return "TEL: " + validarString(tel)
                 + "\n"
                 + "CEL: " + validarString(cel)
                 + "\n"
                 + "FAX: " + validarString(fax)
+                + "\n"
+                + "OBS: " + validarString(obs)
                 + "\n"
                 + "MIGRADO: " + DataHoraUtil.getDataAtual();
     }

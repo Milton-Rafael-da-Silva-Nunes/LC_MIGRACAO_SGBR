@@ -15,6 +15,7 @@ import sistemas.SGBR.model.dao.NcmDao;
 import sistemas.SGBR.model.dao.UnidadeDao;
 import sistemas.SGBR.model.entidades.Empresa;
 import sistemas.LC_SISTEMAS.model.entidades.Cest;
+import sistemas.LC_SISTEMAS.model.entidades.Cliente;
 import sistemas.LC_SISTEMAS.model.entidades.Fabricante;
 import sistemas.LC_SISTEMAS.model.entidades.Fornecedor;
 import sistemas.LC_SISTEMAS.model.entidades.Ncm;
@@ -22,6 +23,7 @@ import sistemas.LC_SISTEMAS.model.entidades.Produto;
 import sistemas.LC_SISTEMAS.model.entidades.SubCategoria;
 import sistemas.LC_SISTEMAS.model.entidades.Unidade;
 import sistemas.SGBR.model.dao.CategoriaDao;
+import sistemas.SGBR.model.dao.ClienteDao;
 import sistemas.SGBR.model.dao.FabricanteDao;
 import sistemas.SGBR.model.dao.SubCategoriaDao;
 import sistemas.SGBR.model.dao.FornecedorDao;
@@ -62,6 +64,7 @@ public class Program {
             SubCategoriaDao subcategoriadao = FabricaDao.criarSubCategoriaDao(conn1, conn2);
             FornecedorDao fornecedordao = FabricaDao.criarFornecedorDao(conn1, conn2);
             ProdutoDao produtodao = FabricaDao.criarProdutoDao(conn1, conn2);
+            ClienteDao clientedao = FabricaDao.criarClienteDao(conn1, conn2);
 
             List<Empresa> listEmp = empresadao.findAll();
             List<Unidade> listUnd = unidadedao.findAll();
@@ -72,8 +75,9 @@ public class Program {
             List<SubCategoria> listaSubCategoria = subcategoriadao.findAll();
             List<Fornecedor> listaFornecedor = fornecedordao.findAll();
             List<Produto> listaProduto = produtodao.findAll();
+            List<Cliente> listacliente = clientedao.findAll();
 
-            System.out.println("\n**** TESTE - findAll EMPRESA ****");
+            /*System.out.println("\n**** TESTE - findAll EMPRESA ****");
             for (Empresa obj : listEmp) {
                 System.out.println(obj);
             }
@@ -125,7 +129,14 @@ public class Program {
             }
             System.out.println("Total de produtos Migrados: " + listaProduto.size());
 
-            System.out.println("");
+            System.out.println("");*/
+            
+            System.out.println("\n**** TESTE - findAll CLIENTE ****");
+            for(Cliente obj : listacliente) {
+                System.out.println(obj);
+            }
+            System.out.println("Total de clientes: " + listacliente.size());
+            
             conn2.commit();
             
         } catch (Exception ex) {

@@ -110,7 +110,7 @@ public class FornecedorDaoJDBC implements FornecedorDao {
         obj.setRg(ObjetoUtil.validarString(rs.getString("rg")));
         obj.setCpfCnpj(ObjetoUtil.validarCpfCnpj(rs.getString("cpf"), rs.getString("cnpj")));
         obj.setIe(ObjetoUtil.validarString(rs.getString("ie")));
-        obj.setObs(ObjetoUtil.getObs(rs.getString("telefone"), rs.getString("celular"), ""));
+        obj.setObs(ObjetoUtil.getObs(rs.getString("telefone"), rs.getString("celular"), "", ""));
         obj.setEmail(ObjetoUtil.validarString(rs.getString("email")));
         obj.setNumero(ObjetoUtil.validarString(rs.getString("numero")));
         obj.setAtivo(Integer.parseInt(ObjetoUtil.getAtivo(rs.getString("ativo"))));
