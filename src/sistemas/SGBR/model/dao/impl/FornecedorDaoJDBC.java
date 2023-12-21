@@ -65,7 +65,6 @@ public class FornecedorDaoJDBC implements FornecedorDao {
         mapaEstado = getMapaEstado();
         
         try {
-
             st = conn2.prepareStatement("INSERT INTO fornecedor(id_empresa, id_estado, id_cidade, id_planocontas, tipo, tipo_fornecedor, nome, razao_social, cnpj_cpf, ie, endereco, numero, bairro, cep, fone, fax, email_site, obs, ativo) "
                     + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 

@@ -15,6 +15,14 @@ public class ObjetoUtil {
         }
         return cpf.isEmpty() ? cnpj : cpf;
     }
+    
+    public final static String corrigirCpfCnpjClienteLc(String CpfCnpj) {
+        if(CpfCnpj == null) {
+            return "";
+        } else {
+           return CpfCnpj.replace(".", "").replace("/", "").replace("-", "");
+        }
+    }
 
     public final static String validarSexo(String sexo) {
         if (sexo == null) {
@@ -132,5 +140,15 @@ public class ObjetoUtil {
             }
         }
         return sb.toString();
+    }
+    
+    public static final String tamanhoObsCliente(String obs) {
+        if(obs == null) {
+            return "";
+        } else if(obs.length()>100) {
+            return obs.substring(0, 100);
+        } else {
+            return obs;
+        }
     }
 }

@@ -121,6 +121,23 @@ public class Cliente {
     
 
     public Cliente() {
+        this.ieIndicador = "9";
+        this.idPais = 34;
+        this.idEmpresa = 1;
+        this.idClienteCanal = 0;
+        this.idCidadesAdi = 0;
+        this.idEstadosAdi = 0;
+        this.rendaEmp = 0.0;
+        this.idCidadesEmp = 0;
+        this.idEstadosEmp = 0;
+        this.idCidadesConj = 0;
+        this.idEstadosConj = 0;
+        this.rendaConj = 0.0;
+        this.poupanca = 0.0;
+        this.idVendedor = 0;
+        this.avalistaRenda = 0.0;
+        this.avalistaIdCidade = 0;
+        this.avalistaIdEstado = 0;
     }
 
     public Cliente(Integer id, String cpfCnpj, String ie, String ieIndicador, String im, String nome, String rg, String razaoSocial, String endereco, String numero, String referencia, String cep, String bairro, String telefone, String telComercial, String fax, Double limiteCredito, String obs, String endereco2, String numero2, String referencia2, String cep2, String bairro2, String ativo, String tipo, Integer idPais, Integer idEstado, Integer idCidade, Integer idEstado2, Integer idCidade2, Integer idEmpresa, Integer idClienteCanal, String paiAdi, String maeAdi, String nascimentoAdi, String sexoAdi, String estCivilAdi, String apelidoAdi, String emailAdi, Integer idCidadesAdi, Integer idEstadosAdi, String empresa, String foneEmp, String enderecoEmp, String numeroEmp, String cepEmp, String bairroEmp, String cargoEmp, Double rendaEmp, String admissaoEmp, Integer idCidadesEmp, Integer idEstadosEmp, String conjuje, String cpfConj, String rgConj, String nascimentoConj, String empresaConj, String foneConj, String enderecoConj, String numeroConj, String cepConj, String bairroConj, String cargoConj, Double rendaConj, String admissaoConj, Integer idCidadesConj, Integer idEstadosConj, String referencias, String comercial1, String comercial2, String comercial3, String bancaria1, String bancaria2, String emissao, String orgao, String dataCadastro, String dataHoraAlteracao, String foto, Double poupanca, String podeAprazo, String podeCartaCobranca, String numeroContrato, String numeroCartao, String tabelaPreco, Integer idVendedor, String filiacaoFoneMae, String filiacaoFonePai, String filiacaoEndereco, String filiacaoReferencia, String filiacaoNumero, String filiacaoCep, String filiacaoBairro, String filiacaoIdCidade, String filiacaoIdEstado, String avalistaNome, String avalistaCpf, String avalistaRg, String avalistaNascimento, String avalistaFone, String avalistaEndereco, String avalistaNumero, String avalistaCep, String avalistaBairro, String avalistaEmpresa, String avalistaCargo, Double avalistaRenda, String avalistaAdmissao, Integer avalistaIdCidade, Integer avalistaIdEstado) {
@@ -1109,13 +1126,16 @@ public class Cliente {
     
     /*Metodos auxiliares*/
     public String getCodigoCidade() {
+        if(codigoCidade == null || codigoCidade.equals("")) {
+            return "1501402"; // CIDADE Belem-PA
+        }
         return codigoCidade;
     }
 
     public void setCodigoCidade(String codigoCidade) {
         this.codigoCidade = codigoCidade;
     }
-
+    
     @Override
     public String toString() {
         return numeroCartao + " - " + cpfCnpj + " > " + nome;

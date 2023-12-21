@@ -133,7 +133,7 @@ public class Program {
             
             System.out.println("\n**** TESTE - findAll CLIENTE ****");
             for(Cliente obj : listacliente) {
-                System.out.println(obj);
+                clientedao.insert(obj);
             }
             System.out.println("Total de clientes: " + listacliente.size());
             
