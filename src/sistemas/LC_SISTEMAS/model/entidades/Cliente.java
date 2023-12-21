@@ -121,23 +121,73 @@ public class Cliente {
     
 
     public Cliente() {
-        this.ieIndicador = "9";
-        this.idPais = 34;
-        this.idEmpresa = 1;
-        this.idClienteCanal = 0;
-        this.idCidadesAdi = 0;
-        this.idEstadosAdi = 0;
-        this.rendaEmp = 0.0;
-        this.idCidadesEmp = 0;
-        this.idEstadosEmp = 0;
-        this.idCidadesConj = 0;
-        this.idEstadosConj = 0;
-        this.rendaConj = 0.0;
-        this.poupanca = 0.0;
-        this.idVendedor = 0;
-        this.avalistaRenda = 0.0;
-        this.avalistaIdCidade = 0;
-        this.avalistaIdEstado = 0;
+        idPais = 34;
+        idEmpresa = 1;
+        idClienteCanal = 0;
+        idCidadesAdi = 0;
+        idEstadosAdi = 0;
+        rendaEmp = 0.0;
+        idCidadesEmp = 0;
+        idEstadosEmp = 0;
+        idCidadesConj = 0;
+        idEstadosConj = 0;
+        rendaConj = 0.0;
+        poupanca = 0.0;
+        idVendedor = 0;
+        telefone = "";
+        telComercial = "";
+        fax = "";
+        estCivilAdi = "";
+        apelidoAdi = "";
+        empresa = "";
+        foneEmp = "";
+        enderecoEmp = "";
+        numeroEmp = "";
+        cepEmp = "";
+        bairroEmp = "";
+        cargoEmp = "";
+        cpfConj = "";
+        rgConj = "";
+        empresaConj = "";
+        foneConj = "";
+        enderecoConj = "";
+        numeroConj = "";
+        cepConj = "";
+        bairroConj = "";
+        cargoConj = "";
+        referencias = "";
+        comercial1 = "";
+        comercial2 = "";
+        comercial3 = "";
+        bancaria1 = "";
+        bancaria2 = "";
+        orgao = "";
+        foto = "";
+        podeAprazo = "S";
+        podeCartaCobranca = "S";
+        tabelaPreco = "NORMAL";
+        filiacaoFoneMae = "(  )    -    ";
+        filiacaoFonePai = "(  )    -    ";
+        filiacaoEndereco = "";
+        filiacaoReferencia = "";
+        filiacaoNumero = "";
+        filiacaoCep = "";
+        filiacaoBairro = "";
+        filiacaoIdCidade = "0";
+        filiacaoIdEstado = "0";
+        avalistaNome = "";
+        avalistaCpf = "   .   .   -  ";
+        avalistaRg = "";
+        avalistaFone = "(  )    -    ";
+        avalistaEndereco = "";
+        avalistaNumero = "";
+        avalistaCep = "";
+        avalistaBairro = "";
+        avalistaEmpresa = "";
+        avalistaCargo = "";
+        avalistaRenda = 0.0;
+        avalistaIdCidade = 0;
+        avalistaIdEstado = 0;
     }
 
     public Cliente(Integer id, String cpfCnpj, String ie, String ieIndicador, String im, String nome, String rg, String razaoSocial, String endereco, String numero, String referencia, String cep, String bairro, String telefone, String telComercial, String fax, Double limiteCredito, String obs, String endereco2, String numero2, String referencia2, String cep2, String bairro2, String ativo, String tipo, Integer idPais, Integer idEstado, Integer idCidade, Integer idEstado2, Integer idCidade2, Integer idEmpresa, Integer idClienteCanal, String paiAdi, String maeAdi, String nascimentoAdi, String sexoAdi, String estCivilAdi, String apelidoAdi, String emailAdi, Integer idCidadesAdi, Integer idEstadosAdi, String empresa, String foneEmp, String enderecoEmp, String numeroEmp, String cepEmp, String bairroEmp, String cargoEmp, Double rendaEmp, String admissaoEmp, Integer idCidadesEmp, Integer idEstadosEmp, String conjuje, String cpfConj, String rgConj, String nascimentoConj, String empresaConj, String foneConj, String enderecoConj, String numeroConj, String cepConj, String bairroConj, String cargoConj, Double rendaConj, String admissaoConj, Integer idCidadesConj, Integer idEstadosConj, String referencias, String comercial1, String comercial2, String comercial3, String bancaria1, String bancaria2, String emissao, String orgao, String dataCadastro, String dataHoraAlteracao, String foto, Double poupanca, String podeAprazo, String podeCartaCobranca, String numeroContrato, String numeroCartao, String tabelaPreco, Integer idVendedor, String filiacaoFoneMae, String filiacaoFonePai, String filiacaoEndereco, String filiacaoReferencia, String filiacaoNumero, String filiacaoCep, String filiacaoBairro, String filiacaoIdCidade, String filiacaoIdEstado, String avalistaNome, String avalistaCpf, String avalistaRg, String avalistaNascimento, String avalistaFone, String avalistaEndereco, String avalistaNumero, String avalistaCep, String avalistaBairro, String avalistaEmpresa, String avalistaCargo, Double avalistaRenda, String avalistaAdmissao, Integer avalistaIdCidade, Integer avalistaIdEstado) {
@@ -277,7 +327,11 @@ public class Cliente {
     }
 
     public String getIeIndicador() {
-        return ieIndicador;
+        if(ie.length()>=1) {
+            return "1";
+        } else {
+            return "9";
+        }
     }
 
     public void setIeIndicador(String ieIndicador) {

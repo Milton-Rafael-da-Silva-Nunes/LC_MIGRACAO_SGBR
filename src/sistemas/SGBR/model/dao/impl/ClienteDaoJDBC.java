@@ -182,6 +182,8 @@ public class ClienteDaoJDBC implements ClienteDao {
         } catch (SQLException e) {
             e.printStackTrace();
             throw new DbException("Erro ao inserir clientes: " + e.getMessage());
+        } finally {
+            MysqlConnector.closeStatement(pstm);
         }
     }
 
@@ -190,9 +192,13 @@ public class ClienteDaoJDBC implements ClienteDao {
         cliente.setNumeroCartao(rs.getString("controle"));
         cliente.setRazaoSocial(rs.getString("cliente"));
         cliente.setEndereco(ObjetoUtil.validarString(rs.getString("endereco")));
+        cliente.setEndereco2(ObjetoUtil.validarString(rs.getString("endereco")));
         cliente.setReferencia(ObjetoUtil.validarString(rs.getString("complemento")));
+        cliente.setReferencia2(ObjetoUtil.validarString(rs.getString("complemento")));
         cliente.setBairro(ObjetoUtil.validarString(rs.getString("bairro")));
+        cliente.setBairro2(ObjetoUtil.validarString(rs.getString("bairro")));
         cliente.setCep(ObjetoUtil.validarString(rs.getString("cep")));
+        cliente.setCep2(ObjetoUtil.validarString(rs.getString("cep")));
         cliente.setTipo(ObjetoUtil.validarTipo(rs.getString("tipocliente")));
         cliente.setRg(ObjetoUtil.validarString(rs.getString("rg")));
         cliente.setCpfCnpj(ObjetoUtil.corrigirCpfCnpjClienteLc(ObjetoUtil.validarCpfCnpj(rs.getString("cpf"), rs.getString("cnpj"))));
@@ -209,6 +215,7 @@ public class ClienteDaoJDBC implements ClienteDao {
         cliente.setLimiteCredito(rs.getDouble("limitecredito"));
         cliente.setConjuje(ObjetoUtil.validarString(rs.getString("nomeconjuge")));
         cliente.setNumero(ObjetoUtil.validarString(rs.getString("numero")));
+        cliente.setNumero2(ObjetoUtil.validarString(rs.getString("numero")));
         cliente.setSexoAdi(ObjetoUtil.validarSexo(rs.getString("sexo")));
         cliente.setCodigoCidade(rs.getString("codigocidadeibge"));
         return cliente;
