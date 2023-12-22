@@ -5,7 +5,7 @@ package sistemas.LC_SISTEMAS.model.entidades;
  * @author Rafael Nunes
  */
 public class Cliente {
-    
+
     private Integer id;
     private String cpfCnpj;
     private String ie;
@@ -115,10 +115,9 @@ public class Cliente {
     private String avalistaAdmissao;
     private Integer avalistaIdCidade;
     private Integer avalistaIdEstado;
-    
+
     /*Atributos Auxiliares*/
     private String codigoCidade;
-    
 
     public Cliente() {
         idPais = 34;
@@ -327,11 +326,12 @@ public class Cliente {
     }
 
     public String getIeIndicador() {
-        if(ie.length()>=1) {
-            return "1";
+        if (cpfCnpj.length() >= 14 && !ie.equals("")) {
+            ieIndicador = "1";
         } else {
-            return "9";
+            ieIndicador = "9";
         }
+        return ieIndicador;
     }
 
     public void setIeIndicador(String ieIndicador) {
@@ -363,7 +363,15 @@ public class Cliente {
     }
 
     public String getRazaoSocial() {
-        return razaoSocial;
+        if (cpfCnpj.length() >= 14) {
+            if (razaoSocial.equals("")) {
+                return nome;
+            } else {
+                return razaoSocial;
+            }
+        } else {
+            return "";
+        }
     }
 
     public void setRazaoSocial(String razaoSocial) {
@@ -1177,10 +1185,10 @@ public class Cliente {
     public void setAvalistaIdEstado(Integer avalistaIdEstado) {
         this.avalistaIdEstado = avalistaIdEstado;
     }
-    
+
     /*Metodos auxiliares*/
     public String getCodigoCidade() {
-        if(codigoCidade == null || codigoCidade.equals("")) {
+        if (codigoCidade == null || codigoCidade.equals("")) {
             return "1501402"; // CIDADE Belem-PA
         }
         return codigoCidade;
@@ -1189,7 +1197,7 @@ public class Cliente {
     public void setCodigoCidade(String codigoCidade) {
         this.codigoCidade = codigoCidade;
     }
-    
+
     @Override
     public String toString() {
         return numeroCartao + " - " + cpfCnpj + " > " + nome;

@@ -3,17 +3,23 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/PROGRAMAÇÃO/PROJETOS-LC/LC_MIGRACAO/src/application/Program.java</file>
             <file>file:/D:/PROGRAMAÇÃO/PROJETOS-LC/LC_MIGRACAO/src/sistemas/LC_SISTEMAS/model/entidades/Cliente.java</file>
-            <file>file:/D:/PROGRAMAÇÃO/PROJETOS-LC/LC_MIGRACAO/src/util/ObjetoUtil.java</file>
             <file>file:/D:/PROGRAMAÇÃO/PROJETOS-LC/LC_MIGRACAO/src/sistemas/SGBR/model/dao/impl/UnidadeDaoJDBC.java</file>
-            <file>file:/D:/PROGRAMAÇÃO/PROJETOS-LC/LC_MIGRACAO/src/sistemas/SGBR/model/dao/impl/ClienteDaoJDBC.java</file>
+            <file>file:/D:/PROGRAMAÇÃO/PROJETOS-LC/LC_MIGRACAO/src/sistemas/SGBR/model/dao/CsosnDao.java</file>
+            <file>file:/D:/PROGRAMAÇÃO/PROJETOS-LC/LC_MIGRACAO/src/sistemas/LC_SISTEMAS/model/dao/CategoriaDaoInsert.java</file>
             <file>file:/D:/PROGRAMAÇÃO/PROJETOS-LC/LC_MIGRACAO/src/sistemas/LC_SISTEMAS/model/entidades/Produto.java</file>
-            <file>file:/D:/PROGRAMAÇÃO/PROJETOS-LC/LC_MIGRACAO/src/sistemas/LC_SISTEMAS/model/entidades/Fornecedor.java</file>
             <file>file:/D:/PROGRAMAÇÃO/PROJETOS-LC/LC_MIGRACAO/src/sistemas/SGBR/model/dao/impl/ProdutoDaoJDBC.java</file>
             <file>file:/D:/PROGRAMAÇÃO/PROJETOS-LC/LC_MIGRACAO/src/sistemas/SGBR/model/dao/FornecedorDao.java</file>
             <file>file:/D:/PROGRAMAÇÃO/PROJETOS-LC/LC_MIGRACAO/src/sistemas/SGBR/model/dao/impl/FornecedorDaoJDBC.java</file>
             <file>file:/D:/PROGRAMAÇÃO/PROJETOS-LC/LC_MIGRACAO/src/sistemas/SGBR/model/dao/ClienteDao.java</file>
+            <file>file:/D:/PROGRAMAÇÃO/PROJETOS-LC/LC_MIGRACAO/src/sistemas/LC_SISTEMAS/model/entidades/Categoria.java</file>
+            <file>file:/D:/PROGRAMAÇÃO/PROJETOS-LC/LC_MIGRACAO/src/application/Program.java</file>
+            <file>file:/D:/PROGRAMAÇÃO/PROJETOS-LC/LC_MIGRACAO/src/util/ObjetoUtil.java</file>
+            <file>file:/D:/PROGRAMAÇÃO/PROJETOS-LC/LC_MIGRACAO/src/sistemas/SGBR/model/dao/CategoriaDao.java</file>
+            <file>file:/D:/PROGRAMAÇÃO/PROJETOS-LC/LC_MIGRACAO/src/sistemas/SGBR/model/dao/impl/ClienteDaoJDBC.java</file>
+            <file>file:/D:/PROGRAMAÇÃO/PROJETOS-LC/LC_MIGRACAO/src/sistemas/SGBR/model/dao/FabricaDao.java</file>
+            <file>file:/D:/PROGRAMAÇÃO/PROJETOS-LC/LC_MIGRACAO/src/conexaoDB/mysql/MysqlConnector.java</file>
+            <file>file:/D:/PROGRAMAÇÃO/PROJETOS-LC/LC_MIGRACAO/src/sistemas/SGBR/model/dao/impl/CategoriaDaoJDBC.java</file>
         </group>
     </open-files>
 </project-private>

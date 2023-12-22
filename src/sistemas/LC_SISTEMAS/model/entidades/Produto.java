@@ -1,6 +1,7 @@
 package sistemas.LC_SISTEMAS.model.entidades;
 
 import java.sql.Date;
+import java.util.TreeMap;
 import util.DataHoraUtil;
 
 /**
@@ -1044,23 +1045,19 @@ public class Produto {
         return 0.0;
     }
 
-    // Metodos Acessores para implementar id em MEP
-    public String getCodigoNcm() {
-        if (codigoNcm == null || codigoNcm.equals("")) {
-            return "00000000";
-        }
-        return codigoNcm;
+    // Metodos Acessores para implementar id em TREEMAP
+    public String getCodigoNcm(TreeMap<String, String> mapaNcm) {
+        String ncm = (codigoNcm != null && !codigoNcm.equals("")) ? codigoNcm : "00000000";
+        return mapaNcm.containsKey(ncm) ? mapaNcm.get(ncm) : mapaNcm.get("00000000");
     }
 
     public void setCodigoNcm(String codigoNcm) {
         this.codigoNcm = codigoNcm;
     }
 
-    public String getCodigoCest() {
-        if (codigoCest == null || codigoCest.equals("")) {
-            return "0000000";
-        }
-        return codigoCest;
+    public String getCodigoCest(TreeMap<String, String> mapaCest) {
+        String cest = (codigoCest != null && !codigoCest.equals("")) ? codigoCest : "0000000";
+        return mapaCest.containsKey(cest) ? mapaCest.get(cest) : mapaCest.get("0000000");
     }
 
     public void setCodigoCest(String codigoCest) {
@@ -1078,11 +1075,9 @@ public class Produto {
         this.unidadeMedida = unidadeMedida;
     }
 
-    public String getCategoriaNome() {
-        if (categoriaNome == null || categoriaNome.equals("")) {
-            return "PADRAO";
-        }
-        return categoriaNome;
+    public String getCategoriaNome(TreeMap<String, String> mapaCategoria) {
+        String nome = (categoriaNome != null && !categoriaNome.equals("")) ? categoriaNome : "PADRAO";
+        return mapaCategoria.containsKey(nome) ? mapaCategoria.get(nome) : mapaCategoria.get("PADRAO");
     }
 
     public void setCategoriaNome(String categoriaNome) {
@@ -1118,9 +1113,10 @@ public class Produto {
     public void setCstCsosn(String cstCsosn) {
         this.cstCsosn = cstCsosn;
     }
-
-    public String getFornecedorNome() {
-        return fornecedorNome == null ? "PADRAO" : fornecedorNome;
+    
+    public String getFornecedorNome(TreeMap<String, String> mapaFornecedor) {
+        String nome = (fornecedorNome != null && !fornecedorNome.equals("")) ? fornecedorNome : "PADRAO";
+        return mapaFornecedor.containsKey(nome) ? mapaFornecedor.get(nome) : mapaFornecedor.get("PADRAO");
     }
 
     public void setFornecedorNome(String fornecedorNome) {
@@ -1178,6 +1174,6 @@ public class Produto {
 
     @Override
     public String toString() {
-        return codigo + " - " + codigoBarras + " > " + nome;
+        return codigo + " - " + codigoBarras + " > " + nome + " > " + fornecedorNome;
     }
 }

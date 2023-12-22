@@ -103,13 +103,13 @@ public class ProdutoDaoJDBC implements ProdutoDao {
             st.setString(4, produto.getNome());
             st.setString(5, produto.getDescricao());
             st.setInt(6, produto.getIdGrupoTributacao());
-            st.setString(7, mapaCategoria.get(produto.getCategoriaNome()));
+            st.setString(7, produto.getCategoriaNome(mapaCategoria));
             st.setString(8, mapaCstCsosn.get(produto.getCstCsosn(regime)));
             st.setInt(9, produto.getIdCfop());
-            st.setString(10, mapaNcm.get(produto.getCodigoNcm()));
-            st.setString(11, mapaCest.get(produto.getCodigoCest()));
+            st.setString(10, produto.getCodigoNcm(mapaNcm));
+            st.setString(11, produto.getCodigoCest(mapaCest));
             st.setString(12, mapaFabricante.get(produto.getFabricanteNome()));
-            st.setString(13, mapaFornecedor.get(produto.getFornecedorNome()));
+            st.setString(13, produto.getFornecedorNome(mapaFornecedor));
             st.setString(14, mapaUnidade.get(produto.getUnidadeMedida()));
             st.setInt(15, produto.getIdUnidadeAtacado2());
             st.setInt(16, produto.getIdUnidadeAtacado3());
@@ -379,7 +379,7 @@ public class ProdutoDaoJDBC implements ProdutoDao {
         obj.setSubcategoriaNome(rs.getString("subgrupo"));
         obj.setFabricanteNome(rs.getString("marca"));
         obj.setCstCsosn(rs.getString("csosn"));
-        obj.setFornecedorNome(rs.getString("fornecedor"));
+        obj.setFornecedorNome(ObjetoUtil.removerCaracteresEspeciais(rs.getString("fornecedor")));
         return obj;
     }
 
@@ -553,11 +553,11 @@ public class ProdutoDaoJDBC implements ProdutoDao {
         TreeMap<String, String> map = new TreeMap();
 
         try {
-            st = conn2.prepareStatement("select id, razao_social from fornecedor");
+            st = conn2.prepareStatement("select id, nome from fornecedor");
             rs = st.executeQuery();
 
             while (rs.next()) {
-                map.put(rs.getString("razao_social"), rs.getString("id"));
+                map.put(rs.getString("nome"), rs.getString("id"));
             }
 
         } catch (SQLException e) {
@@ -568,5 +568,6 @@ public class ProdutoDaoJDBC implements ProdutoDao {
         }
         return map;
     }
+
 
 }

@@ -115,7 +115,7 @@ public class Program {
             System.out.println("\n**** TESTE - findAll FORNECEDOR ****");
             for (Fornecedor obj : listaFornecedor) {
                 fornecedordao.insert(obj);
-            }
+            }*/
 
             System.out.println("\n**** TESTE - findAll PRODUTO ****");
             String regime = "SIMPLES";
@@ -129,13 +129,13 @@ public class Program {
             }
             System.out.println("Total de produtos Migrados: " + listaProduto.size());
 
-            System.out.println("");*/
+            System.out.println("");
             
-            System.out.println("\n**** TESTE - findAll CLIENTE ****");
+            /*System.out.println("\n**** TESTE - findAll CLIENTE ****");
             for(Cliente obj : listacliente) {
                 clientedao.insert(obj);
             }
-            System.out.println("Total de clientes: " + listacliente.size());
+            System.out.println("Total de clientes: " + listacliente.size());*/
             
             conn2.commit();
             
