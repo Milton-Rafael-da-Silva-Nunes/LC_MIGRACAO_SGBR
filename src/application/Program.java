@@ -22,6 +22,8 @@ import sistemas.LC_SISTEMAS.model.entidades.Ncm;
 import sistemas.LC_SISTEMAS.model.entidades.Produto;
 import sistemas.LC_SISTEMAS.model.entidades.SubCategoria;
 import sistemas.LC_SISTEMAS.model.entidades.Unidade;
+import sistemas.LC_SISTEMAS.model.enuns.Estoque;
+import sistemas.LC_SISTEMAS.model.enuns.Regime;
 import sistemas.SGBR.model.dao.CategoriaDao;
 import sistemas.SGBR.model.dao.ClienteDao;
 import sistemas.SGBR.model.dao.FabricanteDao;
@@ -54,7 +56,7 @@ public class Program {
             conn1 = conecatorFdb.getConnection(); // Conector FDB
             conn2 = new MysqlConnector().getConnection(); // Conector LC SISTEMAS
             conn2.setAutoCommit(false);
-            
+
             EmpresaDao empresadao = FabricaDao.criarEmpresaDao(conn1);
             UnidadeDao unidadedao = FabricaDao.criarUnidadeDao(conn1, conn2);
             NcmDao ncmdao = FabricaDao.criarNcmDao(conn1, conn2);
@@ -77,7 +79,7 @@ public class Program {
             List<Produto> listaProduto = produtodao.findAll();
             List<Cliente> listacliente = clientedao.findAll();
 
-            /*System.out.println("\n**** TESTE - findAll EMPRESA ****");
+            System.out.println("\n**** TESTE - findAll EMPRESA ****");
             for (Empresa obj : listEmp) {
                 System.out.println(obj);
             }
@@ -115,30 +117,29 @@ public class Program {
             System.out.println("\n**** TESTE - findAll FORNECEDOR ****");
             for (Fornecedor obj : listaFornecedor) {
                 fornecedordao.insert(obj);
-            }*/
+            }
 
             System.out.println("\n**** TESTE - findAll PRODUTO ****");
-            String regime = "SIMPLES";
-            String estoque = "S";
+            Regime regime = Regime.NORMAL;
+            Estoque estoque = Estoque.NAO;
+            
             for (Produto obj : listaProduto) {
-                produtodao.insert(obj, regime);
+                produtodao.insert(obj, regime.getRegime());
                 // Inserir estoque  
-                if (estoque.equalsIgnoreCase("s")) {
+                if (estoque.getEstoque().equalsIgnoreCase("sim")) {
                     produtodao.insertEstoqueProduto(obj);
                 }
             }
-            System.out.println("Total de produtos Migrados: " + listaProduto.size());
 
-            System.out.println("");
-            
-            /*System.out.println("\n**** TESTE - findAll CLIENTE ****");
-            for(Cliente obj : listacliente) {
+            System.out.println("\n**** TESTE - findAll CLIENTE ****");
+            for (Cliente obj : listacliente) {
                 clientedao.insert(obj);
             }
-            System.out.println("Total de clientes: " + listacliente.size());*/
-            
+            System.out.println("Total de produtos Migrados: " + listaProduto.size());
+            System.out.println("Total de clientes Migrados: " + listacliente.size());
+
             conn2.commit();
-            
+
         } catch (Exception ex) {
             conn2.rollback();
             Logger.getLogger(Program.class.getName()).log(Level.SEVERE, null, ex);

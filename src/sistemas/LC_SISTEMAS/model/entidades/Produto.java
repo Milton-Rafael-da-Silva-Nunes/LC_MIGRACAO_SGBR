@@ -1063,12 +1063,10 @@ public class Produto {
     public void setCodigoCest(String codigoCest) {
         this.codigoCest = codigoCest;
     }
-
-    public String getUnidadeMedida() {
-        if (unidadeMedida == null || unidadeMedida.equals("")) {
-            return "UN";
-        }
-        return unidadeMedida.replace("Ç", "C").replace("ç", "c");
+    
+    public String getUnidadeMedida(TreeMap<String, String> mapaUnidade) {
+        String unidade = (unidadeMedida != null && !unidadeMedida.equals("")) ? unidadeMedida : "UN";
+        return mapaUnidade.containsKey(unidade) ? mapaUnidade.get(unidade.replace("Ç", "C").replace("ç", "c")) : mapaUnidade.get("UN");
     }
 
     public void setUnidadeMedida(String unidadeMedida) {
@@ -1084,22 +1082,18 @@ public class Produto {
         this.categoriaNome = categoriaNome;
     }
 
-    public String getSubcategoriaNome() {
-        if (subcategoriaNome == null || subcategoriaNome.equals("")) {
-            return "PADRAO";
-        }
-        return subcategoriaNome;
+    public String getSubCategoriaNome(TreeMap<String, String> mapaSubcategoria) {
+        String nome = (subcategoriaNome != null && !subcategoriaNome.equals("")) ? subcategoriaNome : "PADRAO";
+        return mapaSubcategoria.containsKey(nome) ? mapaSubcategoria.get(nome) : mapaSubcategoria.get("PADRAO");
     }
 
     public void setSubcategoriaNome(String subcategoriaNome) {
         this.subcategoriaNome = subcategoriaNome;
     }
 
-    public String getFabricanteNome() {
-        if (fabricanteNome == null || fabricanteNome.equals("")) {
-            return "PADRAO";
-        }
-        return fabricanteNome;
+    public String getFabricanteNome(TreeMap<String, String> mapaFabricante) {
+        String nome = (fabricanteNome != null && !fabricanteNome.equals("")) ? fabricanteNome : "PADRAO";
+        return mapaFabricante.containsKey(nome) ? mapaFabricante.get(nome) : mapaFabricante.get("PADRAO");
     }
 
     public void setFabricanteNome(String fabricanteNome) {

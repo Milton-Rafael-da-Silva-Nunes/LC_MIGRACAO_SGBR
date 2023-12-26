@@ -108,14 +108,14 @@ public class ProdutoDaoJDBC implements ProdutoDao {
             st.setInt(9, produto.getIdCfop());
             st.setString(10, produto.getCodigoNcm(mapaNcm));
             st.setString(11, produto.getCodigoCest(mapaCest));
-            st.setString(12, mapaFabricante.get(produto.getFabricanteNome()));
+            st.setString(12, produto.getFabricanteNome(mapaFabricante));
             st.setString(13, produto.getFornecedorNome(mapaFornecedor));
-            st.setString(14, mapaUnidade.get(produto.getUnidadeMedida()));
+            st.setString(14, produto.getUnidadeMedida(mapaUnidade));
             st.setInt(15, produto.getIdUnidadeAtacado2());
             st.setInt(16, produto.getIdUnidadeAtacado3());
             st.setInt(17, produto.getIdUnidadeAtacado4());
             st.setInt(18, produto.getIdUnidadeEmbalagem());
-            st.setString(19, mapaSubcategoria.get(produto.getSubcategoriaNome()));
+            st.setString(19, produto.getSubCategoriaNome(mapaSubcategoria));
             st.setInt(20, produto.getIdEmpresa());
             st.setString(21, produto.getPodeDesconto());
             st.setString(22, produto.getPodeFracionado());
