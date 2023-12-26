@@ -20,6 +20,7 @@ import sistemas.LC_SISTEMAS.model.entidades.Fabricante;
 import sistemas.LC_SISTEMAS.model.entidades.Fornecedor;
 import sistemas.LC_SISTEMAS.model.entidades.Ncm;
 import sistemas.LC_SISTEMAS.model.entidades.Produto;
+import sistemas.LC_SISTEMAS.model.entidades.Receber;
 import sistemas.LC_SISTEMAS.model.entidades.SubCategoria;
 import sistemas.LC_SISTEMAS.model.entidades.Unidade;
 import sistemas.LC_SISTEMAS.model.enuns.Estoque;
@@ -30,6 +31,7 @@ import sistemas.SGBR.model.dao.FabricanteDao;
 import sistemas.SGBR.model.dao.SubCategoriaDao;
 import sistemas.SGBR.model.dao.FornecedorDao;
 import sistemas.SGBR.model.dao.ProdutoDao;
+import sistemas.SGBR.model.dao.ReceberDao;
 
 /**
  *
@@ -46,7 +48,7 @@ public class Program {
         Connection conn1 = null;
         Connection conn2 = null;
         String porta = "3050";
-        String caminho = "C:\\Users\\supor\\Documents\\BASESGMASTER.FDB";
+        String caminho = "C:\\Users\\supor\\Documents\\TESTE-PROGRAMA-JAVA-MIGRACAO\\BASESGMASTER.FDB";
         String usuario = "SYSDBA";
         String senha = "masterkey";
 
@@ -67,6 +69,7 @@ public class Program {
             FornecedorDao fornecedordao = FabricaDao.criarFornecedorDao(conn1, conn2);
             ProdutoDao produtodao = FabricaDao.criarProdutoDao(conn1, conn2);
             ClienteDao clientedao = FabricaDao.criarClienteDao(conn1, conn2);
+            ReceberDao receberdao = FabricaDao.criarReceberDao(conn1, conn2);
 
             List<Empresa> listEmp = empresadao.findAll();
             List<Unidade> listUnd = unidadedao.findAll();
@@ -77,7 +80,8 @@ public class Program {
             List<SubCategoria> listaSubCategoria = subcategoriadao.findAll();
             List<Fornecedor> listaFornecedor = fornecedordao.findAll();
             List<Produto> listaProduto = produtodao.findAll();
-            List<Cliente> listacliente = clientedao.findAll();
+            List<Cliente> listaCliente = clientedao.findAll();
+            List<Receber> listaReceber = receberdao.finfindAll();
 
             System.out.println("\n**** TESTE - findAll EMPRESA ****");
             for (Empresa obj : listEmp) {
@@ -122,7 +126,7 @@ public class Program {
             System.out.println("\n**** TESTE - findAll PRODUTO ****");
             Regime regime = Regime.NORMAL;
             Estoque estoque = Estoque.NAO;
-            
+
             for (Produto obj : listaProduto) {
                 produtodao.insert(obj, regime.getRegime());
                 // Inserir estoque  
@@ -132,12 +136,21 @@ public class Program {
             }
 
             System.out.println("\n**** TESTE - findAll CLIENTE ****");
-            for (Cliente obj : listacliente) {
+            for (Cliente obj : listaCliente) {
                 clientedao.insert(obj);
             }
-            System.out.println("Total de produtos Migrados: " + listaProduto.size());
-            System.out.println("Total de clientes Migrados: " + listacliente.size());
 
+            System.out.println("\n**** TESTE - findAll RECEBER ****");
+            for (Receber obj : listaReceber) {
+                receberdao.insert(obj);
+            }
+
+            System.out.println("");
+            System.out.println("Total de produtos Migrados: " + listaProduto.size());
+            System.out.println("Total de clientes Migrados: " + listaCliente.size());
+            System.out.println("Total de contas a Receber Migrados: " + listaReceber.size());
+            System.out.println("");
+            
             conn2.commit();
 
         } catch (Exception ex) {

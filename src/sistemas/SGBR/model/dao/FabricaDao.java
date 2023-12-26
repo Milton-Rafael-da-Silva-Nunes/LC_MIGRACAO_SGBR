@@ -10,6 +10,7 @@ import sistemas.SGBR.model.dao.impl.FabricanteDaoJDBC;
 import sistemas.SGBR.model.dao.impl.FornecedorDaoJDBC;
 import sistemas.SGBR.model.dao.impl.NcmDaoJDBC;
 import sistemas.SGBR.model.dao.impl.ProdutoDaoJDBC;
+import sistemas.SGBR.model.dao.impl.ReceberDaoJDBC;
 import sistemas.SGBR.model.dao.impl.SubCategoriaJDBC;
 import sistemas.SGBR.model.dao.impl.UnidadeDaoJDBC;
 
@@ -64,5 +65,9 @@ public class FabricaDao {
     
     public static ClienteDao criarClienteDao(Connection conn1, Connection conn2) {
         return new ClienteDaoJDBC(conn1, conn2);
+    }
+    
+    public static ReceberDao criarReceberDao(Connection conn1, Connection conn2) {
+        return new ReceberDaoJDBC(conn1, conn2);
     }
 }
