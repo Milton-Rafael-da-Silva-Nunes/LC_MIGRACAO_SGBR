@@ -118,6 +118,8 @@ public class Cliente {
 
     /*Atributos Auxiliares*/
     private String codigoCidade;
+    private String cpf;
+    private String cnpj;
 
     public Cliente() {
         idPais = 34;
@@ -189,7 +191,7 @@ public class Cliente {
         avalistaIdEstado = 0;
     }
 
-    public Cliente(Integer id, String cpfCnpj, String ie, String ieIndicador, String im, String nome, String rg, String razaoSocial, String endereco, String numero, String referencia, String cep, String bairro, String telefone, String telComercial, String fax, Double limiteCredito, String obs, String endereco2, String numero2, String referencia2, String cep2, String bairro2, String ativo, String tipo, Integer idPais, Integer idEstado, Integer idCidade, Integer idEstado2, Integer idCidade2, Integer idEmpresa, Integer idClienteCanal, String paiAdi, String maeAdi, String nascimentoAdi, String sexoAdi, String estCivilAdi, String apelidoAdi, String emailAdi, Integer idCidadesAdi, Integer idEstadosAdi, String empresa, String foneEmp, String enderecoEmp, String numeroEmp, String cepEmp, String bairroEmp, String cargoEmp, Double rendaEmp, String admissaoEmp, Integer idCidadesEmp, Integer idEstadosEmp, String conjuje, String cpfConj, String rgConj, String nascimentoConj, String empresaConj, String foneConj, String enderecoConj, String numeroConj, String cepConj, String bairroConj, String cargoConj, Double rendaConj, String admissaoConj, Integer idCidadesConj, Integer idEstadosConj, String referencias, String comercial1, String comercial2, String comercial3, String bancaria1, String bancaria2, String emissao, String orgao, String dataCadastro, String dataHoraAlteracao, String foto, Double poupanca, String podeAprazo, String podeCartaCobranca, String numeroContrato, String numeroCartao, String tabelaPreco, Integer idVendedor, String filiacaoFoneMae, String filiacaoFonePai, String filiacaoEndereco, String filiacaoReferencia, String filiacaoNumero, String filiacaoCep, String filiacaoBairro, String filiacaoIdCidade, String filiacaoIdEstado, String avalistaNome, String avalistaCpf, String avalistaRg, String avalistaNascimento, String avalistaFone, String avalistaEndereco, String avalistaNumero, String avalistaCep, String avalistaBairro, String avalistaEmpresa, String avalistaCargo, Double avalistaRenda, String avalistaAdmissao, Integer avalistaIdCidade, Integer avalistaIdEstado) {
+    public Cliente(Integer id, String cpfCnpj, String ie, String ieIndicador, String im, String nome, String rg, String razaoSocial, String endereco, String numero, String referencia, String cep, String bairro, String telefone, String telComercial, String fax, Double limiteCredito, String obs, String endereco2, String numero2, String referencia2, String cep2, String bairro2, String ativo, String tipo, Integer idPais, Integer idEstado, Integer idCidade, Integer idEstado2, Integer idCidade2, Integer idEmpresa, Integer idClienteCanal, String paiAdi, String maeAdi, String nascimentoAdi, String sexoAdi, String estCivilAdi, String apelidoAdi, String emailAdi, Integer idCidadesAdi, Integer idEstadosAdi, String empresa, String foneEmp, String enderecoEmp, String numeroEmp, String cepEmp, String bairroEmp, String cargoEmp, Double rendaEmp, String admissaoEmp, Integer idCidadesEmp, Integer idEstadosEmp, String conjuje, String cpfConj, String rgConj, String nascimentoConj, String empresaConj, String foneConj, String enderecoConj, String numeroConj, String cepConj, String bairroConj, String cargoConj, Double rendaConj, String admissaoConj, Integer idCidadesConj, Integer idEstadosConj, String referencias, String comercial1, String comercial2, String comercial3, String bancaria1, String bancaria2, String emissao, String orgao, String dataCadastro, String dataHoraAlteracao, String foto, Double poupanca, String podeAprazo, String podeCartaCobranca, String numeroContrato, String numeroCartao, String tabelaPreco, Integer idVendedor, String filiacaoFoneMae, String filiacaoFonePai, String filiacaoEndereco, String filiacaoReferencia, String filiacaoNumero, String filiacaoCep, String filiacaoBairro, String filiacaoIdCidade, String filiacaoIdEstado, String avalistaNome, String avalistaCpf, String avalistaRg, String avalistaNascimento, String avalistaFone, String avalistaEndereco, String avalistaNumero, String avalistaCep, String avalistaBairro, String avalistaEmpresa, String avalistaCargo, Double avalistaRenda, String avalistaAdmissao, Integer avalistaIdCidade, Integer avalistaIdEstado, String codigoCidade, String cpf, String cnpj) {
         this.id = id;
         this.cpfCnpj = cpfCnpj;
         this.ie = ie;
@@ -299,6 +301,9 @@ public class Cliente {
         this.avalistaAdmissao = avalistaAdmissao;
         this.avalistaIdCidade = avalistaIdCidade;
         this.avalistaIdEstado = avalistaIdEstado;
+        this.codigoCidade = codigoCidade;
+        this.cpf = cpf;
+        this.cnpj = cnpj;
     }
 
     public Integer getId() {
@@ -310,11 +315,15 @@ public class Cliente {
     }
 
     public String getCpfCnpj() {
-        return cpfCnpj;
+        return !cpf.isEmpty() ? cpf : cnpj;
     }
 
-    public void setCpfCnpj(String cpfCnpj) {
-        this.cpfCnpj = cpfCnpj;
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
     }
 
     public String getIe() {
@@ -326,8 +335,10 @@ public class Cliente {
     }
 
     public String getIeIndicador() {
-        if (cpfCnpj.length() >= 14 && !ie.equals("")) {
+        if (cpfCnpj.length() >= 14 && !ie.isEmpty()) {
             ieIndicador = "1";
+        } else if (cpfCnpj.length() >= 14 && ie.equalsIgnoreCase("isento")) {
+            ieIndicador = "2";
         } else {
             ieIndicador = "9";
         }
@@ -363,15 +374,7 @@ public class Cliente {
     }
 
     public String getRazaoSocial() {
-        if (cpfCnpj.length() >= 14) {
-            if (razaoSocial.equals("")) {
-                return nome;
-            } else {
-                return razaoSocial;
-            }
-        } else {
-            return "";
-        }
+        return (cpfCnpj.length() >= 14 && !razaoSocial.isEmpty()) ? razaoSocial : nome;
     }
 
     public void setRazaoSocial(String razaoSocial) {

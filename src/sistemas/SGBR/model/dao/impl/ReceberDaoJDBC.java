@@ -31,7 +31,7 @@ public class ReceberDaoJDBC implements ReceberDao {
     private TreeMap<String, String> mapaIdCliente;
 
     @Override
-    public List<Receber> finfindAll() {
+    public List<Receber> findAll() {
         PreparedStatement st = null;
         ResultSet rs = null;
 

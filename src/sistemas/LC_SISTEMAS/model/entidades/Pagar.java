@@ -1,5 +1,6 @@
 package sistemas.LC_SISTEMAS.model.entidades;
 
+import java.util.TreeMap;
 import util.DataHoraUtil;
 
 /**
@@ -7,7 +8,7 @@ import util.DataHoraUtil;
  * @author Rafael Nunes
  */
 public class Pagar {
-    
+
     private Integer idUsuario;
     private Integer idEmpresa;
     private Integer idPagamento;
@@ -19,7 +20,7 @@ public class Pagar {
     private String documento;
     private String numeroNf;
     private String lancamento;
-    private String emissao; 
+    private String emissao;
     private String vencimento;
     private String competencia;
     private String parcela;
@@ -37,9 +38,15 @@ public class Pagar {
     private String concilado;
     private String numeroCheque;
     private String numeroBoleto;
-    private String historico;
     private Double valorArec;
     private String obs;
+    // Atributos do sistema SGBR
+    private String codFornecedor;
+    private String fornecedorNome;
+    private String documentoSgbrPagar;
+    private String descricaoLancamento;
+    private String especie;
+    private String centroCusto;
 
     public Pagar() {
         idUsuario = 1;
@@ -64,7 +71,7 @@ public class Pagar {
         valorArec = 0.0;
     }
 
-    public Pagar(Integer idUsuario, Integer idEmpresa, Integer idPagamento, Integer idPlanoContas, Integer idFornecedor, Integer idContaMovimento, String tipo, String status, String documento, String numeroNf, String lancamento, String emissao, String vencimento, String competencia, String parcela, Double valorOriginal, Double valor, Double valorDesc, Double valorPag, String dataPag, Double jurosPag, Double multaPag, Double multa, Double juros, String agencia, String conta, String concilado, String numeroCheque, String numeroBoleto, String historico, Double valorArec, String obs) {
+    public Pagar(Integer idUsuario, Integer idEmpresa, Integer idPagamento, Integer idPlanoContas, Integer idFornecedor, Integer idContaMovimento, String tipo, String status, String documento, String numeroNf, String lancamento, String emissao, String vencimento, String competencia, String parcela, Double valorOriginal, Double valor, Double valorDesc, Double valorPag, String dataPag, Double jurosPag, Double multaPag, Double multa, Double juros, String agencia, String conta, String concilado, String numeroCheque, String numeroBoleto, Double valorArec, String obs) {
         this.idUsuario = idUsuario;
         this.idEmpresa = idEmpresa;
         this.idPagamento = idPagamento;
@@ -94,7 +101,6 @@ public class Pagar {
         this.concilado = concilado;
         this.numeroCheque = numeroCheque;
         this.numeroBoleto = numeroBoleto;
-        this.historico = historico;
         this.valorArec = valorArec;
         this.obs = obs;
     }
@@ -335,10 +341,6 @@ public class Pagar {
         return "MIGRACAO: " + DataHoraUtil.getDataAtual();
     }
 
-    public void setHistorico(String historico) {
-        this.historico = historico;
-    }
-
     public Double getValorArec() {
         return valorArec;
     }
@@ -348,12 +350,45 @@ public class Pagar {
     }
 
     public String getObs() {
-        return obs;
+        return "FORNEC: " + fornecedorNome + "\nDOC: " + documentoSgbrPagar + "\nESPEC: " + especie + "\nCENTRO: " + centroCusto + "\nHIST: " + descricaoLancamento;
     }
 
     public void setObs(String obs) {
         this.obs = obs;
     }
-    
-    
+
+    // Metodos acessores do sistema SGBR
+    public void setCodFornecedor(String codFornecedor) {
+        this.codFornecedor = codFornecedor;
+    }
+
+    public String getFornecedorNome(TreeMap<String, String> mapaNomeFornecedor) {
+        String nomeFornecedor = (fornecedorNome != null && !fornecedorNome.isEmpty()) ? fornecedorNome.trim() : "PADRAO";
+        return mapaNomeFornecedor.containsKey(nomeFornecedor) ? mapaNomeFornecedor.get(nomeFornecedor) : mapaNomeFornecedor.get("PADRAO");
+    }
+
+    public void setFornecedorNome(String fornecedorNome) {
+        this.fornecedorNome = fornecedorNome;
+    }
+
+    public void setDocumentoSgbrPagar(String documentoSgbrPagar) {
+        this.documentoSgbrPagar = documentoSgbrPagar;
+    }
+
+    public void setDescricaoLancamento(String descricaoLancamento) {
+        this.descricaoLancamento = descricaoLancamento;
+    }
+
+    public void setEspecie(String especie) {
+        this.especie = especie;
+    }
+
+    public void setCentroCusto(String centroCusto) {
+        this.centroCusto = centroCusto;
+    }
+
+    @Override
+    public String toString() {
+        return codFornecedor + " " + fornecedorNome + " - " + lancamento + " - " + vencimento + " R$ " + valorOriginal;
+    }
 }

@@ -10,5 +10,5 @@ import sistemas.LC_SISTEMAS.model.entidades.Receber;
  */
 public interface ReceberDao extends ReceberDaoInsert{
     
-    List<Receber> finfindAll();
+    List<Receber> findAll();
 }
