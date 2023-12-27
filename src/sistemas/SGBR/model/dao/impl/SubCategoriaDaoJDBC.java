@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import sistemas.LC_SISTEMAS.model.entidades.SubCategoria;
 import sistemas.SGBR.model.dao.SubCategoriaDao;
-import util.DataHoraUtil;
+import util.ObjetoUtil;
 
 /**
  *
@@ -62,10 +62,10 @@ public class SubCategoriaDaoJDBC implements SubCategoriaDao {
                     + "VALUES(?, ?, ?, ?)");
 
             if (!subcategoriaExiste(subcategoria.getNome())) {
-                st.setInt(1, 1);
+                st.setInt(1, subcategoria.getIdCategoria());
                 st.setString(2, subcategoria.getNome());
-                st.setString(3, DataHoraUtil.getDataHoraAtual());
-                st.setInt(4, 1);
+                st.setString(3, subcategoria.getDataHoraAlteracao());
+                st.setInt(4, subcategoria.getAtivo());
                 st.executeUpdate();
                 System.out.println("SUBCATEGORIA inserida: " + subcategoria.getNome());
             }
@@ -79,7 +79,7 @@ public class SubCategoriaDaoJDBC implements SubCategoriaDao {
     // Metodo para instancia obj e separar responsabilidades.
     private SubCategoria instanciacaoSubCategoria(ResultSet rs) throws SQLException {
         SubCategoria obj = new SubCategoria();
-        obj.setNome(rs.getString("subgrupo"));
+        obj.setNome(ObjetoUtil.removerCaracteresEspeciais(rs.getString("subgrupo")));
         return obj;
     }
 

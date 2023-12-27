@@ -11,7 +11,6 @@ public class Categoria {
     private String nome;
     private Double comissao;
     private String podeGourmet;
-    private String datahoraAlteracao;
     private Integer ativo;
 
     public Categoria() {

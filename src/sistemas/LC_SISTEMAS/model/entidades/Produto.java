@@ -1083,8 +1083,8 @@ public class Produto {
     }
 
     public String getSubCategoriaNome(TreeMap<String, String> mapaSubcategoria) {
-        String nome = (subcategoriaNome != null && !subcategoriaNome.equals("")) ? subcategoriaNome : "PADRAO";
-        return mapaSubcategoria.containsKey(nome) ? mapaSubcategoria.get(nome) : mapaSubcategoria.get("PADRAO");
+        String subcategoria = subcategoriaNome;
+        return mapaSubcategoria.getOrDefault(subcategoria, mapaSubcategoria.get("PADRAO"));
     }
 
     public void setSubcategoriaNome(String subcategoriaNome) {
