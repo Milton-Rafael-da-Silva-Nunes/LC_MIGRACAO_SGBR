@@ -68,10 +68,10 @@ public class FornecedorDaoJDBC implements FornecedorDao {
             st = conn2.prepareStatement("INSERT INTO fornecedor(id_empresa, id_estado, id_cidade, id_planocontas, tipo, tipo_fornecedor, nome, razao_social, cnpj_cpf, ie, endereco, numero, bairro, cep, fone, fax, email_site, obs, ativo) "
                     + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
-            st.setInt(1, 1);
+            st.setInt(1, fornecedor.getIdEmpresa());
             st.setString(2, mapaEstado.get(fornecedor.getCodigoCidade())); // Estado pelo codigo da cidade fornecico
             st.setString(3, mapaCidade.get(fornecedor.getCodigoCidade()));// Cidade 
-            st.setInt(4, 0);
+            st.setInt(4, fornecedor.getIdPlanoContas());
             st.setString(5, fornecedor.getTipo());
             st.setString(6, fornecedor.getTipoFornecedor());
             st.setString(7, fornecedor.getNome());
@@ -104,13 +104,13 @@ public class FornecedorDaoJDBC implements FornecedorDao {
         obj.setNome(ObjetoUtil.removerCaracteresEspeciais(rs.getString("nomefantasia")));
         obj.setEndereco(ObjetoUtil.removerCaracteresEspeciais(ObjetoUtil.validarString(rs.getString("endereco"))));
         obj.setBairro(ObjetoUtil.removerCaracteresEspeciais(ObjetoUtil.validarString(rs.getString("bairro"))));
-        obj.setCodigoCidade(rs.getString("codigocidadeibge"));
+        obj.setCodigoCidade(ObjetoUtil.validarString(rs.getString("codigocidadeibge")));
         obj.setCep(ObjetoUtil.validarString(rs.getString("cep")));
         obj.setRg(ObjetoUtil.validarString(rs.getString("rg")));
         obj.setCpf(ObjetoUtil.validarString(rs.getString("cpf")));
         obj.setCnpj(ObjetoUtil.validarString(rs.getString("cnpj")));
         obj.setIe(ObjetoUtil.validarString(rs.getString("ie")));
-        obj.setObs(ObjetoUtil.getObs(rs.getString("telefone"), rs.getString("celular"), "", ""));
+        obj.setObs(ObjetoUtil.getObs(ObjetoUtil.validarString(rs.getString("telefone")), ObjetoUtil.validarString(rs.getString("celular")), "", ""));
         obj.setEmail(ObjetoUtil.validarString(rs.getString("email")));
         obj.setNumero(ObjetoUtil.validarString(rs.getString("numero")));
         obj.setAtivo(Integer.parseInt(ObjetoUtil.getAtivo(rs.getString("ativo"))));

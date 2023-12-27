@@ -24,6 +24,7 @@ public class Fornecedor {
     private String email;
     private String obs;
     private Integer ativo;
+    private static final String CODIGO_CIDADE_PADRAO = "1501402";
     // Atributos do sistema SGBR
     private String codigoCidade;
     private String rg;
@@ -31,6 +32,8 @@ public class Fornecedor {
     private String cnpj;
 
     public Fornecedor() {
+        idEmpresa = 1;
+        idPlanoContas = 0;
         tipoFornecedor = "Outros";
         fone = "(  )     -   ";
         fax = "(  )     -   ";
@@ -62,10 +65,7 @@ public class Fornecedor {
     }
 
     public String getNumero() {
-        if (numero.length() > 10) {
-            return numero.substring(0, 10);
-        }
-        return numero;
+        return numero.length() <= 10 ? numero : numero.substring(0, 10);
     }
 
     public void setNumero(String numero) {
@@ -113,11 +113,7 @@ public class Fornecedor {
     }
 
     public String getTipo() {
-        if(getCnpjCpf().length()==18) {
-            return "J";
-        } else {
-            return "F";
-        }
+        return getCnpjCpf().length() == 18 ? "J" : "F";
     }
 
     public String getTipoFornecedor() {
@@ -129,7 +125,7 @@ public class Fornecedor {
     }
 
     public String getNome() {
-        return nome;
+        return nome.length() <= 80 ? nome : nome.substring(0, 80);
     }
 
     public void setNome(String nome) {
@@ -137,7 +133,7 @@ public class Fornecedor {
     }
 
     public String getRazaoSocial() {
-        return razaoSocial;
+        return razaoSocial.length() <= 80 ? razaoSocial : razaoSocial.substring(0, 80);
     }
 
     public void setRazaoSocial(String razaoSocial) {
@@ -145,19 +141,12 @@ public class Fornecedor {
     }
 
     public String getCnpjCpf() {
-        if(!cpf.isEmpty()) {
-            return cpf;
-        } else {
-            return cnpj;
-        }
+        return !cpf.isEmpty() ? cpf : cnpj;
     }
-    
+
     public String getIe() {
-        if (!ie.isEmpty()) {
-            return ie;
-        } else {
-            return rg;
-        }
+        String ieRg = !ie.isEmpty() ? ie : rg;
+        return ieRg.length() <= 20 ? ieRg : ieRg.substring(0, 20);
     }
 
     public void setIe(String ie) {
@@ -165,7 +154,7 @@ public class Fornecedor {
     }
 
     public String getEndereco() {
-        return endereco;
+        return endereco.length() <= 80 ? endereco : endereco.substring(0, 80);
     }
 
     public void setEndereco(String endereco) {
@@ -173,7 +162,7 @@ public class Fornecedor {
     }
 
     public String getBairro() {
-        return bairro;
+        return bairro.length() <= 45 ? bairro : bairro.substring(0, 45);
     }
 
     public void setBairro(String bairro) {
@@ -181,7 +170,7 @@ public class Fornecedor {
     }
 
     public String getCep() {
-        return cep;
+        return cep.length() <= 20 ? cep : cep.substring(0, 20);
     }
 
     public void setCep(String cep) {
@@ -205,7 +194,7 @@ public class Fornecedor {
     }
 
     public String getEmail() {
-        return email.toLowerCase();
+        return email.length() <= 80 ? email.toLowerCase() : email.substring(0, 80).toLowerCase();
     }
 
     public void setEmail(String email) {
@@ -244,11 +233,9 @@ public class Fornecedor {
         this.cnpj = cnpj;
     }
 
+    // retorna a cidade padrao para quando nao tem codigo de cidade CIDADE Belem-PA
     public String getCodigoCidade() {
-        if (codigoCidade == null || codigoCidade.equals("")) {
-            return "1501402"; // CIDADE Belem-PA
-        }
-        return codigoCidade;
+        return !codigoCidade.isEmpty() ? codigoCidade : CODIGO_CIDADE_PADRAO;
     }
 
     public void setCodigoCidade(String codigoCidade) {
