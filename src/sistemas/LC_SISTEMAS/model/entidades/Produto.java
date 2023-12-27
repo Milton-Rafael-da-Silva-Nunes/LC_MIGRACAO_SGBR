@@ -1109,8 +1109,8 @@ public class Produto {
     }
     
     public String getFornecedorNome(TreeMap<String, String> mapaFornecedor) {
-        String nome = (fornecedorNome != null && !fornecedorNome.equals("")) ? fornecedorNome : "PADRAO";
-        return mapaFornecedor.containsKey(nome) ? mapaFornecedor.get(nome) : mapaFornecedor.get("PADRAO");
+        String fornecedor = fornecedorNome;
+        return mapaFornecedor.getOrDefault(fornecedor, mapaFornecedor.get("PADRAO"));
     }
 
     public void setFornecedorNome(String fornecedorNome) {

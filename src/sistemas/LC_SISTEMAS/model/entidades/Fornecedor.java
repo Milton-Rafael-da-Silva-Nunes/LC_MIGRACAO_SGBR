@@ -39,31 +39,6 @@ public class Fornecedor {
         fax = "(  )     -   ";
     }
 
-    public Fornecedor(Integer id, Integer idEmpresa, Integer idEstado, Integer idCidade, Integer idPlanoContas, String tipoFornecedor, String nome, String razaoSocial, String ie, String endereco, String numero, String bairro, String cep, String fone, String fax, String email, String obs, Integer ativo, String codigoCidade, String rg, String cpf, String cnpj) {
-        this.id = id;
-        this.idEmpresa = idEmpresa;
-        this.idEstado = idEstado;
-        this.idCidade = idCidade;
-        this.idPlanoContas = idPlanoContas;
-        this.tipoFornecedor = tipoFornecedor;
-        this.nome = nome;
-        this.razaoSocial = razaoSocial;
-        this.ie = ie;
-        this.endereco = endereco;
-        this.numero = numero;
-        this.bairro = bairro;
-        this.cep = cep;
-        this.fone = fone;
-        this.fax = fax;
-        this.email = email;
-        this.obs = obs;
-        this.ativo = ativo;
-        this.codigoCidade = codigoCidade;
-        this.rg = rg;
-        this.cpf = cpf;
-        this.cnpj = cnpj;
-    }
-
     public String getNumero() {
         return numero.length() <= 10 ? numero : numero.substring(0, 10);
     }

@@ -102,8 +102,8 @@ public class FornecedorDaoJDBC implements FornecedorDao {
         obj.setId(rs.getInt("controle"));
         obj.setRazaoSocial(ObjetoUtil.removerCaracteresEspeciais(rs.getString("razaosocial")));
         obj.setNome(ObjetoUtil.removerCaracteresEspeciais(rs.getString("nomefantasia")));
-        obj.setEndereco(ObjetoUtil.removerCaracteresEspeciais(ObjetoUtil.validarString(rs.getString("endereco"))));
-        obj.setBairro(ObjetoUtil.removerCaracteresEspeciais(ObjetoUtil.validarString(rs.getString("bairro"))));
+        obj.setEndereco(ObjetoUtil.removerCaracteresEspeciais(rs.getString("endereco")));
+        obj.setBairro(ObjetoUtil.removerCaracteresEspeciais(rs.getString("bairro")));
         obj.setCodigoCidade(ObjetoUtil.validarString(rs.getString("codigocidadeibge")));
         obj.setCep(ObjetoUtil.validarString(rs.getString("cep")));
         obj.setRg(ObjetoUtil.validarString(rs.getString("rg")));
