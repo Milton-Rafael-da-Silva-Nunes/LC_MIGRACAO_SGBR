@@ -394,8 +394,8 @@ public class Receber {
     }
 
     public String getCodigoCliente(TreeMap<String, String> mapaCodigoCliente) {
-        String codigo = (codigoCliente != null && !codigoCliente.equals("")) ? codigoCliente : "1";
-        return mapaCodigoCliente.containsKey(codigo) ? mapaCodigoCliente.get(codigo) : mapaCodigoCliente.get("1");
+        String codigo = codigoCliente.trim();
+        return mapaCodigoCliente.getOrDefault(codigo, mapaCodigoCliente.get("1"));
     }
 
     public void setCodigoCliente(String codigoCliente) {

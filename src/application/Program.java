@@ -87,7 +87,7 @@ public class Program {
             List<Receber> listaReceber = receberdao.findAll();
             List<Pagar> listaPagar = pagardao.findAll();
 
-            /*System.out.println("\n**** TESTE - findAll EMPRESA ****");
+           /* System.out.println("\n**** TESTE - findAll EMPRESA ****");
             for (Empresa obj : listEmp) {
                 System.out.println(obj);
             }
@@ -110,7 +110,7 @@ public class Program {
             System.out.println("\n**** TESTE - findAll CATEGORIA ****");
             for (Categoria obj : listaCategoria) {
                 categoriadao.insert(obj);
-            }
+            }*/
 
             System.out.println("\n**** TESTE - findAll FABRICANTE ****");
             for (Fabricante obj : listaFabricante) {
@@ -120,21 +120,16 @@ public class Program {
             System.out.println("\n**** TESTE - findAll SUBCATEGORIA ****");
             for (SubCategoria obj : listaSubCategoria) {
                 subcategoriadao.insert(obj);
-            }*/
+            }
 
             System.out.println("\n**** TESTE - findAll FORNECEDOR ****");
             for (Fornecedor obj : listaFornecedor) {
                 fornecedordao.insert(obj);
             }
-            
-            System.out.println("\n**** TESTE - findAll PAGAR ****");
-            for(Pagar obj : listaPagar) {
-                pagardao.insert(obj);
-            }
 
-           /* System.out.println("\n**** TESTE - findAll PRODUTO ****");
-            Regime regime = Regime.NORMAL;
-            Estoque estoque = Estoque.NAO;
+            System.out.println("\n**** TESTE - findAll PRODUTO ****");
+            Regime regime = Regime.SIMPLES;
+            Estoque estoque = Estoque.SIM;
 
             for (Produto obj : listaProduto) {
                 produtodao.insert(obj, regime.getRegime());
@@ -144,22 +139,27 @@ public class Program {
                 }
             }
 
-            System.out.println("\n**** TESTE - findAll CLIENTE ****");
+            /*System.out.println("\n**** TESTE - findAll CLIENTE ****");
             for (Cliente obj : listaCliente) {
                 clientedao.insert(obj);
-            }
+            }*/
 
-            System.out.println("\n**** TESTE - findAll RECEBER ****");
+            /*System.out.println("\n**** TESTE - findAll RECEBER ****");
             for (Receber obj : listaReceber) {
                 receberdao.insert(obj);
             }
+            
+            System.out.println("\n**** TESTE - findAll PAGAR ****");
+            for(Pagar obj : listaPagar) {
+                pagardao.insert(obj);
+            }*/
 
             System.out.println("");
             System.out.println("Total de produtos Migrados: " + listaProduto.size());
             System.out.println("Total de clientes Migrados: " + listaCliente.size());
-            System.out.println("Total de contas a Receber Migrados: " + listaReceber.size());*/
-            System.out.println("Total de fornecedores Migrados: " + listaFornecedor.size());
-            System.out.println("Total de contas a Pagar Migrados: " + listaPagar.size());
+            System.out.println("Total de forneced Migrados: " + listaFornecedor.size());
+            System.out.println("Total de Receber  Migrados: " + listaReceber.size());
+            System.out.println("Total de Pagar    Migrados: " + listaPagar.size());
             System.out.println("");
             
             conn2.commit();

@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import sistemas.LC_SISTEMAS.model.entidades.Categoria;
 import sistemas.SGBR.model.dao.CategoriaDao;
-import util.DataHoraUtil;
+import util.ObjetoUtil;
 
 /**
  *
@@ -63,13 +63,14 @@ public class CategoriaDaoJDBC implements CategoriaDao {
 
             if (!categoriaExiste(categoria.getNome())) { // Verificar se a categoria já existe antes de inserir no LC.
                 st.setString(1, categoria.getNome());
-                st.setDouble(2, 0.0);
-                st.setString(3, "SIM");
-                st.setString(4, DataHoraUtil.getDataHoraAtual());
-                st.setInt(5, 1);
+                st.setDouble(2, categoria.getComissao());
+                st.setString(3, categoria.getPodeGourmet());
+                st.setString(4, categoria.getDatahoraAlteracao());
+                st.setInt(5, categoria.getAtivo());
                 st.executeUpdate();
                 System.out.println("CATEGORIA inserida: " + categoria.getNome());
             }
+            
         } catch (SQLException e) {
             throw new DbException("Erro ao inserir categoria em metodo insert: " + e.getMessage());
         } finally {
@@ -80,7 +81,7 @@ public class CategoriaDaoJDBC implements CategoriaDao {
     // Metodo para instanciar OBJ e separar responsabilidade.
     private Categoria instanciacaoCategoria(ResultSet rs) throws SQLException {
         Categoria obj = new Categoria();
-        obj.setNome(rs.getString("grupo"));
+        obj.setNome(ObjetoUtil.removerCaracteresEspeciais(rs.getString("grupo")));
         return obj;
     }
 

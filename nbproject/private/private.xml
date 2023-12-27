@@ -6,9 +6,10 @@
             <file>file:/D:/PROGRAMAÇÃO/PROJETOS-LC/LC_MIGRACAO/src/application/Program.java</file>
             <file>file:/D:/PROGRAMAÇÃO/PROJETOS-LC/LC_MIGRACAO/src/sistemas/LC_SISTEMAS/model/entidades/Cliente.java</file>
             <file>file:/D:/PROGRAMAÇÃO/PROJETOS-LC/LC_MIGRACAO/src/sistemas/LC_SISTEMAS/model/entidades/Receber.java</file>
+            <file>file:/D:/PROGRAMAÇÃO/PROJETOS-LC/LC_MIGRACAO/src/util/ObjetoUtil.java</file>
+            <file>file:/D:/PROGRAMAÇÃO/PROJETOS-LC/LC_MIGRACAO/src/sistemas/SGBR/model/dao/impl/ClienteDaoJDBC.java</file>
             <file>file:/D:/PROGRAMAÇÃO/PROJETOS-LC/LC_MIGRACAO/src/sistemas/SGBR/model/dao/impl/ReceberDaoJDBC.java</file>
             <file>file:/D:/PROGRAMAÇÃO/PROJETOS-LC/LC_MIGRACAO/src/sistemas/SGBR/model/dao/impl/PagarDaoJDBC.java</file>
-            <file>file:/D:/PROGRAMAÇÃO/PROJETOS-LC/LC_MIGRACAO/src/sistemas/LC_SISTEMAS/model/entidades/Produto.java</file>
             <file>file:/D:/PROGRAMAÇÃO/PROJETOS-LC/LC_MIGRACAO/src/sistemas/LC_SISTEMAS/model/entidades/Pagar.java</file>
         </group>
     </open-files>

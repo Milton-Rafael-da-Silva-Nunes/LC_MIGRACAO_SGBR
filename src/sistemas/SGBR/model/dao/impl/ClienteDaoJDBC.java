@@ -190,7 +190,7 @@ public class ClienteDaoJDBC implements ClienteDao {
     private Cliente instanciacaoCliente(ResultSet rs) throws SQLException {
         Cliente cliente = new Cliente();
         cliente.setNumeroCartao(rs.getString("controle"));
-        cliente.setRazaoSocial(rs.getString("cliente"));
+        cliente.setRazaoSocial(ObjetoUtil.validarString(rs.getString("cliente")));
         cliente.setEndereco(ObjetoUtil.validarString(rs.getString("endereco")));
         cliente.setEndereco2(ObjetoUtil.validarString(rs.getString("endereco")));
         cliente.setReferencia(ObjetoUtil.validarString(rs.getString("complemento")));
@@ -201,8 +201,8 @@ public class ClienteDaoJDBC implements ClienteDao {
         cliente.setCep2(ObjetoUtil.validarString(rs.getString("cep")));
         cliente.setTipo(ObjetoUtil.validarTipo(rs.getString("tipocliente")));
         cliente.setRg(ObjetoUtil.validarString(rs.getString("rg")));
-        cliente.setCpf(ObjetoUtil.validarString(rs.getString("cpf")));
-        cliente.setCnpj(ObjetoUtil.validarString(rs.getString("cnpj")));
+        cliente.setCpf(ObjetoUtil.validarString(ObjetoUtil.corrigirCpfCnpjClienteLc(rs.getString("cpf"))));
+        cliente.setCnpj(ObjetoUtil.validarString(ObjetoUtil.corrigirCpfCnpjClienteLc(rs.getString("cnpj"))));
         cliente.setIe(ObjetoUtil.validarString(rs.getString("ie")));
         cliente.setIm(ObjetoUtil.validarString(rs.getString("im")));
         cliente.setNascimentoAdi(rs.getString("datanascimento"));

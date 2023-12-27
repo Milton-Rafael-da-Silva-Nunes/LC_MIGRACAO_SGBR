@@ -100,8 +100,9 @@ public class ReceberDaoJDBC implements ReceberDao {
             st.setString(32, receber.getHistorico());
             st.setString(33, receber.getObs());
             st.executeUpdate();
-            
+            System.out.println("RECEBER inserido: " + receber);
         } catch (SQLException e) {
+            e.printStackTrace();
             throw new DbException("Erro ao inserir receber em insert: " + e.getMessage());
         } finally {
             MysqlConnector.closeStatement(st);
@@ -112,7 +113,7 @@ public class ReceberDaoJDBC implements ReceberDao {
         Receber rec = new Receber();
         rec.setParcela(ObjetoUtil.validarString(rs.getString("nparcela") + "/" + rs.getString("qtdeparcela")));
         rec.setDescricaoLancamento(ObjetoUtil.validarString(rs.getString("descricaolancamento")));
-        rec.setCodigoCliente(rs.getString("codcliente"));
+        rec.setCodigoCliente(ObjetoUtil.validarString(rs.getString("codcliente")));
         rec.setCliente(ObjetoUtil.validarString(rs.getString("cliente")));
         rec.setEspecie(ObjetoUtil.validarString(rs.getString("especie")));
         rec.setCentroCusto(ObjetoUtil.validarString(rs.getString("centrocusto")));

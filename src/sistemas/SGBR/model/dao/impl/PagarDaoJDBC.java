@@ -56,24 +56,6 @@ public class PagarDaoJDBC implements PagarDao {
         }
     }
 
-    private Pagar instaciacaoPagar(ResultSet rs) throws SQLException {
-        Pagar obj = new Pagar();
-        obj.setLancamento(rs.getString("datahoracadastro"));
-        obj.setEmissao(rs.getString("datahoracadastro"));
-        obj.setVencimento(rs.getString("datavencimento"));
-        obj.setDocumentoSgbrPagar(ObjetoUtil.validarString(ObjetoUtil.removerCaracteresEspeciais(rs.getString("documento"))));
-        obj.setDescricaoLancamento(ObjetoUtil.validarString(ObjetoUtil.removerCaracteresEspeciais(rs.getString("descricaolancamento"))));
-        obj.setCodFornecedor(ObjetoUtil.validarString(rs.getString("codfornecedor")));
-        obj.setFornecedorNome(ObjetoUtil.validarString(ObjetoUtil.removerCaracteresEspeciais(rs.getString("fornecedor"))));
-        obj.setEspecie(ObjetoUtil.validarString(ObjetoUtil.removerCaracteresEspeciais(rs.getString("especie"))));
-        obj.setCentroCusto(ObjetoUtil.validarString(ObjetoUtil.removerCaracteresEspeciais(rs.getString("centrocusto"))));
-        double valor = rs.getDouble("valororiginal") - rs.getDouble("valorpago");
-        obj.setValorOriginal(valor);
-        obj.setValor(valor);
-        obj.setParcela(rs.getString("nparcela") + "/" + rs.getString("qtdeparcela"));
-        return obj;
-    }
-
     @Override
     public void insert(Pagar pagar) {
         PreparedStatement st = null;
@@ -117,12 +99,31 @@ public class PagarDaoJDBC implements PagarDao {
             st.setDouble(31, pagar.getValorArec());
             st.setString(32, pagar.getObs());
             st.executeUpdate();
-
+            System.out.println("PAGAR inserido: " + pagar);
         } catch (SQLException e) {
-            throw new DbException("Erro ao inserir receber em insert: " + e.getMessage());
+            e.printStackTrace();
+            throw new DbException("Erro ao inserir pagar em insert: " + e.getMessage());
         } finally {
             MysqlConnector.closeStatement(st);
         }
+    }
+
+    private Pagar instaciacaoPagar(ResultSet rs) throws SQLException {
+        Pagar obj = new Pagar();
+        obj.setLancamento(rs.getString("datahoracadastro"));
+        obj.setEmissao(rs.getString("datahoracadastro"));
+        obj.setVencimento(rs.getString("datavencimento"));
+        obj.setDocumentoSgbrPagar(ObjetoUtil.validarString(ObjetoUtil.removerCaracteresEspeciais(rs.getString("documento"))));
+        obj.setDescricaoLancamento(ObjetoUtil.validarString(ObjetoUtil.removerCaracteresEspeciais(rs.getString("descricaolancamento"))));
+        obj.setCodFornecedor(ObjetoUtil.validarString(rs.getString("codfornecedor")));
+        obj.setFornecedorNome(ObjetoUtil.validarString(ObjetoUtil.removerCaracteresEspeciais(rs.getString("fornecedor"))));
+        obj.setEspecie(ObjetoUtil.validarString(ObjetoUtil.removerCaracteresEspeciais(rs.getString("especie"))));
+        obj.setCentroCusto(ObjetoUtil.validarString(ObjetoUtil.removerCaracteresEspeciais(rs.getString("centrocusto"))));
+        double valor = rs.getDouble("valororiginal") - rs.getDouble("valorpago");
+        obj.setValorOriginal(valor);
+        obj.setValor(valor);
+        obj.setParcela(rs.getString("nparcela") + "/" + rs.getString("qtdeparcela"));
+        return obj;
     }
 
     private TreeMap<String, String> getMapaIdFornecedor() {

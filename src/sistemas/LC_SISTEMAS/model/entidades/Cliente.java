@@ -191,121 +191,6 @@ public class Cliente {
         avalistaIdEstado = 0;
     }
 
-    public Cliente(Integer id, String cpfCnpj, String ie, String ieIndicador, String im, String nome, String rg, String razaoSocial, String endereco, String numero, String referencia, String cep, String bairro, String telefone, String telComercial, String fax, Double limiteCredito, String obs, String endereco2, String numero2, String referencia2, String cep2, String bairro2, String ativo, String tipo, Integer idPais, Integer idEstado, Integer idCidade, Integer idEstado2, Integer idCidade2, Integer idEmpresa, Integer idClienteCanal, String paiAdi, String maeAdi, String nascimentoAdi, String sexoAdi, String estCivilAdi, String apelidoAdi, String emailAdi, Integer idCidadesAdi, Integer idEstadosAdi, String empresa, String foneEmp, String enderecoEmp, String numeroEmp, String cepEmp, String bairroEmp, String cargoEmp, Double rendaEmp, String admissaoEmp, Integer idCidadesEmp, Integer idEstadosEmp, String conjuje, String cpfConj, String rgConj, String nascimentoConj, String empresaConj, String foneConj, String enderecoConj, String numeroConj, String cepConj, String bairroConj, String cargoConj, Double rendaConj, String admissaoConj, Integer idCidadesConj, Integer idEstadosConj, String referencias, String comercial1, String comercial2, String comercial3, String bancaria1, String bancaria2, String emissao, String orgao, String dataCadastro, String dataHoraAlteracao, String foto, Double poupanca, String podeAprazo, String podeCartaCobranca, String numeroContrato, String numeroCartao, String tabelaPreco, Integer idVendedor, String filiacaoFoneMae, String filiacaoFonePai, String filiacaoEndereco, String filiacaoReferencia, String filiacaoNumero, String filiacaoCep, String filiacaoBairro, String filiacaoIdCidade, String filiacaoIdEstado, String avalistaNome, String avalistaCpf, String avalistaRg, String avalistaNascimento, String avalistaFone, String avalistaEndereco, String avalistaNumero, String avalistaCep, String avalistaBairro, String avalistaEmpresa, String avalistaCargo, Double avalistaRenda, String avalistaAdmissao, Integer avalistaIdCidade, Integer avalistaIdEstado, String codigoCidade, String cpf, String cnpj) {
-        this.id = id;
-        this.cpfCnpj = cpfCnpj;
-        this.ie = ie;
-        this.ieIndicador = ieIndicador;
-        this.im = im;
-        this.nome = nome;
-        this.rg = rg;
-        this.razaoSocial = razaoSocial;
-        this.endereco = endereco;
-        this.numero = numero;
-        this.referencia = referencia;
-        this.cep = cep;
-        this.bairro = bairro;
-        this.telefone = telefone;
-        this.telComercial = telComercial;
-        this.fax = fax;
-        this.limiteCredito = limiteCredito;
-        this.obs = obs;
-        this.endereco2 = endereco2;
-        this.numero2 = numero2;
-        this.referencia2 = referencia2;
-        this.cep2 = cep2;
-        this.bairro2 = bairro2;
-        this.ativo = ativo;
-        this.tipo = tipo;
-        this.idPais = idPais;
-        this.idEstado = idEstado;
-        this.idCidade = idCidade;
-        this.idEstado2 = idEstado2;
-        this.idCidade2 = idCidade2;
-        this.idEmpresa = idEmpresa;
-        this.idClienteCanal = idClienteCanal;
-        this.paiAdi = paiAdi;
-        this.maeAdi = maeAdi;
-        this.nascimentoAdi = nascimentoAdi;
-        this.sexoAdi = sexoAdi;
-        this.estCivilAdi = estCivilAdi;
-        this.apelidoAdi = apelidoAdi;
-        this.emailAdi = emailAdi;
-        this.idCidadesAdi = idCidadesAdi;
-        this.idEstadosAdi = idEstadosAdi;
-        this.empresa = empresa;
-        this.foneEmp = foneEmp;
-        this.enderecoEmp = enderecoEmp;
-        this.numeroEmp = numeroEmp;
-        this.cepEmp = cepEmp;
-        this.bairroEmp = bairroEmp;
-        this.cargoEmp = cargoEmp;
-        this.rendaEmp = rendaEmp;
-        this.admissaoEmp = admissaoEmp;
-        this.idCidadesEmp = idCidadesEmp;
-        this.idEstadosEmp = idEstadosEmp;
-        this.conjuje = conjuje;
-        this.cpfConj = cpfConj;
-        this.rgConj = rgConj;
-        this.nascimentoConj = nascimentoConj;
-        this.empresaConj = empresaConj;
-        this.foneConj = foneConj;
-        this.enderecoConj = enderecoConj;
-        this.numeroConj = numeroConj;
-        this.cepConj = cepConj;
-        this.bairroConj = bairroConj;
-        this.cargoConj = cargoConj;
-        this.rendaConj = rendaConj;
-        this.admissaoConj = admissaoConj;
-        this.idCidadesConj = idCidadesConj;
-        this.idEstadosConj = idEstadosConj;
-        this.referencias = referencias;
-        this.comercial1 = comercial1;
-        this.comercial2 = comercial2;
-        this.comercial3 = comercial3;
-        this.bancaria1 = bancaria1;
-        this.bancaria2 = bancaria2;
-        this.emissao = emissao;
-        this.orgao = orgao;
-        this.dataCadastro = dataCadastro;
-        this.dataHoraAlteracao = dataHoraAlteracao;
-        this.foto = foto;
-        this.poupanca = poupanca;
-        this.podeAprazo = podeAprazo;
-        this.podeCartaCobranca = podeCartaCobranca;
-        this.numeroContrato = numeroContrato;
-        this.numeroCartao = numeroCartao;
-        this.tabelaPreco = tabelaPreco;
-        this.idVendedor = idVendedor;
-        this.filiacaoFoneMae = filiacaoFoneMae;
-        this.filiacaoFonePai = filiacaoFonePai;
-        this.filiacaoEndereco = filiacaoEndereco;
-        this.filiacaoReferencia = filiacaoReferencia;
-        this.filiacaoNumero = filiacaoNumero;
-        this.filiacaoCep = filiacaoCep;
-        this.filiacaoBairro = filiacaoBairro;
-        this.filiacaoIdCidade = filiacaoIdCidade;
-        this.filiacaoIdEstado = filiacaoIdEstado;
-        this.avalistaNome = avalistaNome;
-        this.avalistaCpf = avalistaCpf;
-        this.avalistaRg = avalistaRg;
-        this.avalistaNascimento = avalistaNascimento;
-        this.avalistaFone = avalistaFone;
-        this.avalistaEndereco = avalistaEndereco;
-        this.avalistaNumero = avalistaNumero;
-        this.avalistaCep = avalistaCep;
-        this.avalistaBairro = avalistaBairro;
-        this.avalistaEmpresa = avalistaEmpresa;
-        this.avalistaCargo = avalistaCargo;
-        this.avalistaRenda = avalistaRenda;
-        this.avalistaAdmissao = avalistaAdmissao;
-        this.avalistaIdCidade = avalistaIdCidade;
-        this.avalistaIdEstado = avalistaIdEstado;
-        this.codigoCidade = codigoCidade;
-        this.cpf = cpf;
-        this.cnpj = cnpj;
-    }
-
     public Integer getId() {
         return id;
     }
@@ -335,18 +220,7 @@ public class Cliente {
     }
 
     public String getIeIndicador() {
-        if (cpfCnpj.length() >= 14 && !ie.isEmpty()) {
-            ieIndicador = "1";
-        } else if (cpfCnpj.length() >= 14 && ie.equalsIgnoreCase("isento")) {
-            ieIndicador = "2";
-        } else {
-            ieIndicador = "9";
-        }
-        return ieIndicador;
-    }
-
-    public void setIeIndicador(String ieIndicador) {
-        this.ieIndicador = ieIndicador;
+        return getCpfCnpj().length() >= 14 && !ie.isEmpty() ? "1" : "9";
     }
 
     public String getIm() {
@@ -374,7 +248,7 @@ public class Cliente {
     }
 
     public String getRazaoSocial() {
-        return (cpfCnpj.length() >= 14 && !razaoSocial.isEmpty()) ? razaoSocial : nome;
+        return (getCpfCnpj().length() == 14 && !razaoSocial.isEmpty()) ? razaoSocial : nome;
     }
 
     public void setRazaoSocial(String razaoSocial) {

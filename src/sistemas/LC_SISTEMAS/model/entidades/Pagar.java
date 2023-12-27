@@ -39,7 +39,6 @@ public class Pagar {
     private String numeroCheque;
     private String numeroBoleto;
     private Double valorArec;
-    private String obs;
     // Atributos do sistema SGBR
     private String codFornecedor;
     private String fornecedorNome;
@@ -71,7 +70,7 @@ public class Pagar {
         valorArec = 0.0;
     }
 
-    public Pagar(Integer idUsuario, Integer idEmpresa, Integer idPagamento, Integer idPlanoContas, Integer idFornecedor, Integer idContaMovimento, String tipo, String status, String documento, String numeroNf, String lancamento, String emissao, String vencimento, String competencia, String parcela, Double valorOriginal, Double valor, Double valorDesc, Double valorPag, String dataPag, Double jurosPag, Double multaPag, Double multa, Double juros, String agencia, String conta, String concilado, String numeroCheque, String numeroBoleto, Double valorArec, String obs) {
+    public Pagar(Integer idUsuario, Integer idEmpresa, Integer idPagamento, Integer idPlanoContas, Integer idFornecedor, Integer idContaMovimento, String tipo, String status, String documento, String numeroNf, String lancamento, String emissao, String vencimento, String competencia, String parcela, Double valorOriginal, Double valor, Double valorDesc, Double valorPag, String dataPag, Double jurosPag, Double multaPag, Double multa, Double juros, String agencia, String conta, String concilado, String numeroCheque, String numeroBoleto, Double valorArec, String codFornecedor, String fornecedorNome, String documentoSgbrPagar, String descricaoLancamento, String especie, String centroCusto) {
         this.idUsuario = idUsuario;
         this.idEmpresa = idEmpresa;
         this.idPagamento = idPagamento;
@@ -102,7 +101,12 @@ public class Pagar {
         this.numeroCheque = numeroCheque;
         this.numeroBoleto = numeroBoleto;
         this.valorArec = valorArec;
-        this.obs = obs;
+        this.codFornecedor = codFornecedor;
+        this.fornecedorNome = fornecedorNome;
+        this.documentoSgbrPagar = documentoSgbrPagar;
+        this.descricaoLancamento = descricaoLancamento;
+        this.especie = especie;
+        this.centroCusto = centroCusto;
     }
 
     public Integer getIdUsuario() {
@@ -353,18 +357,14 @@ public class Pagar {
         return "FORNEC: " + fornecedorNome + "\nDOC: " + documentoSgbrPagar + "\nESPEC: " + especie + "\nCENTRO: " + centroCusto + "\nHIST: " + descricaoLancamento;
     }
 
-    public void setObs(String obs) {
-        this.obs = obs;
-    }
-
     // Metodos acessores do sistema SGBR
     public void setCodFornecedor(String codFornecedor) {
         this.codFornecedor = codFornecedor;
     }
 
     public String getFornecedorNome(TreeMap<String, String> mapaNomeFornecedor) {
-        String nomeFornecedor = (fornecedorNome != null && !fornecedorNome.isEmpty()) ? fornecedorNome.trim() : "PADRAO";
-        return mapaNomeFornecedor.containsKey(nomeFornecedor) ? mapaNomeFornecedor.get(nomeFornecedor) : mapaNomeFornecedor.get("PADRAO");
+        String nomeFornecedor = fornecedorNome.trim();
+        return mapaNomeFornecedor.getOrDefault(nomeFornecedor, mapaNomeFornecedor.get("PADRAO"));
     }
 
     public void setFornecedorNome(String fornecedorNome) {

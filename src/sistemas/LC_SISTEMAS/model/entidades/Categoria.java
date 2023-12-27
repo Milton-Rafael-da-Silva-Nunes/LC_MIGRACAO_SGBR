@@ -1,5 +1,7 @@
 package sistemas.LC_SISTEMAS.model.entidades;
 
+import util.DataHoraUtil;
+
 /**
  *
  * @author supor
@@ -7,12 +9,15 @@ package sistemas.LC_SISTEMAS.model.entidades;
 public class Categoria {
     
     private String nome;
+    private Double comissao;
+    private String podeGourmet;
+    private String datahoraAlteracao;
+    private Integer ativo;
 
     public Categoria() {
-    }
-
-    public Categoria(String nome) {
-        this.nome = nome;
+        comissao = 0.0;
+        podeGourmet = "S";
+        ativo = 1;
     }
 
     public String getNome() {
@@ -23,6 +28,30 @@ public class Categoria {
         this.nome = nome;
     }
 
+    public Double getComissao() {
+        return comissao;
+    }
+
+    public void setComissao(Double comissao) {
+        this.comissao = comissao;
+    }
+
+    public String getPodeGourmet() {
+        return podeGourmet;
+    }
+
+    public String getDatahoraAlteracao() {
+        return DataHoraUtil.getDataHoraAtual();
+    }
+
+    public Integer getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(Integer ativo) {
+        this.ativo = ativo;
+    }
+    
     @Override
     public String toString() {
         return nome;
