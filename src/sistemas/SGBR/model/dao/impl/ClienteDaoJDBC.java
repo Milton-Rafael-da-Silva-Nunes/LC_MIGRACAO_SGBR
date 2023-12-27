@@ -201,7 +201,7 @@ public class ClienteDaoJDBC implements ClienteDao {
         cliente.setCep2(ObjetoUtil.validarString(rs.getString("cep")));
         cliente.setTipo(ObjetoUtil.validarTipo(rs.getString("tipocliente")));
         cliente.setRg(ObjetoUtil.validarString(rs.getString("rg")));
-        cliente.setCpfCnpj(ObjetoUtil.corrigirCpfCnpjClienteLc(ObjetoUtil.validarCpfCnpj(rs.getString("cpf"), rs.getString("cnpj"))));
+//        cliente.setCpfCnpj(ObjetoUtil.corrigirCpfCnpjClienteLc(ObjetoUtil.validarCpfCnpj(rs.getString("cpf"), rs.getString("cnpj"))));
         cliente.setIe(ObjetoUtil.validarString(rs.getString("ie")));
         cliente.setIm(ObjetoUtil.validarString(rs.getString("im")));
         cliente.setNascimentoAdi(rs.getString("datanascimento"));

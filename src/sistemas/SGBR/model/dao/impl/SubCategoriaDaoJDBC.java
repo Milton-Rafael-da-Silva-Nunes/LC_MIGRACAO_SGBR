@@ -17,12 +17,12 @@ import util.DataHoraUtil;
  *
  * @author supor
  */
-public class SubCategoriaJDBC implements SubCategoriaDao {
+public class SubCategoriaDaoJDBC implements SubCategoriaDao {
 
     private Connection conn1; // Firebird
     private Connection conn2; // Mysql
 
-    public SubCategoriaJDBC(Connection conn1, Connection conn2) {
+    public SubCategoriaDaoJDBC(Connection conn1, Connection conn2) {
         this.conn1 = conn1;
         this.conn2 = conn2;
     }

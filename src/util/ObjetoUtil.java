@@ -5,16 +5,6 @@ package util;
  * @author supor
  */
 public class ObjetoUtil {
-
-    public final static String validarCpfCnpj(String cpf, String cnpj) {
-        if (cpf == null) {
-            cpf = "";
-        }
-        if (cnpj == null) {
-            cnpj = "";
-        }
-        return cpf.isEmpty() ? cnpj : cpf;
-    }
     
     public final static String corrigirCpfCnpjClienteLc(String CpfCnpj) {
         if(CpfCnpj == null) {

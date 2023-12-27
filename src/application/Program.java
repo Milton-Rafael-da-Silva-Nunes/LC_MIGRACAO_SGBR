@@ -48,7 +48,7 @@ public class Program {
         Connection conn1 = null;
         Connection conn2 = null;
         String porta = "3050";
-        String caminho = "C:\\Users\\supor\\Documents\\TESTE-PROGRAMA-JAVA-MIGRACAO\\BASESGMASTER.FDB";
+        String caminho = "C:\\Users\\supor\\Documents\\BASESGMASTER.FDB";
         String usuario = "SYSDBA";
         String senha = "masterkey";
 
@@ -83,7 +83,7 @@ public class Program {
             List<Cliente> listaCliente = clientedao.findAll();
             List<Receber> listaReceber = receberdao.finfindAll();
 
-            System.out.println("\n**** TESTE - findAll EMPRESA ****");
+            /*System.out.println("\n**** TESTE - findAll EMPRESA ****");
             for (Empresa obj : listEmp) {
                 System.out.println(obj);
             }
@@ -116,14 +116,14 @@ public class Program {
             System.out.println("\n**** TESTE - findAll SUBCATEGORIA ****");
             for (SubCategoria obj : listaSubCategoria) {
                 subcategoriadao.insert(obj);
-            }
+            }*/
 
             System.out.println("\n**** TESTE - findAll FORNECEDOR ****");
             for (Fornecedor obj : listaFornecedor) {
                 fornecedordao.insert(obj);
             }
 
-            System.out.println("\n**** TESTE - findAll PRODUTO ****");
+           /* System.out.println("\n**** TESTE - findAll PRODUTO ****");
             Regime regime = Regime.NORMAL;
             Estoque estoque = Estoque.NAO;
 
@@ -143,12 +143,13 @@ public class Program {
             System.out.println("\n**** TESTE - findAll RECEBER ****");
             for (Receber obj : listaReceber) {
                 receberdao.insert(obj);
-            }
+            }*/
 
             System.out.println("");
-            System.out.println("Total de produtos Migrados: " + listaProduto.size());
-            System.out.println("Total de clientes Migrados: " + listaCliente.size());
-            System.out.println("Total de contas a Receber Migrados: " + listaReceber.size());
+            /*System.out.println("Total de produtos Migrados: " + listaProduto.size());
+            System.out.println("Total de clientes Migrados: " + listaCliente.size());*/
+            System.out.println("Total de fornecedores Migrados: " + listaFornecedor.size());
+            //System.out.println("Total de contas a Receber Migrados: " + listaReceber.size());
             System.out.println("");
             
             conn2.commit();

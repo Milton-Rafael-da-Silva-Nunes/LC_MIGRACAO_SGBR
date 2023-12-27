@@ -10,7 +10,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
-import sistemas.LC_SISTEMAS.model.entidades.Cliente;
 import sistemas.LC_SISTEMAS.model.entidades.Receber;
 import sistemas.SGBR.model.dao.ReceberDao;
 import util.ObjetoUtil;

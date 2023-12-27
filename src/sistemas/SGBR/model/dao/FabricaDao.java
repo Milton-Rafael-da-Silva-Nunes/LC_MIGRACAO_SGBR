@@ -9,9 +9,10 @@ import sistemas.SGBR.model.dao.impl.EmpresaDaoJDBC;
 import sistemas.SGBR.model.dao.impl.FabricanteDaoJDBC;
 import sistemas.SGBR.model.dao.impl.FornecedorDaoJDBC;
 import sistemas.SGBR.model.dao.impl.NcmDaoJDBC;
+import sistemas.SGBR.model.dao.impl.PagarDaoJDBC;
 import sistemas.SGBR.model.dao.impl.ProdutoDaoJDBC;
 import sistemas.SGBR.model.dao.impl.ReceberDaoJDBC;
-import sistemas.SGBR.model.dao.impl.SubCategoriaJDBC;
+import sistemas.SGBR.model.dao.impl.SubCategoriaDaoJDBC;
 import sistemas.SGBR.model.dao.impl.UnidadeDaoJDBC;
 
 /**
@@ -52,7 +53,7 @@ public class FabricaDao {
     }
     
     public static SubCategoriaDao criarSubCategoriaDao(Connection conn1, Connection conn2) {
-        return new SubCategoriaJDBC(conn1, conn2);
+        return new SubCategoriaDaoJDBC(conn1, conn2);
     }
     
     public static FornecedorDao criarFornecedorDao(Connection conn1, Connection conn2) {
@@ -69,5 +70,9 @@ public class FabricaDao {
     
     public static ReceberDao criarReceberDao(Connection conn1, Connection conn2) {
         return new ReceberDaoJDBC(conn1, conn2);
+    }
+    
+    public static PagarDao criarPagarDao(Connection conn1, Connection conn2) {
+        return new PagarDaoJDBC(conn1, conn2);
     }
 }

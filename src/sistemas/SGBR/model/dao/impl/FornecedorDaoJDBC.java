@@ -72,18 +72,18 @@ public class FornecedorDaoJDBC implements FornecedorDao {
             st.setString(2, mapaEstado.get(fornecedor.getCodigoCidade())); // Estado pelo codigo da cidade fornecico
             st.setString(3, mapaCidade.get(fornecedor.getCodigoCidade()));// Cidade 
             st.setInt(4, 0);
-            st.setString(5, "J");
-            st.setString(6, "Outros");
+            st.setString(5, fornecedor.getTipo());
+            st.setString(6, fornecedor.getTipoFornecedor());
             st.setString(7, fornecedor.getNome());
             st.setString(8, fornecedor.getRazaoSocial());
-            st.setString(9, fornecedor.getCpfCnpj());
+            st.setString(9, fornecedor.getCnpjCpf());
             st.setString(10, fornecedor.getIe());
             st.setString(11, fornecedor.getEndereco());
             st.setString(12, fornecedor.getNumero());
             st.setString(13, fornecedor.getBairro());
             st.setString(14, fornecedor.getCep());
-            st.setString(15, "(  )     -   ");
-            st.setString(16, "(  )     -   ");
+            st.setString(15, fornecedor.getFone());
+            st.setString(16, fornecedor.getFax());
             st.setString(17, fornecedor.getEmail());
             st.setString(18, fornecedor.getObs());
             st.setInt(19, fornecedor.getAtivo());
@@ -107,7 +107,8 @@ public class FornecedorDaoJDBC implements FornecedorDao {
         obj.setCodigoCidade(rs.getString("codigocidadeibge"));
         obj.setCep(ObjetoUtil.validarString(rs.getString("cep")));
         obj.setRg(ObjetoUtil.validarString(rs.getString("rg")));
-        obj.setCpfCnpj(ObjetoUtil.validarCpfCnpj(rs.getString("cpf"), rs.getString("cnpj")));
+        obj.setCpf(ObjetoUtil.validarString(rs.getString("cpf")));
+        obj.setCnpj(ObjetoUtil.validarString(rs.getString("cnpj")));
         obj.setIe(ObjetoUtil.validarString(rs.getString("ie")));
         obj.setObs(ObjetoUtil.getObs(rs.getString("telefone"), rs.getString("celular"), "", ""));
         obj.setEmail(ObjetoUtil.validarString(rs.getString("email")));

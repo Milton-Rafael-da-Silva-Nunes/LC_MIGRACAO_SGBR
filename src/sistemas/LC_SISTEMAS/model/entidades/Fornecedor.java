@@ -5,40 +5,71 @@ package sistemas.LC_SISTEMAS.model.entidades;
  * @author supor
  */
 public class Fornecedor {
-    
+
     private Integer id;
-    private String razaoSocial;
+    private Integer idEmpresa;
+    private Integer idEstado;
+    private Integer idCidade;
+    private Integer idPlanoContas;
+    private String tipoFornecedor;
     private String nome;
+    private String razaoSocial;
+    private String ie;
     private String endereco;
+    private String numero;
     private String bairro;
     private String cep;
-    private String rg;
-    private String cpfCnpj;
-    private String ie;
-    private String obs;
+    private String fone;
+    private String fax;
     private String email;
-    private String numero;
+    private String obs;
     private Integer ativo;
+    // Atributos do sistema SGBR
     private String codigoCidade;
+    private String rg;
+    private String cpf;
+    private String cnpj;
 
     public Fornecedor() {
+        tipoFornecedor = "Outros";
+        fone = "(  )     -   ";
+        fax = "(  )     -   ";
     }
 
-    public Fornecedor(Integer id, String razaoSocial, String nome, String endereco, String bairro, String cep, String rg, String cpfCnpj, String ie, String obs, String email, String numero, Integer ativo, String codigoCidade) {
+    public Fornecedor(Integer id, Integer idEmpresa, Integer idEstado, Integer idCidade, Integer idPlanoContas, String tipoFornecedor, String nome, String razaoSocial, String ie, String endereco, String numero, String bairro, String cep, String fone, String fax, String email, String obs, Integer ativo, String codigoCidade, String rg, String cpf, String cnpj) {
         this.id = id;
-        this.razaoSocial = razaoSocial;
+        this.idEmpresa = idEmpresa;
+        this.idEstado = idEstado;
+        this.idCidade = idCidade;
+        this.idPlanoContas = idPlanoContas;
+        this.tipoFornecedor = tipoFornecedor;
         this.nome = nome;
+        this.razaoSocial = razaoSocial;
+        this.ie = ie;
         this.endereco = endereco;
+        this.numero = numero;
         this.bairro = bairro;
         this.cep = cep;
-        this.rg = rg;
-        this.cpfCnpj = cpfCnpj;
-        this.ie = ie;
-        this.obs = obs;
+        this.fone = fone;
+        this.fax = fax;
         this.email = email;
-        this.numero = numero;
+        this.obs = obs;
         this.ativo = ativo;
         this.codigoCidade = codigoCidade;
+        this.rg = rg;
+        this.cpf = cpf;
+        this.cnpj = cnpj;
+    }
+
+    public String getNumero() {
+        if (numero.length() > 10) {
+            return numero.substring(0, 10);
+        }
+        return numero;
+    }
+
+    public void setNumero(String numero) {
+        this.numero = numero;
     }
 
     public Integer getId() {
@@ -49,12 +80,52 @@ public class Fornecedor {
         this.id = id;
     }
 
-    public String getRazaoSocial() {
-        return razaoSocial;
+    public Integer getIdEmpresa() {
+        return idEmpresa;
     }
 
-    public void setRazaoSocial(String razaoSocial) {
-        this.razaoSocial = razaoSocial;
+    public void setIdEmpresa(Integer idEmpresa) {
+        this.idEmpresa = idEmpresa;
+    }
+
+    public Integer getIdEstado() {
+        return idEstado;
+    }
+
+    public void setIdEstado(Integer idEstado) {
+        this.idEstado = idEstado;
+    }
+
+    public Integer getIdCidade() {
+        return idCidade;
+    }
+
+    public void setIdCidade(Integer idCidade) {
+        this.idCidade = idCidade;
+    }
+
+    public Integer getIdPlanoContas() {
+        return idPlanoContas;
+    }
+
+    public void setIdPlanoContas(Integer idPlanoContas) {
+        this.idPlanoContas = idPlanoContas;
+    }
+
+    public String getTipo() {
+        if(getCnpjCpf().length()==18) {
+            return "J";
+        } else {
+            return "F";
+        }
+    }
+
+    public String getTipoFornecedor() {
+        return tipoFornecedor;
+    }
+
+    public void setTipoFornecedor(String tipoFornecedor) {
+        this.tipoFornecedor = tipoFornecedor;
     }
 
     public String getNome() {
@@ -63,6 +134,34 @@ public class Fornecedor {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public String getRazaoSocial() {
+        return razaoSocial;
+    }
+
+    public void setRazaoSocial(String razaoSocial) {
+        this.razaoSocial = razaoSocial;
+    }
+
+    public String getCnpjCpf() {
+        if(!cpf.isEmpty()) {
+            return cpf;
+        } else {
+            return cnpj;
+        }
+    }
+    
+    public String getIe() {
+        if (!ie.isEmpty()) {
+            return ie;
+        } else {
+            return rg;
+        }
+    }
+
+    public void setIe(String ie) {
+        this.ie = ie;
     }
 
     public String getEndereco() {
@@ -89,28 +188,28 @@ public class Fornecedor {
         this.cep = cep;
     }
 
-    public String getRg() {
-        return rg;
+    public String getFone() {
+        return fone;
     }
 
-    public void setRg(String rg) {
-        this.rg = rg;
+    public void setFone(String fone) {
+        this.fone = fone;
     }
 
-    public String getCpfCnpj() {
-        return cpfCnpj;
+    public String getFax() {
+        return fax;
     }
 
-    public void setCpfCnpj(String cpfCnpj) {
-        this.cpfCnpj = cpfCnpj;
+    public void setFax(String fax) {
+        this.fax = fax;
     }
 
-    public String getIe() {
-        return ie;
+    public String getEmail() {
+        return email.toLowerCase();
     }
 
-    public void setIe(String ie) {
-        this.ie = ie;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getObs() {
@@ -121,25 +220,6 @@ public class Fornecedor {
         this.obs = obs;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getNumero() {
-        if(numero.length()>10) {
-            return numero.substring(0, 10);
-        }
-        return numero;
-    }
-
-    public void setNumero(String numero) {
-        this.numero = numero;
-    }
-
     public Integer getAtivo() {
         return ativo;
     }
@@ -148,8 +228,24 @@ public class Fornecedor {
         this.ativo = ativo;
     }
 
+    public String getRg() {
+        return rg;
+    }
+
+    public void setRg(String rg) {
+        this.rg = rg;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
+    }
+
     public String getCodigoCidade() {
-        if(codigoCidade == null || codigoCidade.equals("")) {
+        if (codigoCidade == null || codigoCidade.equals("")) {
             return "1501402"; // CIDADE Belem-PA
         }
         return codigoCidade;
