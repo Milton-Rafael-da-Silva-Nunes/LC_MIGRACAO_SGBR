@@ -113,12 +113,12 @@ public class PagarDaoJDBC implements PagarDao {
         obj.setLancamento(rs.getString("datahoracadastro"));
         obj.setEmissao(rs.getString("datahoracadastro"));
         obj.setVencimento(rs.getString("datavencimento"));
-        obj.setDocumentoSgbrPagar(ObjetoUtil.validarString(ObjetoUtil.removerCaracteresEspeciais(rs.getString("documento"))));
-        obj.setDescricaoLancamento(ObjetoUtil.validarString(ObjetoUtil.removerCaracteresEspeciais(rs.getString("descricaolancamento"))));
+        obj.setDocumentoSgbrPagar(ObjetoUtil.removerCaracteresEspeciais(rs.getString("documento")));
+        obj.setDescricaoLancamento(ObjetoUtil.removerCaracteresEspeciais(rs.getString("descricaolancamento")));
         obj.setCodFornecedor(ObjetoUtil.validarString(rs.getString("codfornecedor")));
-        obj.setFornecedorNome(ObjetoUtil.validarString(ObjetoUtil.removerCaracteresEspeciais(rs.getString("fornecedor"))));
-        obj.setEspecie(ObjetoUtil.validarString(ObjetoUtil.removerCaracteresEspeciais(rs.getString("especie"))));
-        obj.setCentroCusto(ObjetoUtil.validarString(ObjetoUtil.removerCaracteresEspeciais(rs.getString("centrocusto"))));
+        obj.setFornecedorNome(ObjetoUtil.removerCaracteresEspeciais(rs.getString("fornecedor")));
+        obj.setEspecie(ObjetoUtil.removerCaracteresEspeciais(rs.getString("especie")));
+        obj.setCentroCusto(ObjetoUtil.removerCaracteresEspeciais(rs.getString("centrocusto")));
         double valor = rs.getDouble("valororiginal") - rs.getDouble("valorpago");
         obj.setValorOriginal(valor);
         obj.setValor(valor);

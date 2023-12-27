@@ -1074,8 +1074,8 @@ public class Produto {
     }
 
     public String getCategoriaNome(TreeMap<String, String> mapaCategoria) {
-        String nome = (categoriaNome != null && !categoriaNome.equals("")) ? categoriaNome : "PADRAO";
-        return mapaCategoria.containsKey(nome) ? mapaCategoria.get(nome) : mapaCategoria.get("PADRAO");
+        String categoria = categoriaNome;
+        return mapaCategoria.getOrDefault(categoria, mapaCategoria.get("PADRAO"));
     }
 
     public void setCategoriaNome(String categoriaNome) {

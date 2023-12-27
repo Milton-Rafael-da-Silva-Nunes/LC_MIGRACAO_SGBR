@@ -105,12 +105,12 @@ public class Program {
             System.out.println("\n**** TESTE - findAll CEST ****");
             for (Cest obj : listaCest) {
                 cestdao.insert(obj);
-            }
+            }*/
 
             System.out.println("\n**** TESTE - findAll CATEGORIA ****");
             for (Categoria obj : listaCategoria) {
                 categoriadao.insert(obj);
-            }*/
+            }
 
             System.out.println("\n**** TESTE - findAll FABRICANTE ****");
             for (Fabricante obj : listaFabricante) {
