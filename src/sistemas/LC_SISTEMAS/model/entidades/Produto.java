@@ -1065,8 +1065,8 @@ public class Produto {
     }
     
     public String getUnidadeMedida(TreeMap<String, String> mapaUnidade) {
-        String unidade = (unidadeMedida != null && !unidadeMedida.equals("")) ? unidadeMedida : "UN";
-        return mapaUnidade.containsKey(unidade) ? mapaUnidade.get(unidade.replace("Ç", "C").replace("ç", "c")) : mapaUnidade.get("UN");
+        String unidade = unidadeMedida;
+        return mapaUnidade.getOrDefault(unidade, mapaUnidade.get("UN"));
     }
 
     public void setUnidadeMedida(String unidadeMedida) {

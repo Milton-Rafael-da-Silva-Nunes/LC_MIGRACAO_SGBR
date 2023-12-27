@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 import sistemas.SGBR.model.dao.UnidadeDao;
 import sistemas.LC_SISTEMAS.model.entidades.Unidade;
-import util.DataHoraUtil;
 import static util.ObjetoUtil.removerCaracteresEspeciais;
 
 /**
@@ -62,14 +61,14 @@ public class UnidadeDaoJDBC implements UnidadeDao {
             st = conn2.prepareStatement("INSERT INTO unidade(descricao, nome, fator_conversao, datahora_alteracao, ativo) "
                     + "VALUES (?, ?, ?, ?, ?)");
 
-            if (!unidadeExiste(unidade.getUnidade())) { // Verificar se a unidade já existe antes de inserir no LC.
-                st.setString(1, unidade.getUnidade());
-                st.setString(2, unidade.getUnidade() + " - 1");
-                st.setDouble(3, 1.0);
-                st.setString(4, DataHoraUtil.getDataHoraAtual());
-                st.setInt(5, 1);
+            if (!unidadeExiste(unidade.getDescricao())) { // Verificar se a unidade já existe antes de inserir no LC.
+                st.setString(1, unidade.getDescricao());
+                st.setString(2, unidade.getNome());
+                st.setDouble(3, unidade.getFatorConversao());
+                st.setString(4, unidade.getDataHoraAlteracao());
+                st.setInt(5, unidade.getAtivo());
                 st.executeUpdate();
-                System.out.println("UNIDADE inserida: " + unidade.getUnidade());
+                System.out.println("UNIDADE inserida: " + unidade.getDescricao());
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -82,7 +81,7 @@ public class UnidadeDaoJDBC implements UnidadeDao {
     // Metodo para instanciar OBJ e separar responsabilidade.
     private Unidade instanciacaoUnidade(ResultSet rs) throws SQLException {
         Unidade obj = new Unidade();
-        obj.setUnidade(removerCaracteresEspeciais(rs.getString("unidade")));
+        obj.setDescricao(removerCaracteresEspeciais(rs.getString("unidade")));
         return obj;
     }
 

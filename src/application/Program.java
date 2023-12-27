@@ -87,7 +87,7 @@ public class Program {
             List<Receber> listaReceber = receberdao.findAll();
             List<Pagar> listaPagar = pagardao.findAll();
 
-           /* System.out.println("\n**** TESTE - findAll EMPRESA ****");
+            System.out.println("\n**** TESTE - findAll EMPRESA ****");
             for (Empresa obj : listEmp) {
                 System.out.println(obj);
             }
@@ -105,7 +105,7 @@ public class Program {
             System.out.println("\n**** TESTE - findAll CEST ****");
             for (Cest obj : listaCest) {
                 cestdao.insert(obj);
-            }*/
+            }
 
             System.out.println("\n**** TESTE - findAll CATEGORIA ****");
             for (Categoria obj : listaCategoria) {
