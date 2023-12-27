@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import sistemas.LC_SISTEMAS.model.entidades.Fabricante;
 import sistemas.SGBR.model.dao.FabricanteDao;
-import util.DataHoraUtil;
+import util.ObjetoUtil;
 
 /**
  *
@@ -63,8 +63,8 @@ public class FabricanteDaoJDBC implements FabricanteDao {
 
             if (!fabricanteExiste(fabricante.getNome())) {
                 st.setString(1, fabricante.getNome());
-                st.setString(2, DataHoraUtil.getDataHoraAtual());
-                st.setInt(3, 1);
+                st.setString(2, fabricante.getDataHoraAlteracao());
+                st.setInt(3, fabricante.getAtivo());
                 st.executeUpdate();
                 System.out.println("FABRICANTE inserido: " + fabricante.getNome());
             }
@@ -77,7 +77,7 @@ public class FabricanteDaoJDBC implements FabricanteDao {
 
     private Fabricante instanciacaoFabricante(ResultSet rs) throws SQLException {
         Fabricante obj = new Fabricante();
-        obj.setNome(rs.getString("marca").trim());
+        obj.setNome(ObjetoUtil.removerCaracteresEspeciais(rs.getString("marca")));
         return obj;
     }
 

@@ -377,7 +377,7 @@ public class ProdutoDaoJDBC implements ProdutoDao {
         obj.setUnidadeMedida(ObjetoUtil.removerCaracteresEspeciais(rs.getString("unidade")));
         obj.setCategoriaNome(ObjetoUtil.removerCaracteresEspeciais(rs.getString("grupo")));
         obj.setSubcategoriaNome(ObjetoUtil.removerCaracteresEspeciais(rs.getString("subgrupo")));
-        obj.setFabricanteNome(rs.getString("marca"));
+        obj.setFabricanteNome(ObjetoUtil.removerCaracteresEspeciais(rs.getString("marca")));
         obj.setCstCsosn(rs.getString("csosn"));
         obj.setFornecedorNome(ObjetoUtil.removerCaracteresEspeciais(rs.getString("fornecedor")));
         return obj;

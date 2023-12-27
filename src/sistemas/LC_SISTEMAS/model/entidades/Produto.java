@@ -1092,8 +1092,8 @@ public class Produto {
     }
 
     public String getFabricanteNome(TreeMap<String, String> mapaFabricante) {
-        String nome = (fabricanteNome != null && !fabricanteNome.equals("")) ? fabricanteNome : "PADRAO";
-        return mapaFabricante.containsKey(nome) ? mapaFabricante.get(nome) : mapaFabricante.get("PADRAO");
+        String fabricante = fabricanteNome;
+        return mapaFabricante.getOrDefault(fabricante, mapaFabricante.get("PADRAO"));
     }
 
     public void setFabricanteNome(String fabricanteNome) {
