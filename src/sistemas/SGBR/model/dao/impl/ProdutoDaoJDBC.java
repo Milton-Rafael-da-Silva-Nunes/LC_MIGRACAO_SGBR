@@ -94,8 +94,8 @@ public class ProdutoDaoJDBC implements ProdutoDao {
         mapaFornecedor = getMapaFornecedor();
 
         try {
-            st = conn2.prepareStatement("INSERT INTO produto(codigo, referencia, codigo_barras, nome, descricao, id_grupotributacao, id_categoria, id_cst, id_cfop, id_ncm, id_cest, id_fabricante, id_fornecedor, id_unidade, id_unidadeatacado2, id_unidadeatacado3, id_unidadeatacado4, id_unidadeembalagem, id_subcategoria, id_empresa, pode_desconto, pode_fracionado, pode_balanca, pode_lote, pode_comissao, pode_lerpeso, pode_atualizarncm, datahora_cadastro, datahora_alteracao, preco_compra, valor_compra, preco_custo, custo_medio, preco_venda, desconto_max, preco_venda2, qtd_minimapv2, desconto_max2, preco_venda3, qtd_minimapv3, desconto_max3, preco_venda4, qtd_minimapv4, desconto_max4, preco_antigo, valor_frete, ipi, preco_promocao, data_promocaoinicial, data_promocaofinal, comissao, comissao_valor, fidelidade_pontos, estoque, estoque_minimo, estoque_max, estoque_tara, qtd_embalagem, qtd_diasvalidade, peso_bruto, peso_liquido, tipo_produto, origem_produto, ex_tipi, ativo, observacoes, local, ref_cruzada1, ref_cruzada2, ref_cruzada3, ref_cruzada4, ref_cruzada5, ref_cruzada6, cod_ean, codigo_med, tipo_med, tabela_med, linha_med, ref_anvisa_med, portaria_med, rms_med, edicao_pharmacos, comb_cprodanp, comb_descanp, comb_percentualgaspetroleo, comb_percentualgasnaturalnacional, comb_percentualgasnaturalimportado, comb_valorpartida, med_classeterapeutica, med_unidademedida, med_usoprolongado, med_podeatualizar, med_precovendafpop, med_apresentacaofpop, trib_issaliqsaida, trib_icmsaliqsaida, trib_icmsaliqredbasecalcsaida, trib_icmsobs, trib_icmsfcpaliq, trib_ipisaida, trib_ipialiqsaida, trib_pissaida, trib_pisaliqsaida, trib_cofinssaida, trib_cofinsaliqsaida, trib_genero, imendes_codigointerno, imendes_produtonome, margem_lucro, margem_lucro2, margem_lucro3, margem_lucro4, margem_ideal, med_margemfpop) "
-                    + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
+            st = conn2.prepareStatement("INSERT INTO produto(codigo, referencia, codigo_barras, nome, descricao, id_grupotributacao, id_categoria, id_cst, id_cfop, id_ncm, id_cest, id_fabricante, id_fornecedor, id_unidade, id_unidadeatacado2, id_unidadeatacado3, id_unidadeatacado4, id_unidadeembalagem, id_subcategoria, id_empresa, pode_desconto, pode_fracionado, pode_balanca, pode_lote, pode_comissao, pode_lerpeso, pode_atualizarncm, datahora_cadastro, datahora_alteracao, preco_compra, valor_compra, preco_custo, custo_medio, preco_venda, desconto_max, preco_venda2, qtd_minimapv2, desconto_max2, preco_venda3, qtd_minimapv3, desconto_max3, preco_venda4, qtd_minimapv4, desconto_max4, preco_antigo, valor_frete, ipi, preco_promocao, data_promocaoinicial, data_promocaofinal, comissao, comissao_valor, fidelidade_pontos, estoque, estoque_minimo, estoque_max, estoque_tara, qtd_embalagem, qtd_diasvalidade, peso_bruto, peso_liquido, tipo_produto, origem_produto, ex_tipi, ativo, observacoes, local, ref_cruzada1, ref_cruzada2, ref_cruzada3, ref_cruzada4, ref_cruzada5, ref_cruzada6, cod_ean, codigo_med, tipo_med, tabela_med, linha_med, ref_anvisa_med, portaria_med, rms_med, edicao_pharmacos, comb_cprodanp, comb_descanp, comb_percentualgaspetroleo, comb_percentualgasnaturalnacional, comb_percentualgasnaturalimportado, comb_valorpartida, med_classeterapeutica, med_unidademedida, med_usoprolongado, med_podeatualizar, med_precovendafpop, med_apresentacaofpop, trib_issaliqsaida, trib_icmsaliqsaida, trib_icmsaliqredbasecalcsaida, trib_icmsobs, trib_icmsfcpaliq, trib_ipisaida, trib_ipialiqsaida, trib_pissaida, trib_pisaliqsaida, trib_cofinssaida, trib_cofinsaliqsaida, trib_genero, imendes_codigointerno, imendes_produtonome, margem_lucro, margem_lucro2, margem_lucro3, margem_lucro4, margem_ideal, med_margemfpop, foto, foto2, foto3) "
+                    + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
 
             st.setString(1, produto.getCodigo());
             st.setString(2, produto.getReferencia());
@@ -143,13 +143,13 @@ public class ProdutoDaoJDBC implements ProdutoDao {
             st.setDouble(44, produto.getDescontoMax4());
             st.setDouble(45, produto.getPrecoAntigo());
             st.setDouble(46, produto.getValorFrete());
-            st.setString(47, produto.getIpi());
+            st.setDouble(47, produto.getIpi());
             st.setDouble(48, produto.getPrecoPromocao());
             st.setString(49, produto.getDataPromocaoInicial());
             st.setString(50, produto.getDataPromocaoFinal());
-            st.setInt(51, produto.getComissao());
+            st.setDouble(51, produto.getComissao());
             st.setDouble(52, produto.getComissaoValor());
-            st.setString(53, produto.getFidelidadePontos());
+            st.setDouble(53, produto.getFidelidadePontos());
             st.setDouble(54, produto.getEstoque());
             st.setDouble(55, produto.getEstoqueMinimo());
             st.setDouble(56, produto.getEstoqueMax());
@@ -190,7 +190,7 @@ public class ProdutoDaoJDBC implements ProdutoDao {
             st.setString(91, produto.getMedUsoProlongado());
             st.setString(92, produto.getMedPodeAtualizar());
             st.setDouble(93, produto.getMedPrecoVendaFpop());
-            st.setString(94, produto.getMedApresentacaoFpop());
+            st.setDouble(94, produto.getMedApresentacaoFpop());
             st.setDouble(95, produto.getTribIssAliqSaida());
             st.setDouble(96, produto.getTribIcmsAliqsaida());
             st.setDouble(97, produto.getTribIcmsAliqRedBaseCalcSaida());
@@ -211,6 +211,9 @@ public class ProdutoDaoJDBC implements ProdutoDao {
             st.setDouble(112, produto.getMargemLucro4());
             st.setDouble(113, produto.getMargemIdeal());
             st.setDouble(114, produto.getMargemFpop());
+            st.setString(115, produto.getFoto());
+            st.setString(116, produto.getFoto2());
+            st.setString(117, produto.getFoto3());
             int linhas = st.executeUpdate();
             System.out.println("PRODUTOS inserido: " + produto);
 
@@ -227,6 +230,7 @@ public class ProdutoDaoJDBC implements ProdutoDao {
             }
 
         } catch (SQLException e) {
+            e.printStackTrace();
             throw new DbException("Erro ao inserir produto em insert: " + e.getMessage());
         } finally {
             MysqlConnector.closeStatement(st);
@@ -336,49 +340,55 @@ public class ProdutoDaoJDBC implements ProdutoDao {
 
     private Produto instanciacaoProduto(ResultSet rs) throws SQLException {
         Produto obj = new Produto();
-        obj.setCodigo(rs.getString("controle"));
-        obj.setNome(rs.getString("produto"));
-        obj.setCodigoBarras(rs.getString("codbarras"));
-        obj.setPrecoCompra(rs.getDouble("precocusto"));
-        obj.setValorCompra(rs.getDouble("precocusto"));
-        obj.setPrecoCusto(rs.getDouble("precocusto"));
-        obj.setPrecoVenda(rs.getDouble("precovenda"));
-        obj.setPesoBruto(rs.getDouble("peso"));
-        obj.setCustoMedio(rs.getDouble("customedio"));
-        obj.setEstoqueMinimo(rs.getDouble("qtdeminima"));
-        obj.setEstoqueMax(rs.getDouble("qtdemaxima"));
-        obj.setEstoque(rs.getDouble("qtde"));
+        obj.setCodigo(ObjetoUtil.validarString(rs.getString("controle")));
+        obj.setNome(ObjetoUtil.removerCaracteresEspeciais(rs.getString("produto")));
+        obj.setCodigoBarras(ObjetoUtil.validarString(rs.getString("codbarras")));
+        obj.setPrecoCusto(ObjetoUtil.validarDouble(rs.getDouble("precocusto")));
+        obj.setCustoMedio(ObjetoUtil.validarDouble(rs.getDouble("customedio")));
+        obj.setPrecoCompra(ObjetoUtil.validarDouble(rs.getDouble("valorunitariocompra")));
+        obj.setValorCompra(ObjetoUtil.validarDouble(rs.getDouble("valorunitariocompra")));
+        obj.setPrecoVenda(ObjetoUtil.validarDouble(rs.getDouble("precovenda")));
+        obj.setPrecoVenda2(ObjetoUtil.validarDouble(rs.getDouble("precominimo")));
+        obj.setPrecoVenda3(ObjetoUtil.validarDouble(rs.getDouble("precorevenda")));
+        obj.setDescontoMax(ObjetoUtil.validarDouble(rs.getDouble("percmaximodesconto")));
+        obj.setValorFrete(ObjetoUtil.validarDouble(rs.getDouble("valorfrete")));
+        obj.setIpi(ObjetoUtil.validarDouble(rs.getDouble("valoripi")));
+        obj.setPesoBruto(ObjetoUtil.validarDouble(rs.getDouble("peso")));
+        obj.setEstoqueMinimo(ObjetoUtil.validarDouble(rs.getDouble("qtdeminima")));
+        obj.setEstoqueMax(ObjetoUtil.validarDouble(rs.getDouble("qtdemaxima")));
+        obj.setEstoque(ObjetoUtil.validarDouble(rs.getDouble("qtde")));
         obj.setAtivo(Integer.parseInt(ObjetoUtil.getAtivo(rs.getString("ativo"))));
-        obj.setTribIpiSaida(rs.getString("codtributacaoipi"));
-        obj.setTribPisSaida(rs.getString("codtributacaopis"));
-        obj.setTribCofinsSaida(rs.getString("codtributacaocofins"));
+        obj.setTribIpiSaida(ObjetoUtil.validarString(rs.getString("codtributacaoipi")));
+        obj.setTribIpiAliqSaida(ObjetoUtil.validarDouble(rs.getDouble("percipi")));
+        obj.setTribPisSaida(ObjetoUtil.validarString(rs.getString("codtributacaopis")));
+        obj.setTribCofinsSaida(ObjetoUtil.validarString(rs.getString("codtributacaocofins")));
         obj.setPodeBalanca(ObjetoUtil.getPodeBalanca(rs.getString("pesado")));
-        obj.setTribIcmsAliqsaida(rs.getDouble("aliquotaicmsecf"));
-        obj.setReferencia(rs.getString("referencia"));
-        obj.setDescontoMax(rs.getDouble("percmaximodesconto"));
-        obj.setComissao(rs.getInt("perccomissao"));
-        obj.setPrecoVenda2(rs.getDouble("precominimo"));
-        obj.setTribPisAliqSaida(rs.getDouble("percpis"));
-        obj.setTribCofinsAliqSaida(rs.getDouble("perccofins"));
-        obj.setTribIcmsAliqRedBaseCalcSaida(rs.getDouble("percreducaobc"));
-        obj.setPrecoVenda3(rs.getDouble("precorevenda"));
-        obj.setTribIpiAliqSaida(rs.getDouble("percipi"));
-        obj.setCombCprodAnp(rs.getString("codigoanp"));
-        obj.setCombDescAnp(rs.getString("descricaoanp"));
-        obj.setCombPercentualGasPetroleo(rs.getDouble("percglpcomb"));
-        obj.setCombPercentualGasNatuaralNacional(rs.getDouble("percgnncomb"));
-        obj.setCombValorPartilha(rs.getDouble("valorpartidacomb"));
-        obj.setRmsMed(rs.getString("codigoanvisa"));
-        obj.setTribIcmsfcpAliq(rs.getDouble("aliquotafcp"));
-        obj.setLocal(rs.getString("localizacao"));
+        obj.setTribIcmsAliqsaida(ObjetoUtil.validarDouble(rs.getDouble("aliquotaicmsecf")));
+        obj.setReferencia(ObjetoUtil.validarString(rs.getString("referencia")));
+        obj.setComissao(ObjetoUtil.validarDouble(rs.getDouble("perccomissao")));
+        obj.setComissaoValor(ObjetoUtil.validarDouble(rs.getDouble("valorcomissaofixo")));
+        obj.setTribPisAliqSaida(ObjetoUtil.validarDouble(rs.getDouble("percpis")));
+        obj.setTribCofinsAliqSaida(ObjetoUtil.validarDouble(rs.getDouble("perccofins")));
+        obj.setTribIcmsAliqRedBaseCalcSaida(ObjetoUtil.validarDouble(rs.getDouble("percreducaobc")));
+        obj.setCombCprodAnp(ObjetoUtil.validarString(rs.getString("codigoanp")));
+        obj.setCombDescAnp(ObjetoUtil.validarString(rs.getString("descricaoanp")));
+        obj.setCombPercentualGasPetroleo(ObjetoUtil.validarDouble(rs.getDouble("percglpcomb")));
+        obj.setCombPercentualGasNatuaralNacional(ObjetoUtil.validarDouble(rs.getDouble("percgnncomb")));
+        obj.setCombPercentualGasNaturalImportado(ObjetoUtil.validarDouble(rs.getDouble("percgnicomb")));
+        obj.setCombValorPartilha(ObjetoUtil.validarDouble(rs.getDouble("valorpartidacomb")));
+        obj.setRmsMed(ObjetoUtil.formatarRmsMedicamentos(rs.getString("codigoanvisa")));
+        obj.setTribIcmsfcpAliq(ObjetoUtil.validarDouble(rs.getDouble("aliquotafcp")));
+        obj.setLocal(ObjetoUtil.validarString(rs.getString("localizacao")));
+        obj.setDescricao(ObjetoUtil.validarString(rs.getString("descricaocomplementar")));
+        obj.setDataHoraCadastro(ObjetoUtil.validarString(rs.getString("datahoracadastro")));
         // Adicionar valores para usar em MAP
-        obj.setCodigoNcm(rs.getString("ncm"));
-        obj.setCodigoCest(rs.getString("cest"));
+        obj.setCodigoNcm(ObjetoUtil.validarString(rs.getString("ncm")));
+        obj.setCodigoCest(ObjetoUtil.validarString(rs.getString("cest")));
         obj.setUnidadeMedida(ObjetoUtil.removerCaracteresEspeciais(rs.getString("unidade")));
         obj.setCategoriaNome(ObjetoUtil.removerCaracteresEspeciais(rs.getString("grupo")));
         obj.setSubcategoriaNome(ObjetoUtil.removerCaracteresEspeciais(rs.getString("subgrupo")));
         obj.setFabricanteNome(ObjetoUtil.removerCaracteresEspeciais(rs.getString("marca")));
-        obj.setCstCsosn(rs.getString("csosn"));
+        obj.setCstCsosn(ObjetoUtil.validarString(rs.getString("csosn")));
         obj.setFornecedorNome(ObjetoUtil.removerCaracteresEspeciais(rs.getString("fornecedor")));
         return obj;
     }

@@ -5,12 +5,12 @@ package util;
  * @author supor
  */
 public class ObjetoUtil {
-    
+
     public final static String corrigirCpfCnpjClienteLc(String CpfCnpj) {
-        if(CpfCnpj == null) {
+        if (CpfCnpj == null) {
             return "";
         } else {
-           return CpfCnpj.replace(".", "").replace("/", "").replace("-", "");
+            return CpfCnpj.replace(".", "").replace("/", "").replace("-", "");
         }
     }
 
@@ -43,11 +43,21 @@ public class ObjetoUtil {
         }
     }
 
-    public final static String validarString(String texto) {
-        if (texto == null) {
-            return "";
+    public final static String formatarRmsMedicamentos(String rms) {
+        rms = validarString(rms).trim().replace(" ", "").replace(".", "").replace("-", "").replace("/", "").replace(",", "");
+
+        if (rms.length() == 13) {
+            return rms.substring(0, 1) + "." + rms.substring(1, 5) + "." + rms.substring(5, 9) + "." + rms.substring(9, 12) + "-" + rms.substring(12, 13);
         }
-        return texto;
+        return " .    .    .   - ";
+    }
+
+    public final static String validarString(String texto) {
+        return (texto != null) ? texto.trim() : "";
+    }
+
+    public final static Double validarDouble(Double valor) {
+        return (valor != null) ? valor : 0.0;
     }
 
     public final static String validarNomeFantasia(String nome, String fantasia) {
@@ -68,25 +78,25 @@ public class ObjetoUtil {
 
     public final static String getAtivo(String ativo) {
         if (ativo.equalsIgnoreCase("s")) {
-            return "1";
+            ativo = "1";
         } else if (ativo.equalsIgnoreCase("sim")) {
-            return "1";
+            ativo = "1";
         } else if (ativo.equalsIgnoreCase("n")) {
-            return "0";
+            ativo = "0";
         } else if (ativo.equalsIgnoreCase("nao")) {
-            return "0";
+            ativo = "0";
         } else if (ativo.equalsIgnoreCase("não")) {
-            return "0";
+            ativo = "0";
         }
         return ativo;
     }
 
     public final static String getPodeBalanca(String balanca) {
-        if (balanca.equalsIgnoreCase("s") || balanca.equals("1") || balanca.equalsIgnoreCase("sim")) {
-            return "S";
-        } else {
-            return "N";
+        if (balanca == null || balanca.trim().isEmpty()) {
+            return "1";
         }
+
+        return (balanca.equalsIgnoreCase("s") || balanca.equals("1") || balanca.equalsIgnoreCase("sim")) ? "S" : "N";
     }
 
     public static String removerCaracteresEspeciais(String texto) {
@@ -131,11 +141,11 @@ public class ObjetoUtil {
         }
         return sb.toString();
     }
-    
+
     public static final String tamanhoObsCliente(String obs) {
-        if(obs == null) {
+        if (obs == null) {
             return "";
-        } else if(obs.length()>100) {
+        } else if (obs.length() > 100) {
             return obs.substring(0, 100);
         } else {
             return obs;
