@@ -1,5 +1,7 @@
 package sistemas.LC_SISTEMAS.model.entidades;
 
+import util.DataHoraUtil;
+
 /**
  *
  * @author Rafael Nunes
@@ -115,8 +117,7 @@ public class Cliente {
     private String avalistaAdmissao;
     private Integer avalistaIdCidade;
     private Integer avalistaIdEstado;
-
-    /*Atributos Auxiliares*/
+    // Atributos do sistema SGBR
     private String codigoCidade;
     private String cpf;
     private String cnpj;
@@ -189,6 +190,7 @@ public class Cliente {
         avalistaRenda = 0.0;
         avalistaIdCidade = 0;
         avalistaIdEstado = 0;
+        numeroContrato = "";
     }
 
     public Integer getId() {
@@ -212,7 +214,7 @@ public class Cliente {
     }
 
     public String getIe() {
-        return ie;
+        return ie.length() > 20 ? ie.substring(0, 20) : ie;
     }
 
     public void setIe(String ie) {
@@ -224,7 +226,7 @@ public class Cliente {
     }
 
     public String getIm() {
-        return im;
+        return im.length() > 20 ? im.substring(0, 20) : im;
     }
 
     public void setIm(String im) {
@@ -232,7 +234,7 @@ public class Cliente {
     }
 
     public String getNome() {
-        return nome;
+        return nome.length() > 80 ? nome.substring(0, 80) : nome;
     }
 
     public void setNome(String nome) {
@@ -240,7 +242,7 @@ public class Cliente {
     }
 
     public String getRg() {
-        return rg;
+        return rg.length() > 17 ? rg.substring(0, 17) : rg;
     }
 
     public void setRg(String rg) {
@@ -248,7 +250,16 @@ public class Cliente {
     }
 
     public String getRazaoSocial() {
+        String razao = escolherRazao();
+        return limitarComprimento(razao, 80);
+    }
+
+    private String escolherRazao() {
         return (getCpfCnpj().length() == 14 && !razaoSocial.isEmpty()) ? razaoSocial : nome;
+    }
+
+    private String limitarComprimento(String razao, int maxLength) {
+        return razao.length() > maxLength ? razao.substring(0, maxLength) : razao;
     }
 
     public void setRazaoSocial(String razaoSocial) {
@@ -256,7 +267,7 @@ public class Cliente {
     }
 
     public String getEndereco() {
-        return endereco;
+        return endereco.length() > 80 ? endereco.substring(0, 80) : endereco;
     }
 
     public void setEndereco(String endereco) {
@@ -264,7 +275,7 @@ public class Cliente {
     }
 
     public String getNumero() {
-        return numero;
+        return numero.length() > 10 ? numero.substring(0, 10) : numero;
     }
 
     public void setNumero(String numero) {
@@ -272,7 +283,7 @@ public class Cliente {
     }
 
     public String getReferencia() {
-        return referencia;
+        return referencia.length() > 80 ? referencia.substring(0, 80) : referencia;
     }
 
     public void setReferencia(String referencia) {
@@ -280,7 +291,7 @@ public class Cliente {
     }
 
     public String getCep() {
-        return cep;
+        return cep.length() > 15 ? cep.substring(0, 15) : cep;
     }
 
     public void setCep(String cep) {
@@ -288,7 +299,7 @@ public class Cliente {
     }
 
     public String getBairro() {
-        return bairro;
+        return bairro.length() > 45 ? bairro.substring(0, 45) : bairro;
     }
 
     public void setBairro(String bairro) {
@@ -328,7 +339,7 @@ public class Cliente {
     }
 
     public String getObs() {
-        return obs;
+        return obs.length() > 100 ? obs.substring(0, 100) : obs;
     }
 
     public void setObs(String obs) {
@@ -336,7 +347,7 @@ public class Cliente {
     }
 
     public String getEndereco2() {
-        return endereco2;
+        return endereco2.length() > 80 ? endereco2.substring(0, 80) : endereco2;
     }
 
     public void setEndereco2(String endereco2) {
@@ -344,7 +355,7 @@ public class Cliente {
     }
 
     public String getNumero2() {
-        return numero2;
+        return numero2.length() > 10 ? numero2.substring(0, 10) : numero2;
     }
 
     public void setNumero2(String numero2) {
@@ -352,7 +363,7 @@ public class Cliente {
     }
 
     public String getReferencia2() {
-        return referencia2;
+        return referencia2.length() > 80 ? referencia2.substring(0, 80) : referencia2;
     }
 
     public void setReferencia2(String referencia2) {
@@ -360,7 +371,7 @@ public class Cliente {
     }
 
     public String getCep2() {
-        return cep2;
+        return cep2.length() > 15 ? cep2.substring(0, 15) : cep2;
     }
 
     public void setCep2(String cep2) {
@@ -368,7 +379,7 @@ public class Cliente {
     }
 
     public String getBairro2() {
-        return bairro2;
+        return bairro2.length() > 45 ? bairro2.substring(0, 45) : bairro2;
     }
 
     public void setBairro2(String bairro2) {
@@ -448,7 +459,7 @@ public class Cliente {
     }
 
     public String getPaiAdi() {
-        return paiAdi;
+        return paiAdi.length() > 100 ? paiAdi.substring(0, 100) : paiAdi;
     }
 
     public void setPaiAdi(String paiAdi) {
@@ -456,7 +467,7 @@ public class Cliente {
     }
 
     public String getMaeAdi() {
-        return maeAdi;
+        return maeAdi.length() > 100 ? maeAdi.substring(0, 100) : maeAdi;
     }
 
     public void setMaeAdi(String maeAdi) {
@@ -488,7 +499,7 @@ public class Cliente {
     }
 
     public String getApelidoAdi() {
-        return apelidoAdi;
+        return apelidoAdi.length() > 20 ? apelidoAdi.substring(0, 20) : apelidoAdi;
     }
 
     public void setApelidoAdi(String apelidoAdi) {
@@ -496,7 +507,7 @@ public class Cliente {
     }
 
     public String getEmailAdi() {
-        return emailAdi;
+        return emailAdi.length() > 100 ? emailAdi.substring(0, 100) : emailAdi;
     }
 
     public void setEmailAdi(String emailAdi) {
@@ -520,7 +531,7 @@ public class Cliente {
     }
 
     public String getEmpresa() {
-        return empresa;
+        return empresa.length() > 100 ? empresa.substring(0, 100) : empresa;
     }
 
     public void setEmpresa(String empresa) {
@@ -528,7 +539,7 @@ public class Cliente {
     }
 
     public String getFoneEmp() {
-        return foneEmp;
+        return foneEmp.length() > 15 ? foneEmp.substring(0, 15) : foneEmp;
     }
 
     public void setFoneEmp(String foneEmp) {
@@ -536,7 +547,7 @@ public class Cliente {
     }
 
     public String getEnderecoEmp() {
-        return enderecoEmp;
+        return enderecoEmp.length() > 100 ? enderecoEmp.substring(0, 100) : enderecoEmp;
     }
 
     public void setEnderecoEmp(String enderecoEmp) {
@@ -544,7 +555,7 @@ public class Cliente {
     }
 
     public String getNumeroEmp() {
-        return numeroEmp;
+        return numeroEmp.length() > 15 ? numeroEmp.substring(0, 15) : numeroEmp;
     }
 
     public void setNumeroEmp(String numeroEmp) {
@@ -552,7 +563,7 @@ public class Cliente {
     }
 
     public String getCepEmp() {
-        return cepEmp;
+        return cepEmp.length() > 15 ? cepEmp.substring(0, 15) : cepEmp;
     }
 
     public void setCepEmp(String cepEmp) {
@@ -560,7 +571,7 @@ public class Cliente {
     }
 
     public String getBairroEmp() {
-        return bairroEmp;
+        return bairroEmp.length() > 50 ? bairroEmp.substring(0, 50) : bairroEmp;
     }
 
     public void setBairroEmp(String bairroEmp) {
@@ -568,7 +579,7 @@ public class Cliente {
     }
 
     public String getCargoEmp() {
-        return cargoEmp;
+        return cargoEmp.length() > 50 ? cargoEmp.substring(0, 50) : cargoEmp;
     }
 
     public void setCargoEmp(String cargoEmp) {
@@ -608,7 +619,7 @@ public class Cliente {
     }
 
     public String getConjuje() {
-        return conjuje;
+        return conjuje.length() > 100 ? conjuje.substring(0, 100) : conjuje;
     }
 
     public void setConjuje(String conjuje) {
@@ -616,7 +627,7 @@ public class Cliente {
     }
 
     public String getCpfConj() {
-        return cpfConj;
+        return cpfConj.length() > 19 ? cpfConj.substring(0, 19) : cpfConj;
     }
 
     public void setCpfConj(String cpfConj) {
@@ -624,7 +635,7 @@ public class Cliente {
     }
 
     public String getRgConj() {
-        return rgConj;
+        return rgConj.length() > 14 ? rgConj.substring(0, 14) : rgConj;
     }
 
     public void setRgConj(String rgConj) {
@@ -640,7 +651,7 @@ public class Cliente {
     }
 
     public String getEmpresaConj() {
-        return empresaConj;
+        return empresaConj.length() > 80 ? empresaConj.substring(0, 80) : empresaConj;
     }
 
     public void setEmpresaConj(String empresaConj) {
@@ -648,7 +659,7 @@ public class Cliente {
     }
 
     public String getFoneConj() {
-        return foneConj;
+        return foneConj.length() > 12 ? foneConj.substring(0, 12) : foneConj;
     }
 
     public void setFoneConj(String foneConj) {
@@ -656,7 +667,7 @@ public class Cliente {
     }
 
     public String getEnderecoConj() {
-        return enderecoConj;
+        return enderecoConj.length() > 100 ? enderecoConj.substring(0, 100) : enderecoConj;
     }
 
     public void setEnderecoConj(String enderecoConj) {
@@ -664,7 +675,7 @@ public class Cliente {
     }
 
     public String getNumeroConj() {
-        return numeroConj;
+        return numeroConj.length() > 15 ? numeroConj.substring(0, 15) : numeroConj;
     }
 
     public void setNumeroConj(String numeroConj) {
@@ -672,7 +683,7 @@ public class Cliente {
     }
 
     public String getCepConj() {
-        return cepConj;
+        return cepConj.length() > 15 ? cepConj.substring(0, 15) : cepConj;
     }
 
     public void setCepConj(String cepConj) {
@@ -680,7 +691,7 @@ public class Cliente {
     }
 
     public String getBairroConj() {
-        return bairroConj;
+        return bairroConj.length() > 50 ? bairroConj.substring(0, 50) : bairroConj;
     }
 
     public void setBairroConj(String bairroConj) {
@@ -688,7 +699,7 @@ public class Cliente {
     }
 
     public String getCargoConj() {
-        return cargoConj;
+        return cargoConj.length() > 50 ? cargoConj.substring(0, 50) : cargoConj;
     }
 
     public void setCargoConj(String cargoConj) {
@@ -728,7 +739,7 @@ public class Cliente {
     }
 
     public String getReferencias() {
-        return referencias;
+        return referencias.length() > 200 ? referencias.substring(0, 200) : referencias;
     }
 
     public void setReferencias(String referencias) {
@@ -736,7 +747,7 @@ public class Cliente {
     }
 
     public String getComercial1() {
-        return comercial1;
+        return comercial1.length() > 200 ? comercial1.substring(0, 200) : comercial1;
     }
 
     public void setComercial1(String comercial1) {
@@ -744,7 +755,7 @@ public class Cliente {
     }
 
     public String getComercial2() {
-        return comercial2;
+        return comercial2.length() > 200 ? comercial2.substring(0, 200) : comercial2;
     }
 
     public void setComercial2(String comercial2) {
@@ -752,7 +763,7 @@ public class Cliente {
     }
 
     public String getComercial3() {
-        return comercial3;
+        return comercial3.length() > 200 ? comercial3.substring(0, 200) : comercial3;
     }
 
     public void setComercial3(String comercial3) {
@@ -760,7 +771,7 @@ public class Cliente {
     }
 
     public String getBancaria1() {
-        return bancaria1;
+        return bancaria1.length() > 200 ? bancaria1.substring(0, 200) : bancaria1;
     }
 
     public void setBancaria1(String bancaria1) {
@@ -768,7 +779,7 @@ public class Cliente {
     }
 
     public String getBancaria2() {
-        return bancaria2;
+        return bancaria2.length() > 45 ? bancaria2.substring(0, 45) : bancaria2;
     }
 
     public void setBancaria2(String bancaria2) {
@@ -784,7 +795,7 @@ public class Cliente {
     }
 
     public String getOrgao() {
-        return orgao;
+        return orgao.length() > 20 ? orgao.substring(0, 20) : orgao;
     }
 
     public void setOrgao(String orgao) {
@@ -800,7 +811,7 @@ public class Cliente {
     }
 
     public String getDataHoraAlteracao() {
-        return dataHoraAlteracao;
+        return DataHoraUtil.getDataHoraAtual();
     }
 
     public void setDataHoraAlteracao(String dataHoraAlteracao) {
@@ -840,7 +851,7 @@ public class Cliente {
     }
 
     public String getNumeroContrato() {
-        return numeroContrato;
+        return numeroContrato.length() > 20 ? numeroContrato.substring(0, 20) : numeroContrato;
     }
 
     public void setNumeroContrato(String numeroContrato) {
@@ -872,7 +883,7 @@ public class Cliente {
     }
 
     public String getFiliacaoFoneMae() {
-        return filiacaoFoneMae;
+        return filiacaoFoneMae.length() > 14 ? filiacaoFoneMae.substring(0, 14) : filiacaoFoneMae;
     }
 
     public void setFiliacaoFoneMae(String filiacaoFoneMae) {
@@ -880,7 +891,7 @@ public class Cliente {
     }
 
     public String getFiliacaoFonePai() {
-        return filiacaoFonePai;
+        return filiacaoFonePai.length() > 14 ? filiacaoFonePai.substring(0, 14) : filiacaoFonePai;
     }
 
     public void setFiliacaoFonePai(String filiacaoFonePai) {
@@ -888,7 +899,7 @@ public class Cliente {
     }
 
     public String getFiliacaoEndereco() {
-        return filiacaoEndereco;
+        return filiacaoEndereco.length() > 150 ? filiacaoEndereco.substring(0, 150) : filiacaoEndereco;
     }
 
     public void setFiliacaoEndereco(String filiacaoEndereco) {
@@ -896,7 +907,7 @@ public class Cliente {
     }
 
     public String getFiliacaoReferencia() {
-        return filiacaoReferencia;
+        return filiacaoReferencia.length() > 150 ? filiacaoReferencia.substring(0, 150) : filiacaoReferencia;
     }
 
     public void setFiliacaoReferencia(String filiacaoReferencia) {
@@ -904,7 +915,7 @@ public class Cliente {
     }
 
     public String getFiliacaoNumero() {
-        return filiacaoNumero;
+        return filiacaoNumero.length() > 20 ? filiacaoNumero.substring(0, 20) : filiacaoNumero;
     }
 
     public void setFiliacaoNumero(String filiacaoNumero) {
@@ -912,7 +923,7 @@ public class Cliente {
     }
 
     public String getFiliacaoCep() {
-        return filiacaoCep;
+        return filiacaoCep.length() > 20 ? filiacaoCep.substring(0, 20) : filiacaoCep;
     }
 
     public void setFiliacaoCep(String filiacaoCep) {
@@ -920,7 +931,7 @@ public class Cliente {
     }
 
     public String getFiliacaoBairro() {
-        return filiacaoBairro;
+        return filiacaoBairro.length() > 50 ? filiacaoBairro.substring(0, 50) : filiacaoBairro;
     }
 
     public void setFiliacaoBairro(String filiacaoBairro) {
@@ -944,7 +955,7 @@ public class Cliente {
     }
 
     public String getAvalistaNome() {
-        return avalistaNome;
+        return avalistaNome.length() > 150 ? avalistaNome.substring(0, 150) : avalistaNome;
     }
 
     public void setAvalistaNome(String avalistaNome) {
@@ -952,7 +963,7 @@ public class Cliente {
     }
 
     public String getAvalistaCpf() {
-        return avalistaCpf;
+        return avalistaCpf.length() > 15 ? avalistaCpf.substring(0, 15) : avalistaCpf;
     }
 
     public void setAvalistaCpf(String avalistaCpf) {
@@ -960,7 +971,7 @@ public class Cliente {
     }
 
     public String getAvalistaRg() {
-        return avalistaRg;
+        return avalistaRg.length() > 20 ? avalistaRg.substring(0, 20) : avalistaRg;
     }
 
     public void setAvalistaRg(String avalistaRg) {
@@ -976,7 +987,7 @@ public class Cliente {
     }
 
     public String getAvalistaFone() {
-        return avalistaFone;
+        return avalistaFone.length() > 14 ? avalistaFone.substring(0, 14) : avalistaFone;
     }
 
     public void setAvalistaFone(String avalistaFone) {
@@ -984,7 +995,7 @@ public class Cliente {
     }
 
     public String getAvalistaEndereco() {
-        return avalistaEndereco;
+        return avalistaEndereco.length() > 150 ? avalistaEndereco.substring(0, 150) : avalistaEndereco;
     }
 
     public void setAvalistaEndereco(String avalistaEndereco) {
@@ -992,7 +1003,7 @@ public class Cliente {
     }
 
     public String getAvalistaNumero() {
-        return avalistaNumero;
+        return avalistaNumero.length() > 15 ? avalistaNumero.substring(0, 15) : avalistaNumero;
     }
 
     public void setAvalistaNumero(String avalistaNumero) {
@@ -1000,7 +1011,7 @@ public class Cliente {
     }
 
     public String getAvalistaCep() {
-        return avalistaCep;
+        return avalistaCep.length() > 20 ? avalistaCep.substring(0, 20) : avalistaCep;
     }
 
     public void setAvalistaCep(String avalistaCep) {
@@ -1008,7 +1019,7 @@ public class Cliente {
     }
 
     public String getAvalistaBairro() {
-        return avalistaBairro;
+        return avalistaBairro.length() > 50 ? avalistaBairro.substring(0, 50) : avalistaBairro;
     }
 
     public void setAvalistaBairro(String avalistaBairro) {
@@ -1016,7 +1027,7 @@ public class Cliente {
     }
 
     public String getAvalistaEmpresa() {
-        return avalistaEmpresa;
+        return avalistaEmpresa.length() > 100 ? avalistaEmpresa.substring(0, 100) : avalistaEmpresa;
     }
 
     public void setAvalistaEmpresa(String avalistaEmpresa) {
@@ -1024,7 +1035,7 @@ public class Cliente {
     }
 
     public String getAvalistaCargo() {
-        return avalistaCargo;
+        return avalistaCargo.length() > 100 ? avalistaCargo.substring(0, 100) : avalistaCargo;
     }
 
     public void setAvalistaCargo(String avalistaCargo) {
@@ -1063,9 +1074,9 @@ public class Cliente {
         this.avalistaIdEstado = avalistaIdEstado;
     }
 
-    /*Metodos auxiliares*/
+    // Metodos acessores do sistema SGBR
     public String getCodigoCidade() {
-        if (codigoCidade == null || codigoCidade.equals("")) {
+        if (codigoCidade.equals("")) {
             return "1501402"; // CIDADE Belem-PA
         }
         return codigoCidade;
@@ -1077,6 +1088,6 @@ public class Cliente {
 
     @Override
     public String toString() {
-        return numeroCartao + " - " + cpfCnpj + " > " + nome;
+        return numeroCartao + " - " + getCpfCnpj() + " > " + nome;
     }
 }

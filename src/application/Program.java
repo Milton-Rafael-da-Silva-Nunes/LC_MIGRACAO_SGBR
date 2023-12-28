@@ -125,7 +125,7 @@ public class Program {
             System.out.println("\n**** TESTE - findAll FORNECEDOR ****");
             for (Fornecedor obj : listaFornecedor) {
                 fornecedordao.insert(obj);
-            }*/
+            }
 
             System.out.println("\n**** TESTE - findAll PRODUTO ****");
             Regime regime = Regime.SIMPLES;
@@ -137,12 +137,12 @@ public class Program {
                 if (estoque.getEstoque().equalsIgnoreCase("sim")) {
                     produtodao.insertEstoqueProduto(obj);
                 }
-            }
+            }*/
 
-            /*System.out.println("\n**** TESTE - findAll CLIENTE ****");
+            System.out.println("\n**** TESTE - findAll CLIENTE ****");
             for (Cliente obj : listaCliente) {
                 clientedao.insert(obj);
-            }*/
+            }
 
             /*System.out.println("\n**** TESTE - findAll RECEBER ****");
             for (Receber obj : listaReceber) {

@@ -61,7 +61,7 @@ public class ObjetoUtil {
     }
 
     public final static String validarNomeFantasia(String nome, String fantasia) {
-        return (fantasia != null && !fantasia.isEmpty()) ? fantasia : nome;
+        return (fantasia != null && !fantasia.isEmpty()) ? removerCaracteresEspeciais(fantasia) : removerCaracteresEspeciais(nome);
     }
 
     public final static String getObs(String tel, String cel, String fax, String obs) {
