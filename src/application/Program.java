@@ -7,37 +7,37 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import sistemas.LC_SISTEMAS.model.entidades.Categoria;
-import sistemas.SGBR.model.dao.CestDao;
+import sistemas.SGBR.model.entidades.Empresa;
 import sistemas.SGBR.model.dao.EmpresaDao;
 import sistemas.SGBR.model.dao.FabricaDao;
-import sistemas.SGBR.model.dao.NcmDao;
+import sistemas.SGBR.model.dao.ProdutoDao;
 import sistemas.SGBR.model.dao.UnidadeDao;
-import sistemas.SGBR.model.entidades.Empresa;
-import sistemas.LC_SISTEMAS.model.entidades.Cest;
-import sistemas.LC_SISTEMAS.model.entidades.Cliente;
+import sistemas.SGBR.model.dao.CategoriaDao;
+import sistemas.SGBR.model.dao.SubCategoriaDao;
+import sistemas.SGBR.model.dao.FabricanteDao;
+import sistemas.SGBR.model.dao.FornecedorDao;
+import sistemas.SGBR.model.dao.ClienteDao;
+import sistemas.SGBR.model.dao.NcmDao;
+import sistemas.SGBR.model.dao.CestDao;
+import sistemas.SGBR.model.dao.PagarDao;
+import sistemas.SGBR.model.dao.ReceberDao;
+import sistemas.LC_SISTEMAS.model.entidades.Produto;
+import sistemas.LC_SISTEMAS.model.entidades.Unidade;
+import sistemas.LC_SISTEMAS.model.entidades.Categoria;
+import sistemas.LC_SISTEMAS.model.entidades.SubCategoria;
 import sistemas.LC_SISTEMAS.model.entidades.Fabricante;
 import sistemas.LC_SISTEMAS.model.entidades.Fornecedor;
+import sistemas.LC_SISTEMAS.model.entidades.Cliente;
 import sistemas.LC_SISTEMAS.model.entidades.Ncm;
+import sistemas.LC_SISTEMAS.model.entidades.Cest;
 import sistemas.LC_SISTEMAS.model.entidades.Pagar;
-import sistemas.LC_SISTEMAS.model.entidades.Produto;
 import sistemas.LC_SISTEMAS.model.entidades.Receber;
-import sistemas.LC_SISTEMAS.model.entidades.SubCategoria;
-import sistemas.LC_SISTEMAS.model.entidades.Unidade;
 import sistemas.LC_SISTEMAS.model.enuns.Estoque;
 import sistemas.LC_SISTEMAS.model.enuns.Regime;
-import sistemas.SGBR.model.dao.CategoriaDao;
-import sistemas.SGBR.model.dao.ClienteDao;
-import sistemas.SGBR.model.dao.FabricanteDao;
-import sistemas.SGBR.model.dao.SubCategoriaDao;
-import sistemas.SGBR.model.dao.FornecedorDao;
-import sistemas.SGBR.model.dao.PagarDao;
-import sistemas.SGBR.model.dao.ProdutoDao;
-import sistemas.SGBR.model.dao.ReceberDao;
 
 /**
  *
- * @author supor
+ * @author Rafael Nunes
  */
 public class Program {
 
@@ -87,7 +87,7 @@ public class Program {
             List<Receber> listaReceber = receberdao.findAll();
             List<Pagar> listaPagar = pagardao.findAll();
 
-            /*System.out.println("\n**** TESTE - findAll EMPRESA ****");
+            System.out.println("\n**** TESTE - findAll EMPRESA ****");
             for (Empresa obj : listEmp) {
                 System.out.println(obj);
             }
@@ -137,14 +137,14 @@ public class Program {
                 if (estoque.getEstoque().equalsIgnoreCase("sim")) {
                     produtodao.insertEstoqueProduto(obj);
                 }
-            }*/
+            }
 
             System.out.println("\n**** TESTE - findAll CLIENTE ****");
             for (Cliente obj : listaCliente) {
                 clientedao.insert(obj);
             }
 
-            /*System.out.println("\n**** TESTE - findAll RECEBER ****");
+            System.out.println("\n**** TESTE - findAll RECEBER ****");
             for (Receber obj : listaReceber) {
                 receberdao.insert(obj);
             }
@@ -152,7 +152,7 @@ public class Program {
             System.out.println("\n**** TESTE - findAll PAGAR ****");
             for(Pagar obj : listaPagar) {
                 pagardao.insert(obj);
-            }*/
+            }
 
             System.out.println("");
             System.out.println("Total de produtos Migrados: " + listaProduto.size());
