@@ -52,6 +52,23 @@ public class FirebirdConnector {
         }
     }
 
+    public boolean testarConexao(int porta, String usuario, String senha, String caminho) {
+        Connection testConn = null;
+        try {
+            Class.forName("org.firebirdsql.jdbc.FBDriver");
+            String url = "jdbc:firebirdsql:localhost/" + porta + ":" + caminho + "?encoding=" + charset;
+            testConn = DriverManager.getConnection(url, usuario, senha);
+            System.out.println("Conexao Firebird testada com sucesso!");
+            return true;
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+            System.out.println("Erro ao testar a conexão Firebird: " + e.getMessage());
+            return false;
+        } finally {
+            closeConnection(testConn);
+        }
+    }
+
     public static void closeConnection(Connection conn) {
         if (conn != null) {
             try {
