@@ -68,7 +68,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 
     private void imagemLc() {
-        ImageIcon icon = new ImageIcon("C:/LC sistemas - Softhouse/lib/lc_logoSofthouse.gif");
+        ImageIcon icon = new ImageIcon("src/telas/imagens/lc_logoSofthouse.gif");
         icon.setImage(icon.getImage().getScaledInstance(280, 280, 20));
         lblLogo.setIcon(icon);
     }
