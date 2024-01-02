@@ -8,6 +8,7 @@ import java.awt.Graphics2D;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
+import javax.swing.JDialog;
 import javax.swing.JPanel;
 
 /**
@@ -24,6 +25,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         imagemLc();
         configurarMouseListeners();
         configurarGradienteMenus(jPanelMenus, new Color(72, 61, 139), new Color(21, 30, 60), false);
+        setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
     }
 
     private void configurarGradienteMenus(JPanel panel, Color startColor, Color endColor, boolean horizontal) {
@@ -70,10 +72,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
             public void mouseExited(MouseEvent e) {
                 jPanelConfiguracao.setBackground(new Color(48, 47, 97));  // Cor original
             }
-            
+
             @Override
             public void mouseClicked(MouseEvent e) {
-                new TelaConfiguracaoBancoSGBR().setVisible(true);
+                TelaConfiguracaoBancoSGBR telaConfiguracao = new TelaConfiguracaoBancoSGBR(TelaPrincipal.this);
+                telaConfiguracao.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+                telaConfiguracao.setModalityType(JDialog.DEFAULT_MODALITY_TYPE);
+                telaConfiguracao.setVisible(true);
             }
         });
 

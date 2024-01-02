@@ -3,13 +3,14 @@ package telas;
 import conexaoDB.firebird.FirebirdConnector;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dialog;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JDialog;
 import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -17,14 +18,17 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  *
  * @author Rafael Nunes
  */
-public class TelaConfiguracaoBancoSGBR extends javax.swing.JFrame {
+public class TelaConfiguracaoBancoSGBR extends JDialog {
 
     private String caminhoDoArquivoSelecionado;
+    private TelaConfirmacao telaConfirmacao;
 
-    public TelaConfiguracaoBancoSGBR() {
+    public TelaConfiguracaoBancoSGBR(TelaPrincipal telaPrincipal) {
+        super(telaPrincipal, "Configuração do Banco de Dados", Dialog.ModalityType.APPLICATION_MODAL);
         initComponents();
         configurarMouseListeners();
         configurarGradienteTopo(jPanelTopo, new Color(21, 30, 60), new Color(72, 61, 139), true);
+        setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
     }
 
     private void configurarGradienteTopo(JPanel panel, Color startColor, Color endColor, boolean horizontal) {
@@ -60,15 +64,15 @@ public class TelaConfiguracaoBancoSGBR extends javax.swing.JFrame {
     }
 
     private void configurarMouseListeners() {
-        jPanelPesquisa.addMouseListener(new MouseAdapter() {
+        jPanelPesquisar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                jPanelPesquisa.setBackground(new Color(182, 187, 187));  // Cor ao passar o mouse
+                jPanelPesquisar.setBackground(new Color(182, 187, 187));  // Cor ao passar o mouse
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                jPanelPesquisa.setBackground(new Color(255, 255, 255));  // Cor original
+                jPanelPesquisar.setBackground(new Color(255, 255, 255));  // Cor original
             }
 
             @Override
@@ -125,24 +129,41 @@ public class TelaConfiguracaoBancoSGBR extends javax.swing.JFrame {
         jPanelTestarConexao.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                String usuario = txtUsuario.getText().toUpperCase(); 
-                String senha = txtSenha.getText(); 
-                String caminhoBanco = caminhoDoArquivoSelecionado; 
+                String usuario = txtUsuario.getText().toUpperCase();
+                String senha = txtSenha.getText();
+                String caminhoBanco = caminhoDoArquivoSelecionado;
                 int porta = 3050;
 
                 FirebirdConnector firebirdConnector = new FirebirdConnector();
                 boolean conexaoValida = firebirdConnector.testarConexao(porta, usuario, senha, caminhoBanco);
 
                 if (conexaoValida) {
-                    JOptionPane.showMessageDialog(null, "Conexão aprovada!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                    chamarTelaConfirmacaoConexao();
                 } else {
-                    JOptionPane.showMessageDialog(null, "Conexão rejeitada!", "Error", JOptionPane.WARNING_MESSAGE);
-                    System.out.println("Falha na conexão!");
+                    chamarTelaRejeicaoConexao();
                     txtSenha.setText("");
                 }
             }
 
         });
+    }
+
+    private void chamarTelaConfirmacaoConexao() {
+        String texto = "Conexão com o Banco de Dados aprovada!";
+        String caminhoGif = "src/imagens/icons8-ok.gif";
+        telaConfirmacao = new TelaConfirmacao(TelaConfiguracaoBancoSGBR.this, texto, caminhoGif);
+        telaConfirmacao.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        telaConfirmacao.setModalityType(JDialog.DEFAULT_MODALITY_TYPE);
+        telaConfirmacao.setVisible(true);
+    }
+    
+    private void chamarTelaRejeicaoConexao() {
+        String texto = "Conexão com o Banco de Dados reprovada!";
+        String caminhoGif = "src/imagens/icons8-erro.gif";
+        telaConfirmacao = new TelaConfirmacao(TelaConfiguracaoBancoSGBR.this, texto, caminhoGif);
+        telaConfirmacao.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        telaConfirmacao.setModalityType(JDialog.DEFAULT_MODALITY_TYPE);
+        telaConfirmacao.setVisible(true);
     }
 
     private void abrirFileChooser() {
@@ -169,17 +190,17 @@ public class TelaConfiguracaoBancoSGBR extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabelLocalbanco = new javax.swing.JLabel();
-        jPanelPesquisa = new javax.swing.JPanel();
+        jPanelPesquisar = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         txtServidor = new javax.swing.JTextField();
-        txtSenha = new javax.swing.JTextField();
         txtUsuario = new javax.swing.JTextField();
         jPanelTestarConexao = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
+        txtSenha = new javax.swing.JPasswordField();
         jPanelSair = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jPanelSalvar = new javax.swing.JPanel();
@@ -187,7 +208,7 @@ public class TelaConfiguracaoBancoSGBR extends javax.swing.JFrame {
         jPanelTopo = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -206,19 +227,18 @@ public class TelaConfiguracaoBancoSGBR extends javax.swing.JFrame {
         jLabelLocalbanco.setBackground(new java.awt.Color(255, 255, 255));
         jLabelLocalbanco.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabelLocalbanco.setForeground(new java.awt.Color(255, 255, 255));
-        jLabelLocalbanco.setText("  EX:");
         jPanel2.add(jLabelLocalbanco, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 35));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 600, 35));
 
-        jPanelPesquisa.setBackground(new java.awt.Color(255, 255, 255));
-        jPanelPesquisa.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanelPesquisar.setBackground(new java.awt.Color(255, 255, 255));
+        jPanelPesquisar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icons8-pesquisar-35.png"))); // NOI18N
-        jPanelPesquisa.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 50, 50));
+        jPanelPesquisar.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 50, 50));
 
-        jPanel1.add(jPanelPesquisa, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 82, 50, 50));
+        jPanel1.add(jPanelPesquisar, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 82, 50, 50));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -246,6 +266,8 @@ public class TelaConfiguracaoBancoSGBR extends javax.swing.JFrame {
         jLabel6.setText(" Testar");
         jPanelTestarConexao.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 90, 50));
 
+        txtSenha.setText("masterkey");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -261,8 +283,8 @@ public class TelaConfiguracaoBancoSGBR extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtServidor, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jPanelTestarConexao, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(268, Short.MAX_VALUE))
         );
@@ -281,9 +303,9 @@ public class TelaConfiguracaoBancoSGBR extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
+                .addGap(32, 32, 32)
                 .addComponent(jPanelTestarConexao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 660, 250));
@@ -342,7 +364,7 @@ public class TelaConfiguracaoBancoSGBR extends javax.swing.JFrame {
     public static void main(String args[]) {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -356,12 +378,6 @@ public class TelaConfiguracaoBancoSGBR extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(TelaConfiguracaoBancoSGBR.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new TelaConfiguracaoBancoSGBR().setVisible(true);
-            }
-        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -378,13 +394,14 @@ public class TelaConfiguracaoBancoSGBR extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanelPesquisa;
+    private javax.swing.JPanel jPanelPesquisar;
     private javax.swing.JPanel jPanelSair;
     private javax.swing.JPanel jPanelSalvar;
     private javax.swing.JPanel jPanelTestarConexao;
     private javax.swing.JPanel jPanelTopo;
-    private javax.swing.JTextField txtSenha;
+    private javax.swing.JPasswordField txtSenha;
     private javax.swing.JTextField txtServidor;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
+
 }
