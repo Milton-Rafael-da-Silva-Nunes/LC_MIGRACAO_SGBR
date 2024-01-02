@@ -41,23 +41,17 @@ import sistemas.LC_SISTEMAS.model.enuns.Regime;
  */
 public class Program {
 
-    /**
-     * @param args the command line arguments
-     * @throws java.sql.SQLException
-     */
-    public static void main(String[] args) throws SQLException {
+    private FirebirdConnector conectorFibird;
+    private Connection conn1 = null;
+    private Connection conn2 = null;
 
-        Connection conn1 = null;
-        Connection conn2 = null;
-        String porta = "3050";
-        String caminho = "C:\\Users\\supor\\Documents\\BASESGMASTER.FDB";
-        String usuario = "SYSDBA";
-        String senha = "masterkey";
+    public Program(FirebirdConnector conectorFibird) {
+        this.conectorFibird = conectorFibird;
+    }
 
-        FirebirdConnector conecatorFdb = new FirebirdConnector(porta, caminho, usuario, senha);
-
+    public void realizarOperacoes() throws SQLException {
         try {
-            conn1 = conecatorFdb.getConnection(); // Conector FDB
+            conn1 = conectorFibird.getConnection(); // Conector FDB
             conn2 = new MysqlConnector().getConnection(); // Conector LC SISTEMAS
             conn2.setAutoCommit(false);
 
@@ -148,9 +142,9 @@ public class Program {
             for (Receber obj : listaReceber) {
                 receberdao.insert(obj);
             }
-            
+
             System.out.println("\n**** TESTE - findAll PAGAR ****");
-            for(Pagar obj : listaPagar) {
+            for (Pagar obj : listaPagar) {
                 pagardao.insert(obj);
             }
 
@@ -161,7 +155,7 @@ public class Program {
             System.out.println("Total de Receber  Migrados: " + listaReceber.size());
             System.out.println("Total de Pagar    Migrados: " + listaPagar.size());
             System.out.println("");
-            
+
             conn2.commit();
 
         } catch (Exception ex) {

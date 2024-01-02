@@ -12,9 +12,9 @@ import javax.swing.JDialog;
  * @author Rafael Nunes
  */
 public class TelaConfirmacao extends JDialog {
-    
-    public TelaConfirmacao(TelaConfiguracaoBancoSGBR telaConfiguracaoBancoSgbr,String texto, String caminhoGif) {
-        super(telaConfiguracaoBancoSgbr, "Tela de confirmacao de conexão", Dialog.ModalityType.APPLICATION_MODAL);
+
+    public TelaConfirmacao(TelaConfiguracaoBancoSGBR telaConfiguracaoBancoSgbr, String texto, String caminhoGif) {
+        super(telaConfiguracaoBancoSgbr, "Tela confirmacao de conexão com o banco de dados", Dialog.ModalityType.APPLICATION_MODAL);
         initComponents();
         configurarMouseListeners();
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -62,6 +62,7 @@ public class TelaConfirmacao extends JDialog {
 
         jLabelTexto.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabelTexto.setForeground(new java.awt.Color(0, 0, 0));
+        jLabelTexto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jPanel1.add(jLabelTexto, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 390, 60));
 
         jLabelGif.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);

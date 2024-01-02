@@ -9,7 +9,7 @@ import java.sql.Statement;
 
 /**
  *
- * @author supor
+ * @author Rafael Nunes
  */
 public class FirebirdConnector {
 
@@ -19,8 +19,9 @@ public class FirebirdConnector {
     private static String usuario;
     private static String senha;
     private static String charset = "UTF8"; // Codificação padrão
-
+    
     public FirebirdConnector() {
+        
     }
 
     public FirebirdConnector(String porta, String caminho, String usuario, String senha) {
@@ -52,7 +53,7 @@ public class FirebirdConnector {
         }
     }
 
-    public boolean testarConexao(int porta, String usuario, String senha, String caminho) {
+    public boolean testarConexao(String porta, String usuario, String senha, String caminho) {
         Connection testConn = null;
         try {
             Class.forName("org.firebirdsql.jdbc.FBDriver");
@@ -61,7 +62,6 @@ public class FirebirdConnector {
             System.out.println("Conexao Firebird testada com sucesso!");
             return true;
         } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
             System.out.println("Erro ao testar a conexão Firebird: " + e.getMessage());
             return false;
         } finally {

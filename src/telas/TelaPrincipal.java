@@ -1,5 +1,6 @@
 package telas;
 
+import conexaoDB.firebird.FirebirdConnector;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GradientPaint;
@@ -17,15 +18,15 @@ import javax.swing.JPanel;
  */
 public class TelaPrincipal extends javax.swing.JFrame {
 
-    /**
-     * Creates new form TelaPrincipal
-     */
+    private FirebirdConnector firebirdConnector;
+
     public TelaPrincipal() {
         initComponents();
         imagemLc();
+        esconderPaineis();
         configurarMouseListeners();
         configurarGradienteMenus(jPanelMenus, new Color(72, 61, 139), new Color(21, 30, 60), false);
-        setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        firebirdConnector = new FirebirdConnector();
     }
 
     private void configurarGradienteMenus(JPanel panel, Color startColor, Color endColor, boolean horizontal) {
@@ -75,7 +76,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
             @Override
             public void mouseClicked(MouseEvent e) {
-                TelaConfiguracaoBancoSGBR telaConfiguracao = new TelaConfiguracaoBancoSGBR(TelaPrincipal.this);
+                TelaConfiguracaoBancoSGBR telaConfiguracao = new TelaConfiguracaoBancoSGBR(TelaPrincipal.this, firebirdConnector);
                 telaConfiguracao.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
                 telaConfiguracao.setModalityType(JDialog.DEFAULT_MODALITY_TYPE);
                 telaConfiguracao.setVisible(true);
@@ -92,6 +93,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
             @Override
             public void mouseExited(MouseEvent e) {
                 jPanelMigracao.setBackground(new Color(48, 47, 97));  // Cor original
+            }
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                jPanelSeletores.setVisible(true);
             }
         });
 
@@ -121,10 +127,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
         lblLogo.setIcon(icon);
     }
 
-    @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jToggleButton1 = new javax.swing.JToggleButton();
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jPanelsair = new javax.swing.JPanel();
@@ -138,8 +144,30 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         lblLogo = new javax.swing.JLabel();
+        jPanelSeletores = new javax.swing.JPanel();
+        jPanelContasReceber = new javax.swing.JPanel();
+        btnReceber = new javax.swing.JRadioButton();
+        btnRecebidas = new javax.swing.JRadioButton();
+        btnClientes = new javax.swing.JRadioButton();
+        jPanelContasAPagar = new javax.swing.JPanel();
+        btnPagar = new javax.swing.JRadioButton();
+        btnPagas = new javax.swing.JRadioButton();
+        btnFornecedores = new javax.swing.JRadioButton();
+        jPanelProdutos = new javax.swing.JPanel();
+        jRadioButton1 = new javax.swing.JRadioButton();
+        jRadioButton2 = new javax.swing.JRadioButton();
+        jRadioButton3 = new javax.swing.JRadioButton();
+        jRadioButton4 = new javax.swing.JRadioButton();
+        jSeparator3 = new javax.swing.JSeparator();
+        jRadioButton5 = new javax.swing.JRadioButton();
+        jSeparator2 = new javax.swing.JSeparator();
+        jRadioButton6 = new javax.swing.JRadioButton();
+        jRadioButton7 = new javax.swing.JRadioButton();
+        btnProdutos = new javax.swing.JRadioButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jToggleButton1.setText("jToggleButton1");
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -207,12 +235,164 @@ public class TelaPrincipal extends javax.swing.JFrame {
         lblLogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jPanel1.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 310, 110));
 
+        jPanelSeletores.setBackground(new java.awt.Color(255, 255, 255));
+        jPanelSeletores.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanelSeletores.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanelContasReceber.setBackground(new java.awt.Color(255, 255, 255));
+        jPanelContasReceber.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnReceber.setBackground(new java.awt.Color(255, 255, 255));
+        btnReceber.setFont(new java.awt.Font("Dialog", 1, 17)); // NOI18N
+        btnReceber.setForeground(new java.awt.Color(51, 51, 51));
+        btnReceber.setText(" Receber");
+        jPanelContasReceber.add(btnReceber, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 120, -1));
+
+        btnRecebidas.setBackground(new java.awt.Color(255, 255, 255));
+        btnRecebidas.setFont(new java.awt.Font("Dialog", 1, 17)); // NOI18N
+        btnRecebidas.setForeground(new java.awt.Color(51, 51, 51));
+        btnRecebidas.setText(" Recebidas");
+        jPanelContasReceber.add(btnRecebidas, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 120, -1));
+
+        jPanelSeletores.add(jPanelContasReceber, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 70, 150, 60));
+
+        btnClientes.setBackground(new java.awt.Color(255, 255, 255));
+        btnClientes.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        btnClientes.setForeground(new java.awt.Color(0, 0, 0));
+        btnClientes.setText(" Clientes");
+        btnClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClientesActionPerformed(evt);
+            }
+        });
+        jPanelSeletores.add(btnClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 40, 260, -1));
+
+        jPanelContasAPagar.setBackground(new java.awt.Color(255, 255, 255));
+        jPanelContasAPagar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnPagar.setBackground(new java.awt.Color(255, 255, 255));
+        btnPagar.setFont(new java.awt.Font("Dialog", 1, 17)); // NOI18N
+        btnPagar.setForeground(new java.awt.Color(51, 51, 51));
+        btnPagar.setText(" Pagar");
+        jPanelContasAPagar.add(btnPagar, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 0, 130, -1));
+
+        btnPagas.setBackground(new java.awt.Color(255, 255, 255));
+        btnPagas.setFont(new java.awt.Font("Dialog", 1, 17)); // NOI18N
+        btnPagas.setForeground(new java.awt.Color(51, 51, 51));
+        btnPagas.setText(" Pagas");
+        jPanelContasAPagar.add(btnPagas, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 30, 130, -1));
+
+        jPanelSeletores.add(jPanelContasAPagar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 70, 150, 60));
+
+        btnFornecedores.setBackground(new java.awt.Color(255, 255, 255));
+        btnFornecedores.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        btnFornecedores.setForeground(new java.awt.Color(0, 0, 0));
+        btnFornecedores.setText(" Fornecedores");
+        btnFornecedores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFornecedoresActionPerformed(evt);
+            }
+        });
+        jPanelSeletores.add(btnFornecedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 40, 260, -1));
+
+        jPanelProdutos.setBackground(new java.awt.Color(255, 255, 255));
+        jPanelProdutos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jRadioButton1.setBackground(new java.awt.Color(255, 255, 255));
+        jRadioButton1.setFont(new java.awt.Font("Dialog", 1, 17)); // NOI18N
+        jRadioButton1.setForeground(new java.awt.Color(51, 51, 51));
+        jRadioButton1.setText(" Unidades");
+        jPanelProdutos.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 0, 160, -1));
+
+        jRadioButton2.setBackground(new java.awt.Color(255, 255, 255));
+        jRadioButton2.setFont(new java.awt.Font("Dialog", 1, 17)); // NOI18N
+        jRadioButton2.setForeground(new java.awt.Color(51, 51, 51));
+        jRadioButton2.setText(" Categorias");
+        jPanelProdutos.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 30, -1, -1));
+
+        jRadioButton3.setBackground(new java.awt.Color(255, 255, 255));
+        jRadioButton3.setFont(new java.awt.Font("Dialog", 1, 17)); // NOI18N
+        jRadioButton3.setForeground(new java.awt.Color(51, 51, 51));
+        jRadioButton3.setText(" Subcategorias");
+        jPanelProdutos.add(jRadioButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 60, -1, -1));
+
+        jRadioButton4.setBackground(new java.awt.Color(255, 255, 255));
+        jRadioButton4.setFont(new java.awt.Font("Dialog", 1, 17)); // NOI18N
+        jRadioButton4.setForeground(new java.awt.Color(51, 51, 51));
+        jRadioButton4.setText(" Ncm");
+        jPanelProdutos.add(jRadioButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 140, -1, -1));
+        jPanelProdutos.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 130, 210, 5));
+
+        jRadioButton5.setBackground(new java.awt.Color(255, 255, 255));
+        jRadioButton5.setFont(new java.awt.Font("Dialog", 1, 17)); // NOI18N
+        jRadioButton5.setForeground(new java.awt.Color(51, 51, 51));
+        jRadioButton5.setText(" Cest");
+        jPanelProdutos.add(jRadioButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 170, -1, -1));
+        jPanelProdutos.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 210, 210, 5));
+
+        jRadioButton6.setBackground(new java.awt.Color(255, 255, 255));
+        jRadioButton6.setFont(new java.awt.Font("Dialog", 1, 17)); // NOI18N
+        jRadioButton6.setForeground(new java.awt.Color(51, 51, 51));
+        jRadioButton6.setText(" Estoque");
+        jPanelProdutos.add(jRadioButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 220, 180, -1));
+
+        jRadioButton7.setBackground(new java.awt.Color(255, 255, 255));
+        jRadioButton7.setFont(new java.awt.Font("Dialog", 1, 17)); // NOI18N
+        jRadioButton7.setForeground(new java.awt.Color(51, 51, 51));
+        jRadioButton7.setText(" Fabricante");
+        jPanelProdutos.add(jRadioButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 90, -1, -1));
+
+        jPanelSeletores.add(jPanelProdutos, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 70, 250, 260));
+
+        btnProdutos.setBackground(new java.awt.Color(255, 255, 255));
+        btnProdutos.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        btnProdutos.setForeground(new java.awt.Color(0, 0, 0));
+        btnProdutos.setText(" Produtos");
+        btnProdutos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProdutosActionPerformed(evt);
+            }
+        });
+        jPanelSeletores.add(btnProdutos, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 40, 260, -1));
+
+        jPanel1.add(jPanelSeletores, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 130, 1220, 710));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1570, 860));
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesActionPerformed
+        if (btnClientes.isSelected()) {
+            jPanelContasReceber.setVisible(true);
+        } else {
+            jPanelContasReceber.setVisible(false);
+        }
+    }//GEN-LAST:event_btnClientesActionPerformed
+
+    private void btnFornecedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFornecedoresActionPerformed
+        if (btnFornecedores.isSelected()) {
+            jPanelContasAPagar.setVisible(true);
+        } else {
+            jPanelContasAPagar.setVisible(false);
+        }
+    }//GEN-LAST:event_btnFornecedoresActionPerformed
+
+    private void btnProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdutosActionPerformed
+        if (btnProdutos.isSelected()) {
+            jPanelProdutos.setVisible(true);
+        } else {
+            jPanelProdutos.setVisible(false);
+        }
+    }//GEN-LAST:event_btnProdutosActionPerformed
+
+    private void esconderPaineis() {
+        jPanelSeletores.setVisible(false);
+        jPanelContasReceber.setVisible(false);
+        jPanelContasAPagar.setVisible(false);
+        jPanelProdutos.setVisible(false);
+    }
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
             new TelaPrincipal().setVisible(true);
@@ -220,6 +400,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JRadioButton btnClientes;
+    private javax.swing.JRadioButton btnFornecedores;
+    private javax.swing.JRadioButton btnPagar;
+    private javax.swing.JRadioButton btnPagas;
+    private javax.swing.JRadioButton btnProdutos;
+    private javax.swing.JRadioButton btnReceber;
+    private javax.swing.JRadioButton btnRecebidas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelConfiguracao;
@@ -227,10 +414,24 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanelConfiguracao;
+    private javax.swing.JPanel jPanelContasAPagar;
+    private javax.swing.JPanel jPanelContasReceber;
     private javax.swing.JPanel jPanelMenus;
     private javax.swing.JPanel jPanelMigracao;
+    private javax.swing.JPanel jPanelProdutos;
+    private javax.swing.JPanel jPanelSeletores;
     private javax.swing.JPanel jPanelsair;
+    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JRadioButton jRadioButton3;
+    private javax.swing.JRadioButton jRadioButton4;
+    private javax.swing.JRadioButton jRadioButton5;
+    private javax.swing.JRadioButton jRadioButton6;
+    private javax.swing.JRadioButton jRadioButton7;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JLabel lblLogo;
     private javax.swing.JLabel lblSair;
     // End of variables declaration//GEN-END:variables
