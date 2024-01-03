@@ -2,10 +2,13 @@ package telas;
 
 import java.awt.Color;
 import java.awt.Dialog;
+import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
 
 /**
  *
@@ -18,8 +21,25 @@ public class TelaConfirmacao extends JDialog {
         initComponents();
         configurarMouseListeners();
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-        jLabelTexto.setText(texto);
-        jLabelGif.setIcon(new ImageIcon(caminhoGif));
+        ajustarTextoImagem(texto, caminhoGif);
+    }
+
+    private void ajustarTextoImagem(String texto, String caminhoGif) {
+        // Criar um JLabel para o texto
+        JLabel textoLabel = new JLabel(texto + " ");
+        textoLabel.setFont(new Font("Arial", Font.BOLD, 18)); // Ajustar a fonte conforme necessário
+        textoLabel.setHorizontalAlignment(JLabel.CENTER); // Centralizar o texto horizontalmente
+
+        // Carregar a imagem do caminhoGif
+        ImageIcon imagemIcon = new ImageIcon(caminhoGif);
+
+        // Criar um JLabel para a imagem
+        JLabel imagemLabel = new JLabel(imagemIcon);
+
+        // Configurar o layout do jLabelTexto para FlowLayout
+        jLabelTexto.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10)); // Ajustar o espaçamento conforme necessário
+        jLabelTexto.add(textoLabel);
+        jLabelTexto.add(imagemLabel);
     }
 
     private void configurarMouseListeners() {
@@ -48,7 +68,6 @@ public class TelaConfirmacao extends JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         jLabelTexto = new javax.swing.JLabel();
-        jLabelGif = new javax.swing.JLabel();
         jPanelOk = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
 
@@ -63,10 +82,7 @@ public class TelaConfirmacao extends JDialog {
         jLabelTexto.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabelTexto.setForeground(new java.awt.Color(0, 0, 0));
         jLabelTexto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jPanel1.add(jLabelTexto, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 390, 60));
-
-        jLabelGif.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jPanel1.add(jLabelGif, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 40, 50, 60));
+        jPanel1.add(jLabelTexto, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 440, 60));
 
         jPanelOk.setBackground(new java.awt.Color(48, 47, 97));
         jPanelOk.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -114,7 +130,6 @@ public class TelaConfirmacao extends JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabelGif;
     private javax.swing.JLabel jLabelTexto;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelOk;
