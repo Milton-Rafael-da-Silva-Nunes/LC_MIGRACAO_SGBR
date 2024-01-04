@@ -19,14 +19,26 @@ import javax.swing.JPanel;
 public class TelaPrincipal extends javax.swing.JFrame {
 
     private FirebirdConnector firebirdConnector;
+    protected String caminhoBanco;
+    protected String usuario;
+    protected String senha;
+    protected String porta;
 
     public TelaPrincipal() {
         initComponents();
-        imagemLc();
-        esconderPaineis();
+        setLogoLc();
+        setVisibilidadePaineisMigracao();
         configurarMouseListeners();
         configurarGradienteMenus(jPanelMenus, new Color(72, 61, 139), new Color(21, 30, 60), false);
-        firebirdConnector = new FirebirdConnector();
+    }
+
+    public void setLoginBancoFirebird(FirebirdConnector firebirdConnector, String caminhoBanco, String usuario, String senha, String porta) {
+        this.firebirdConnector = firebirdConnector;
+        this.caminhoBanco = caminhoBanco;
+        this.usuario = usuario;
+        this.senha = senha;
+        this.porta = porta;
+        System.out.println("TELA PRINCIPAL: " + caminhoBanco + "-" + usuario + "-" + senha + "-" + porta);
     }
 
     private void configurarGradienteMenus(JPanel panel, Color startColor, Color endColor, boolean horizontal) {
@@ -76,7 +88,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
             @Override
             public void mouseClicked(MouseEvent e) {
-                TelaConfiguracaoBancoSGBR telaConfiguracao = new TelaConfiguracaoBancoSGBR(TelaPrincipal.this, firebirdConnector);
+                TelaConfiguracaoBancoSGBR telaConfiguracao = new TelaConfiguracaoBancoSGBR(TelaPrincipal.this);
                 telaConfiguracao.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
                 telaConfiguracao.setModalityType(JDialog.DEFAULT_MODALITY_TYPE);
                 telaConfiguracao.setVisible(true);
@@ -121,7 +133,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
     }
 
-    private void imagemLc() {
+    private void setLogoLc() {
         ImageIcon icon = new ImageIcon("src/imagens/lc_logoSofthouse.gif");
         icon.setImage(icon.getImage().getScaledInstance(280, 280, 20));
         lblLogo.setIcon(icon);
@@ -387,12 +399,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnProdutosActionPerformed
 
-    private void esconderPaineis() {
+    private void setVisibilidadePaineisMigracao() {
         jPanelSeletores.setVisible(false);
         jPanelContasReceber.setVisible(false);
         jPanelContasAPagar.setVisible(false);
         jPanelProdutos.setVisible(false);
     }
+
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
             new TelaPrincipal().setVisible(true);

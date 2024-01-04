@@ -1,5 +1,6 @@
 package telas;
 
+import application.Program;
 import conexaoDB.firebird.FirebirdConnector;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -21,23 +22,21 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class TelaConfiguracaoBancoSGBR extends JDialog {
 
     private String caminhoBanco;
-    private String texto;
-    private String localGif;
     private String usuario;
     private String senha;
     private String porta;
-    private FirebirdConnector firebirdConnector;
+    private String mensagemTela;
+    private String localGif;
     private TelaConfirmacao telaConfirmacao;
-    private final TelaPrincipal telaPrincipal;
+    private TelaPrincipal telaPrincipal;
 
-    public TelaConfiguracaoBancoSGBR(TelaPrincipal telaPrincipal, FirebirdConnector firebirdConnector) {
+    public TelaConfiguracaoBancoSGBR(TelaPrincipal telaPrincipal) {
         super(telaPrincipal, "Configuração do Banco de Dados", Dialog.ModalityType.APPLICATION_MODAL);
         initComponents();
         configurarMouseListeners();
         configurarGradienteTopo(jPanelTopo, new Color(21, 30, 60), new Color(72, 61, 139), true);
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         this.telaPrincipal = telaPrincipal;
-        this.firebirdConnector = firebirdConnector;
     }
 
     private void configurarGradienteTopo(JPanel panel, Color startColor, Color endColor, boolean horizontal) {
@@ -127,9 +126,9 @@ public class TelaConfiguracaoBancoSGBR extends JDialog {
                 senha = txtSenha.getText();
                 porta = txtPorta.getText();
 
-                firebirdConnector = new FirebirdConnector(porta, caminhoBanco, usuario, senha);
-
-                boolean conexaoValida = firebirdConnector.testarConexao(porta, usuario, senha, caminhoBanco);
+                // No metodo que testa ja fecha a conexao de teste
+                FirebirdConnector conector = new FirebirdConnector(porta, caminhoBanco, usuario, senha);
+                boolean conexaoValida = conector.testarConexao(porta, usuario, senha, caminhoBanco);
 
                 if (conexaoValida) {
                     chamarTelaConfirmacaoConexao();
@@ -139,7 +138,7 @@ public class TelaConfiguracaoBancoSGBR extends JDialog {
                 }
             }
         });
-        
+
         jPanelSalvar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
@@ -156,26 +155,26 @@ public class TelaConfiguracaoBancoSGBR extends JDialog {
                 usuario = txtUsuario.getText().toUpperCase();
                 senha = txtSenha.getText();
                 porta = txtPorta.getText();
-                firebirdConnector = new FirebirdConnector(porta, caminhoBanco, usuario, senha);
+                FirebirdConnector firebirdConnector = new FirebirdConnector(porta, caminhoBanco, usuario, senha);
+                telaPrincipal.setLoginBancoFirebird(firebirdConnector, caminhoBanco, usuario, senha, porta);
                 dispose();
             }
-
         });
     }
 
     private void chamarTelaConfirmacaoConexao() {
-        texto = "Conexão com o Banco aprovada!";
+        mensagemTela = "Conexão com o Banco aprovada!";
         localGif = "src/imagens/icons8-ok.gif";
-        telaConfirmacao = new TelaConfirmacao(TelaConfiguracaoBancoSGBR.this, texto, localGif);
+        telaConfirmacao = new TelaConfirmacao(TelaConfiguracaoBancoSGBR.this, mensagemTela, localGif);
         telaConfirmacao.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         telaConfirmacao.setModalityType(JDialog.DEFAULT_MODALITY_TYPE);
         telaConfirmacao.setVisible(true);
     }
 
     private void chamarTelaRejeicaoConexao() {
-        texto = "Conexão com o Banco reprovada!";
+        mensagemTela = "Conexão com o Banco reprovada!";
         localGif = "src/imagens/icons8-erro.gif";
-        telaConfirmacao = new TelaConfirmacao(TelaConfiguracaoBancoSGBR.this, texto, localGif);
+        telaConfirmacao = new TelaConfirmacao(TelaConfiguracaoBancoSGBR.this, mensagemTela, localGif);
         telaConfirmacao.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         telaConfirmacao.setModalityType(JDialog.DEFAULT_MODALITY_TYPE);
         telaConfirmacao.setVisible(true);
@@ -195,10 +194,6 @@ public class TelaConfiguracaoBancoSGBR extends JDialog {
             // Faça o que for necessário com o caminho do arquivo selecionado
             System.out.println("Caminho do arquivo selecionado: " + caminhoBanco);
         }
-    }
-
-    public FirebirdConnector getFirebirdConnector() {
-        return firebirdConnector;
     }
 
     @SuppressWarnings("unchecked")

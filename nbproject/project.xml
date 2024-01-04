@@ -3,7 +3,7 @@
     <type>org.netbeans.modules.java.j2seproject</type>
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/j2se-project/3">
-            <name>LC_MIGRACAO</name>
+            <name>LC_MIGRACAO_SGBR</name>
             <source-roots>
                 <root id="src.dir"/>
             </source-roots>

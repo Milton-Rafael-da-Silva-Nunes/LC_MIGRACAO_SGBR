@@ -25,19 +25,15 @@ public class TelaConfirmacao extends JDialog {
     }
 
     private void ajustarTextoImagem(String texto, String caminhoGif) {
-        // Criar um JLabel para o texto
         JLabel textoLabel = new JLabel(texto + " ");
-        textoLabel.setFont(new Font("Arial", Font.BOLD, 18)); // Ajustar a fonte conforme necessário
-        textoLabel.setHorizontalAlignment(JLabel.CENTER); // Centralizar o texto horizontalmente
+        textoLabel.setFont(new Font("Arial", Font.BOLD, 18));
+        textoLabel.setHorizontalAlignment(JLabel.CENTER);
 
-        // Carregar a imagem do caminhoGif
         ImageIcon imagemIcon = new ImageIcon(caminhoGif);
 
-        // Criar um JLabel para a imagem
         JLabel imagemLabel = new JLabel(imagemIcon);
 
-        // Configurar o layout do jLabelTexto para FlowLayout
-        jLabelTexto.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10)); // Ajustar o espaçamento conforme necessário
+        jLabelTexto.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
         jLabelTexto.add(textoLabel);
         jLabelTexto.add(imagemLabel);
     }

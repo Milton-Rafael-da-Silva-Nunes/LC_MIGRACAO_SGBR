@@ -86,7 +86,7 @@ public class Program {
                 System.out.println(obj);
             }
 
-            System.out.println("\n**** TESTE - findAll UNIDADE ****");
+            /*System.out.println("\n**** TESTE - findAll UNIDADE ****");
             for (Unidade obj : listUnd) {
                 unidadedao.insert(obj);
             }
@@ -146,7 +146,7 @@ public class Program {
             System.out.println("\n**** TESTE - findAll PAGAR ****");
             for (Pagar obj : listaPagar) {
                 pagardao.insert(obj);
-            }
+            }*/
 
             System.out.println("");
             System.out.println("Total de produtos Migrados: " + listaProduto.size());
