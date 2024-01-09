@@ -1,6 +1,5 @@
 package telas;
 
-import application.Program;
 import conexaoDB.firebird.FirebirdConnector;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -104,8 +103,7 @@ public class TelaConfiguracaoBancoSGBR extends JDialog {
 
             @Override
             public void mouseClicked(MouseEvent e) {
-                System.out.println("Saindo da tela de configuração SGBR");
-                dispose();  // Isso encerrará o programa
+                dispose();
             }
         });
 
@@ -131,9 +129,9 @@ public class TelaConfiguracaoBancoSGBR extends JDialog {
                 boolean conexaoValida = conector.testarConexao(porta, usuario, senha, caminhoBanco);
 
                 if (conexaoValida) {
-                    chamarTelaConfirmacaoConexao();
+                    getTelaConfirmacaoConexao();
                 } else {
-                    chamarTelaRejeicaoConexao();
+                    getTelaRejeicaoConexao();
                     txtSenha.setText("");
                 }
             }
@@ -155,14 +153,23 @@ public class TelaConfiguracaoBancoSGBR extends JDialog {
                 usuario = txtUsuario.getText().toUpperCase();
                 senha = txtSenha.getText();
                 porta = txtPorta.getText();
+
                 FirebirdConnector firebirdConnector = new FirebirdConnector(porta, caminhoBanco, usuario, senha);
-                telaPrincipal.setLoginBancoFirebird(firebirdConnector, caminhoBanco, usuario, senha, porta);
-                dispose();
+                boolean validarConexao = firebirdConnector.testarConexao(porta, usuario, senha, caminhoBanco);
+
+                if (validarConexao) {
+                    telaPrincipal.setLoginBancoFirebird(firebirdConnector, caminhoBanco, usuario, senha, porta);
+                    getTelaLoginSalvo();
+                    dispose();
+                    telaPrincipal.setVisibilidadePainelMigracao(true);
+                } else {
+                    getTelaLoginNaoSalvo();
+                }
             }
         });
     }
 
-    private void chamarTelaConfirmacaoConexao() {
+    private void getTelaConfirmacaoConexao() {
         mensagemTela = "Conexão com o Banco aprovada!";
         localGif = "src/imagens/icons8-ok.gif";
         telaConfirmacao = new TelaConfirmacao(TelaConfiguracaoBancoSGBR.this, mensagemTela, localGif);
@@ -171,9 +178,27 @@ public class TelaConfiguracaoBancoSGBR extends JDialog {
         telaConfirmacao.setVisible(true);
     }
 
-    private void chamarTelaRejeicaoConexao() {
+    private void getTelaRejeicaoConexao() {
         mensagemTela = "Conexão com o Banco reprovada!";
         localGif = "src/imagens/icons8-erro.gif";
+        telaConfirmacao = new TelaConfirmacao(TelaConfiguracaoBancoSGBR.this, mensagemTela, localGif);
+        telaConfirmacao.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        telaConfirmacao.setModalityType(JDialog.DEFAULT_MODALITY_TYPE);
+        telaConfirmacao.setVisible(true);
+    }
+    
+    private void getTelaLoginSalvo() {
+        mensagemTela = "Salvo com sucesso!";
+        localGif = "src/imagens/icons8-ok.gif";
+        telaConfirmacao = new TelaConfirmacao(TelaConfiguracaoBancoSGBR.this, mensagemTela, localGif);
+        telaConfirmacao.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        telaConfirmacao.setModalityType(JDialog.DEFAULT_MODALITY_TYPE);
+        telaConfirmacao.setVisible(true);
+    }
+    
+    private void getTelaLoginNaoSalvo() {
+        mensagemTela = "Verifique os dados de login!";
+        localGif = "src/imagens/icons8-atencao.gif.gif";
         telaConfirmacao = new TelaConfirmacao(TelaConfiguracaoBancoSGBR.this, mensagemTela, localGif);
         telaConfirmacao.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         telaConfirmacao.setModalityType(JDialog.DEFAULT_MODALITY_TYPE);
@@ -189,10 +214,7 @@ public class TelaConfiguracaoBancoSGBR extends JDialog {
         int result = fileChooser.showOpenDialog(this);
 
         if (result == JFileChooser.APPROVE_OPTION) {
-            // O usuário selecionou um arquivo
             caminhoBanco = fileChooser.getSelectedFile().getAbsolutePath();
-            // Faça o que for necessário com o caminho do arquivo selecionado
-            System.out.println("Caminho do arquivo selecionado: " + caminhoBanco);
         }
     }
 

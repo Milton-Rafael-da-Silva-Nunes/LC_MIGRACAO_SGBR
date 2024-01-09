@@ -14,16 +14,16 @@ import javax.swing.JLabel;
  *
  * @author Rafael Nunes
  */
-public class TelaConfirmacao extends JDialog {
+public class TelaSucessoMigracao extends JDialog {
 
-    public TelaConfirmacao(TelaConfiguracaoBancoSGBR telaConfiguracaoBancoSgbr, String texto, String caminhoGif) {
-        super(telaConfiguracaoBancoSgbr, "Tela confirmacao de conexão com o banco de dados", Dialog.ModalityType.APPLICATION_MODAL);
+    public TelaSucessoMigracao(TelaPrincipal telaPrincipal, String mensagemTela, String caminhoGif) {
+        super(telaPrincipal, "Tela de Sucesso Migração", Dialog.ModalityType.APPLICATION_MODAL);
         initComponents();
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         configurarMouseListeners();
-        ajustarTextoImagem(texto, caminhoGif);
+        ajustarTextoImagem(mensagemTela, caminhoGif);
     }
-
+    
     private void ajustarTextoImagem(String mensagemTela, String caminhoGif) {
         JLabel textoLabel = new JLabel(mensagemTela + " ");
         textoLabel.setFont(new Font("Arial", Font.BOLD, 18));
@@ -33,21 +33,21 @@ public class TelaConfirmacao extends JDialog {
 
         JLabel imagemLabel = new JLabel(imagemIcon);
 
-        jLabelTexto.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
-        jLabelTexto.add(textoLabel);
-        jLabelTexto.add(imagemLabel);
+        jLabelMensagemTela.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
+        jLabelMensagemTela.add(textoLabel);
+        jLabelMensagemTela.add(imagemLabel);
     }
-
+    
     private void configurarMouseListeners() {
-        jPanelOk.addMouseListener(new MouseAdapter() {
+        jPanelOK.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                jPanelOk.setBackground(new Color(182, 187, 187));  // Cor ao passar o mouse
+                jPanelOK.setBackground(new Color(182, 187, 187));  // Cor ao passar o mouse
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                jPanelOk.setBackground(new Color(48, 47, 97));  // Cor original
+                jPanelOK.setBackground(new Color(48, 47, 97));  // Cor original
             }
 
             @Override
@@ -62,48 +62,50 @@ public class TelaConfirmacao extends JDialog {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabelTexto = new javax.swing.JLabel();
-        jPanelOk = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
+        jLabelMensagemTela = new javax.swing.JLabel();
+        jPanelOK = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
-        setResizable(false);
+        setPreferredSize(new java.awt.Dimension(480, 198));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabelTexto.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabelTexto.setForeground(new java.awt.Color(0, 0, 0));
-        jLabelTexto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jPanel1.add(jLabelTexto, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 440, 60));
+        jLabelMensagemTela.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabelMensagemTela.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(jLabelMensagemTela, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 440, 60));
 
-        jPanelOk.setBackground(new java.awt.Color(48, 47, 97));
-        jPanelOk.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanelOK.setBackground(new java.awt.Color(48, 47, 97));
+        jPanelOK.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel3.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("OK");
-        jPanelOk.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 440, 40));
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("OK");
+        jPanelOK.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 440, 40));
 
-        jPanel1.add(jPanelOk, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 440, 40));
+        jPanel1.add(jPanelOK, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 440, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
     public static void main(String args[]) {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -124,9 +126,9 @@ public class TelaConfirmacao extends JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabelTexto;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabelMensagemTela;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanelOk;
+    private javax.swing.JPanel jPanelOK;
     // End of variables declaration//GEN-END:variables
 }

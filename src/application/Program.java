@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import sistemas.SGBR.model.entidades.Empresa;
 import sistemas.SGBR.model.dao.EmpresaDao;
 import sistemas.SGBR.model.dao.FabricaDao;
@@ -34,6 +35,7 @@ import sistemas.LC_SISTEMAS.model.entidades.Pagar;
 import sistemas.LC_SISTEMAS.model.entidades.Receber;
 import sistemas.LC_SISTEMAS.model.enuns.Estoque;
 import sistemas.LC_SISTEMAS.model.enuns.Regime;
+import telas.TelaConfirmacao;
 
 /**
  *
@@ -86,7 +88,7 @@ public class Program {
                 System.out.println(obj);
             }
 
-            /*System.out.println("\n**** TESTE - findAll UNIDADE ****");
+            System.out.println("\n**** TESTE - findAll UNIDADE ****");
             for (Unidade obj : listUnd) {
                 unidadedao.insert(obj);
             }
@@ -146,7 +148,7 @@ public class Program {
             System.out.println("\n**** TESTE - findAll PAGAR ****");
             for (Pagar obj : listaPagar) {
                 pagardao.insert(obj);
-            }*/
+            }
 
             System.out.println("");
             System.out.println("Total de produtos Migrados: " + listaProduto.size());
@@ -157,7 +159,7 @@ public class Program {
             System.out.println("");
 
             conn2.commit();
-
+            
         } catch (Exception ex) {
             conn2.rollback();
             Logger.getLogger(Program.class.getName()).log(Level.SEVERE, null, ex);
