@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import sistemas.SGBR.model.dao.EmpresaDao;
 import sistemas.SGBR.model.entidades.Empresa;
+import util.ObjetoUtil;
 
 /**
  *
@@ -73,15 +74,23 @@ public class EmpresaDaoJDBC implements EmpresaDao {
     }
 
     private Empresa instanciacaoEmpresa(ResultSet rs) throws SQLException {
-        String controle = rs.getString("controle");
-        String cnpj = rs.getString("cnpj");
-        String nomeFantasia = rs.getString("nomeFantasia");
+        String controle = ObjetoUtil.validarString(rs.getString("controle"));
+        String nomeFantasia = ObjetoUtil.validarNomeFantasia(rs.getString("razaosocial"), rs.getString("nomeFantasia"));
 
-        if (controle != null && !controle.isEmpty() && nomeFantasia != null && !nomeFantasia.isEmpty()) {
+        if (!controle.isEmpty() && !nomeFantasia.isEmpty()) {
             Empresa empresa = new Empresa();
             empresa.setControle(controle);
-            empresa.setCnpj(cnpj);
+            empresa.setCnpj(ObjetoUtil.validarString(rs.getString("cnpj")));
+            empresa.setIe(ObjetoUtil.validarString(rs.getString("ie")));
             empresa.setNomeFantasia(nomeFantasia);
+            empresa.setRazaoSocial(ObjetoUtil.validarString(rs.getString("razaosocial")));
+            empresa.setEndereco(ObjetoUtil.validarString(rs.getString("endereco")));
+            empresa.setBairro(ObjetoUtil.validarString(rs.getString("bairro")));
+            empresa.setCidade(ObjetoUtil.validarString(rs.getString("cidade")));
+            empresa.setUf(ObjetoUtil.validarString(rs.getString("uf")));
+            empresa.setCep(ObjetoUtil.validarString(rs.getString("cep")));
+            empresa.setEmail(ObjetoUtil.validarString(rs.getString("email")));
+
             return empresa;
         } else {
             throw new DbException("Dados de empresa inválidos ou ausentes! \n\n" + "Atenção: Codigo da empresa ou Nome não preenchidos.");

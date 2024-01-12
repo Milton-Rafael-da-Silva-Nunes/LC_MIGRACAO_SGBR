@@ -9,10 +9,14 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import sistemas.SGBR.model.dao.impl.EmpresaDaoJDBC;
+import sistemas.SGBR.model.entidades.Empresa;
 
 /**
  *
@@ -24,8 +28,6 @@ public class TelaConfiguracaoBancoSGBR extends JDialog {
     private String usuario;
     private String senha;
     private String porta;
-    private String mensagemTela;
-    private String localGif;
     private TelaConfirmacao telaConfirmacao;
     private TelaPrincipal telaPrincipal;
 
@@ -156,12 +158,12 @@ public class TelaConfiguracaoBancoSGBR extends JDialog {
 
                 FirebirdConnector firebirdConnector = new FirebirdConnector(porta, caminhoBanco, usuario, senha);
                 boolean validarConexao = firebirdConnector.testarConexao(porta, usuario, senha, caminhoBanco);
+                List<Empresa> listaDeEmpresas = new ArrayList<>();
 
                 if (validarConexao) {
-                    telaPrincipal.setLoginBancoFirebird(firebirdConnector, caminhoBanco, usuario, senha, porta);
-                    getTelaLoginSalvo();
-                    dispose();
-                    telaPrincipal.setVisibilidadePainelMigracao(true);
+                    EmpresaDaoJDBC t = new EmpresaDaoJDBC(firebirdConnector.getConnection());
+                    listaDeEmpresas = t.findAll();
+                    configurarTelaPrincipal(firebirdConnector, caminhoBanco, usuario, senha, porta, listaDeEmpresas);
                 } else {
                     getTelaLoginNaoSalvo();
                 }
@@ -169,40 +171,39 @@ public class TelaConfiguracaoBancoSGBR extends JDialog {
         });
     }
 
-    private void getTelaConfirmacaoConexao() {
-        mensagemTela = "Conexão com o Banco aprovada!";
-        localGif = "src/imagens/icons8-ok.gif";
-        telaConfirmacao = new TelaConfirmacao(TelaConfiguracaoBancoSGBR.this, mensagemTela, localGif);
+    private void configurarTelaPrincipal(FirebirdConnector firebirdConnector, String caminhoBanco, String usuario, String senha, String porta, List<Empresa> listaDeEmpresas) {
+        telaPrincipal.setLoginBancoFirebird(firebirdConnector, caminhoBanco, usuario, senha, porta, listaDeEmpresas);
+        getTelaLoginSalvo();
+        dispose();
+        telaPrincipal.setVisibilidadePainelMigracao(true);
+    }
+
+    private void exibirMensagem(String mensagem, String caminhoIcone) {
+        telaConfirmacao = new TelaConfirmacao(TelaConfiguracaoBancoSGBR.this, mensagem, caminhoIcone);
         telaConfirmacao.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         telaConfirmacao.setModalityType(JDialog.DEFAULT_MODALITY_TYPE);
         telaConfirmacao.setVisible(true);
     }
 
+    // Adicione constantes para ícones e caminhos
+    private static final String OK_ICON_PATH = "src/imagens/icons8-ok.gif";
+    private static final String ERRO_ICON_PATH = "src/imagens/icons8-erro.gif";
+    private static final String ATENCAO_ICON_PATH = "src/imagens/icons8-atencao.gif.gif";
+
+    private void getTelaConfirmacaoConexao() {
+        exibirMensagem("Conexão com o Banco aprovada!", OK_ICON_PATH);
+    }
+
     private void getTelaRejeicaoConexao() {
-        mensagemTela = "Conexão com o Banco reprovada!";
-        localGif = "src/imagens/icons8-erro.gif";
-        telaConfirmacao = new TelaConfirmacao(TelaConfiguracaoBancoSGBR.this, mensagemTela, localGif);
-        telaConfirmacao.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-        telaConfirmacao.setModalityType(JDialog.DEFAULT_MODALITY_TYPE);
-        telaConfirmacao.setVisible(true);
+        exibirMensagem("Conexão com o Banco reprovada!", ERRO_ICON_PATH);
     }
-    
+
     private void getTelaLoginSalvo() {
-        mensagemTela = "Salvo com sucesso!";
-        localGif = "src/imagens/icons8-ok.gif";
-        telaConfirmacao = new TelaConfirmacao(TelaConfiguracaoBancoSGBR.this, mensagemTela, localGif);
-        telaConfirmacao.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-        telaConfirmacao.setModalityType(JDialog.DEFAULT_MODALITY_TYPE);
-        telaConfirmacao.setVisible(true);
+        exibirMensagem("Salvo com sucesso!", OK_ICON_PATH);
     }
-    
+
     private void getTelaLoginNaoSalvo() {
-        mensagemTela = "Verifique os dados de login!";
-        localGif = "src/imagens/icons8-atencao.gif.gif";
-        telaConfirmacao = new TelaConfirmacao(TelaConfiguracaoBancoSGBR.this, mensagemTela, localGif);
-        telaConfirmacao.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-        telaConfirmacao.setModalityType(JDialog.DEFAULT_MODALITY_TYPE);
-        telaConfirmacao.setVisible(true);
+        exibirMensagem("Verifique os dados de login!", ATENCAO_ICON_PATH);
     }
 
     private void abrirFileChooser() {

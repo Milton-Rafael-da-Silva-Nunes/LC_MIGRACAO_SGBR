@@ -10,11 +10,13 @@ import java.awt.Graphics2D;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
+import sistemas.SGBR.model.entidades.Empresa;
 
 /**
  *
@@ -28,6 +30,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     protected String usuario;
     protected String senha;
     protected String porta;
+    protected List<Empresa> listaDeEmpresasSGBR;
 
     public TelaPrincipal() {
         initComponents();
@@ -38,13 +41,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jPanelMigracao.setVisible(false);
     }
 
-    public void setLoginBancoFirebird(FirebirdConnector firebirdConnector, String caminhoBanco, String usuario, String senha, String porta) {
+    public void setLoginBancoFirebird(FirebirdConnector firebirdConnector, String caminhoBanco, String usuario, String senha, String porta, List<Empresa> listaDeEmpresasSGBR) {
         this.firebirdConnector = firebirdConnector;
         this.caminhoBanco = caminhoBanco;
         this.usuario = usuario;
         this.senha = senha;
         this.porta = porta;
-        System.out.println("TELA PRINCIPAL: " + caminhoBanco + "-" + usuario + "-" + senha + "-" + porta);
+        this.listaDeEmpresasSGBR = listaDeEmpresasSGBR;
+        System.out.println("TELA PRINCIPAL: " + caminhoBanco + "-" + usuario + "-" + senha + "-" + porta + " LISTA EMP -> " + listaDeEmpresasSGBR);
     }
 
     public void setVisibilidadePainelMigracao(boolean pode) {
@@ -221,6 +225,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         btnFabricante = new javax.swing.JRadioButton();
         btnProdutos = new javax.swing.JRadioButton();
         jProgressBar1 = new javax.swing.JProgressBar();
+        jComboBoxEmpresas = new javax.swing.JComboBox<>();
+        jLabel4 = new javax.swing.JLabel();
         jPanelExecutar = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
 
@@ -313,7 +319,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         btnRecebidas.setText(" Recebidas");
         jPanelContasReceber.add(btnRecebidas, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 120, -1));
 
-        jPanelSeletores.add(jPanelContasReceber, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 70, 150, 60));
+        jPanelSeletores.add(jPanelContasReceber, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 150, 60));
 
         btnClientes.setBackground(new java.awt.Color(255, 255, 255));
         btnClientes.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -324,7 +330,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 btnClientesActionPerformed(evt);
             }
         });
-        jPanelSeletores.add(btnClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 40, 260, -1));
+        jPanelSeletores.add(btnClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 260, -1));
 
         jPanelContasAPagar.setBackground(new java.awt.Color(255, 255, 255));
         jPanelContasAPagar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -341,7 +347,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         btnPagas.setText(" Pagas");
         jPanelContasAPagar.add(btnPagas, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 30, 130, -1));
 
-        jPanelSeletores.add(jPanelContasAPagar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 70, 150, 60));
+        jPanelSeletores.add(jPanelContasAPagar, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 270, 150, 60));
 
         btnFornecedores.setBackground(new java.awt.Color(255, 255, 255));
         btnFornecedores.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -352,7 +358,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 btnFornecedoresActionPerformed(evt);
             }
         });
-        jPanelSeletores.add(btnFornecedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 40, 260, -1));
+        jPanelSeletores.add(btnFornecedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 240, 260, -1));
 
         jPanelProdutos.setBackground(new java.awt.Color(255, 255, 255));
         jPanelProdutos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -401,7 +407,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         btnFabricante.setText(" Fabricante");
         jPanelProdutos.add(btnFabricante, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 90, -1, -1));
 
-        jPanelSeletores.add(jPanelProdutos, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 70, 250, 260));
+        jPanelSeletores.add(jPanelProdutos, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 280, 250, 260));
 
         btnProdutos.setBackground(new java.awt.Color(255, 255, 255));
         btnProdutos.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -412,7 +418,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 btnProdutosActionPerformed(evt);
             }
         });
-        jPanelSeletores.add(btnProdutos, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 40, 260, -1));
+        jPanelSeletores.add(btnProdutos, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 250, 260, -1));
 
         jProgressBar1.setBackground(new java.awt.Color(255, 255, 255));
         jProgressBar1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -422,6 +428,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jProgressBar1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jProgressBar1.setStringPainted(true);
         jPanelSeletores.add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 572, 1200, 30));
+
+        jComboBoxEmpresas.setBackground(new java.awt.Color(255, 255, 255));
+        jComboBoxEmpresas.setFont(new java.awt.Font("Dialog", 1, 17)); // NOI18N
+        jComboBoxEmpresas.setForeground(new java.awt.Color(0, 0, 0));
+        jComboBoxEmpresas.setBorder(null);
+        jPanelSeletores.add(jComboBoxEmpresas, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 1110, -1));
+
+        jLabel4.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel4.setText("Empresa:");
+        jPanelSeletores.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, 30));
 
         jPanel1.add(jPanelSeletores, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 130, 1220, 610));
 
@@ -507,9 +524,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JRadioButton btnRecebidas;
     private javax.swing.JRadioButton btnSubcategoria;
     private javax.swing.JRadioButton btnUnidade;
+    private javax.swing.JComboBox<String> jComboBoxEmpresas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabelConfiguracao;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
