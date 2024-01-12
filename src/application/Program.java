@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import sistemas.SGBR.model.entidades.Empresa;
 import sistemas.SGBR.model.dao.EmpresaDao;
 import sistemas.SGBR.model.dao.FabricaDao;
@@ -35,7 +34,6 @@ import sistemas.LC_SISTEMAS.model.entidades.Pagar;
 import sistemas.LC_SISTEMAS.model.entidades.Receber;
 import sistemas.LC_SISTEMAS.model.enuns.Estoque;
 import sistemas.LC_SISTEMAS.model.enuns.Regime;
-import telas.TelaConfirmacao;
 
 /**
  *

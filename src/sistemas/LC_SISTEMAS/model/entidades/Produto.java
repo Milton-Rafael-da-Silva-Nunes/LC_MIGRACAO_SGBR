@@ -485,11 +485,17 @@ public class Produto {
     }
 
     public Double getEstoque() {
-        return estoque < 0.0 ? 0.0 : estoque;
+        return estoque;
     }
 
-    public void setEstoque(Double estoque) {
-        this.estoque = estoque;
+    public void setEstoque(Double novoEstoque) {
+        if (novoEstoque < 0.0) {
+            this.estoque = 0.0;
+        } else if (novoEstoque >= 1000000.0) {
+            this.estoque = 0.0;
+        } else {
+            this.estoque = novoEstoque;
+        }
     }
 
     public Double getEstoqueMinimo() {

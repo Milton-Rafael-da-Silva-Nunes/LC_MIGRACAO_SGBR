@@ -169,7 +169,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
     
     private void getTelaSucessoMigracao() {
-        String mensagemTela = "Conexão com o Banco aprovada!";
+        String mensagemTela = "Migração finalizada com sucesso!";
         String localGif = "src/imagens/icons8-ok.gif";
         telaSucessoMigracao = new TelaSucessoMigracao(TelaPrincipal.this, mensagemTela, localGif);
         telaSucessoMigracao.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);

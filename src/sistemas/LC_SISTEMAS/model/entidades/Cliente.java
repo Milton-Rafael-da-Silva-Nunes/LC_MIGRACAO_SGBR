@@ -15,6 +15,7 @@ public class Cliente {
     private String im;
     private String nome;
     private String rg;
+    private String isUf;
     private String razaoSocial;
     private String endereco;
     private String numero;
@@ -191,6 +192,7 @@ public class Cliente {
         avalistaIdCidade = 0;
         avalistaIdEstado = 0;
         numeroContrato = "";
+        isUf = "";
     }
 
     public Integer getId() {
@@ -247,6 +249,14 @@ public class Cliente {
 
     public void setRg(String rg) {
         this.rg = rg;
+    }
+
+    public String getIsUf() {
+        return isUf;
+    }
+
+    public void setIsUf(String isUf) {
+        this.isUf = isUf;
     }
 
     public String getRazaoSocial() {
