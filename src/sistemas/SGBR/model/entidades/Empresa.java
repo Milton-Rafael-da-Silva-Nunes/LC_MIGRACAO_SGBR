@@ -22,22 +22,7 @@ public class Empresa {
     private String crt;
     private String numero;
 
-    public Empresa(String controle, String nomeFantasia, String razaoSocial, String endereco, String complemento, String bairro, String cidade, String uf, String cep, String cnpj, String ie, String telefone, String email, String crt, String numero) {
-        this.controle = controle;
-        this.nomeFantasia = nomeFantasia;
-        this.razaoSocial = razaoSocial;
-        this.endereco = endereco;
-        this.complemento = complemento;
-        this.bairro = bairro;
-        this.cidade = cidade;
-        this.uf = uf;
-        this.cep = cep;
-        this.cnpj = cnpj;
-        this.ie = ie;
-        this.telefone = telefone;
-        this.email = email;
-        this.crt = crt;
-        this.numero = numero;
+    public Empresa() {
     }
 
     public String getControle() {
