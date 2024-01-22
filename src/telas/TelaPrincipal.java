@@ -51,6 +51,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
         System.out.println("TELA PRINCIPAL: " + caminhoBanco + "-" + usuario + "-" + senha + "-" + porta + " LISTA EMP -> " + listaDeEmpresasSGBR);
     }
 
+    private void mostrarListaDeEmpresasCombobox(List<Empresa> listaDeEmpresasSGBR) {
+        for (Empresa empresa : listaDeEmpresasSGBR) {
+            jComboBoxEmpresas.addItem(empresa.toString());
+        }
+    }
+
     public void setVisibilidadePainelMigracao(boolean pode) {
         jPanelMigracao.setVisible(pode);
     }
@@ -125,6 +131,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             public void mouseClicked(MouseEvent e) {
                 jPanelSeletores.setVisible(true);
                 jPanelExecutar.setVisible(true);
+                mostrarListaDeEmpresasCombobox(listaDeEmpresasSGBR);
             }
         });
 
@@ -171,7 +178,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
     }
-    
+
     private void getTelaSucessoMigracao() {
         String mensagemTela = "Migração finalizada com sucesso!";
         String localGif = "src/imagens/icons8-ok.gif";
@@ -227,6 +234,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jProgressBar1 = new javax.swing.JProgressBar();
         jComboBoxEmpresas = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
+        jPanelDadosEmpresa = new javax.swing.JPanel();
         jPanelExecutar = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
 
@@ -432,13 +440,24 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jComboBoxEmpresas.setBackground(new java.awt.Color(255, 255, 255));
         jComboBoxEmpresas.setFont(new java.awt.Font("Dialog", 1, 17)); // NOI18N
         jComboBoxEmpresas.setForeground(new java.awt.Color(0, 0, 0));
+        jComboBoxEmpresas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione" }));
+        jComboBoxEmpresas.setToolTipText("");
         jComboBoxEmpresas.setBorder(null);
+        jComboBoxEmpresas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxEmpresasActionPerformed(evt);
+            }
+        });
         jPanelSeletores.add(jComboBoxEmpresas, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 1110, -1));
 
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Empresa:");
         jPanelSeletores.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, 30));
+
+        jPanelDadosEmpresa.setBackground(new java.awt.Color(255, 255, 255));
+        jPanelDadosEmpresa.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Informações da Empresa", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
+        jPanelSeletores.add(jPanelDadosEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 1200, 120));
 
         jPanel1.add(jPanelSeletores, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 130, 1220, 610));
 
@@ -495,12 +514,21 @@ public class TelaPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnProdutosActionPerformed
 
+    private void jComboBoxEmpresasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxEmpresasActionPerformed
+        if(!jComboBoxEmpresas.getSelectedItem().equals("Selecione")) {
+            jPanelDadosEmpresa.setVisible(true);
+        } else {
+            jPanelDadosEmpresa.setVisible(false);
+        }
+    }//GEN-LAST:event_jComboBoxEmpresasActionPerformed
+
     private void setVisibilidadePaineisMigracao() {
         jPanelSeletores.setVisible(false);
         jPanelContasReceber.setVisible(false);
         jPanelContasAPagar.setVisible(false);
         jPanelProdutos.setVisible(false);
         jPanelExecutar.setVisible(false);
+        jPanelDadosEmpresa.setVisible(false);
     }
 
     public static void main(String args[]) {
@@ -536,6 +564,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelConfiguracao;
     private javax.swing.JPanel jPanelContasAPagar;
     private javax.swing.JPanel jPanelContasReceber;
+    private javax.swing.JPanel jPanelDadosEmpresa;
     private javax.swing.JPanel jPanelExecutar;
     private javax.swing.JPanel jPanelMenus;
     private javax.swing.JPanel jPanelMigracao;
