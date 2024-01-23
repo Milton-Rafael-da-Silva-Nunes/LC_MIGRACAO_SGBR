@@ -80,18 +80,23 @@ public class EmpresaDaoJDBC implements EmpresaDao {
         if (!controle.isEmpty() && !nomeFantasia.isEmpty()) {
             Empresa empresa = new Empresa();
             empresa.setControle(controle);
-            empresa.setCnpj(ObjetoUtil.validarString(rs.getString("cnpj")));
-            empresa.setIe(ObjetoUtil.validarString(rs.getString("ie")));
             empresa.setNomeFantasia(nomeFantasia);
             empresa.setRazaoSocial(ObjetoUtil.validarString(rs.getString("razaosocial")));
             empresa.setEndereco(ObjetoUtil.validarString(rs.getString("endereco")));
+            empresa.setComplemento(ObjetoUtil.validarString(rs.getString("complemento")));
             empresa.setBairro(ObjetoUtil.validarString(rs.getString("bairro")));
             empresa.setCidade(ObjetoUtil.validarString(rs.getString("cidade")));
             empresa.setUf(ObjetoUtil.validarString(rs.getString("uf")));
             empresa.setCep(ObjetoUtil.validarString(rs.getString("cep")));
+            empresa.setCnpj(ObjetoUtil.validarString(rs.getString("cnpj")));
+            empresa.setIe(ObjetoUtil.validarString(rs.getString("ie")));
+            empresa.setTelefone(ObjetoUtil.validarString(rs.getString("telefone")));
             empresa.setEmail(ObjetoUtil.validarString(rs.getString("email")));
+            empresa.setCrt(ObjetoUtil.validarString(rs.getString("crt")));
+            empresa.setNumero(ObjetoUtil.validarString(rs.getString("numero")));
 
             return empresa;
+            
         } else {
             throw new DbException("Dados de empresa inválidos ou ausentes! \n\n" + "Atenção: Codigo da empresa ou Nome não preenchidos.");
         }

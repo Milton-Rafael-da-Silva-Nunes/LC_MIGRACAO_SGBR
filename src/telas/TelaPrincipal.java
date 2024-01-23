@@ -7,6 +7,8 @@ import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
@@ -48,17 +50,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
         this.senha = senha;
         this.porta = porta;
         this.listaDeEmpresasSGBR = listaDeEmpresasSGBR;
-        System.out.println("TELA PRINCIPAL: " + caminhoBanco + "-" + usuario + "-" + senha + "-" + porta + " LISTA EMP -> " + listaDeEmpresasSGBR);
+        // Carrega a lista de Empresas para a combobox
+        mostrarListaDeEmpresasCombobox(listaDeEmpresasSGBR);
     }
 
-    private void mostrarListaDeEmpresasCombobox(List<Empresa> listaDeEmpresasSGBR) {
-        for (Empresa empresa : listaDeEmpresasSGBR) {
-            jComboBoxEmpresas.addItem(empresa.toString());
-        }
-    }
-
-    public void setVisibilidadePainelMigracao(boolean pode) {
-        jPanelMigracao.setVisible(pode);
+    private void setLogoLc() {
+        ImageIcon icon = new ImageIcon("src/imagens/lc_logoSofthouse.gif");
+        icon.setImage(icon.getImage().getScaledInstance(280, 280, 20));
+        lblLogo.setIcon(icon);
     }
 
     private void configurarGradienteMenus(JPanel panel, Color startColor, Color endColor, boolean horizontal) {
@@ -131,7 +130,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
             public void mouseClicked(MouseEvent e) {
                 jPanelSeletores.setVisible(true);
                 jPanelExecutar.setVisible(true);
-                mostrarListaDeEmpresasCombobox(listaDeEmpresasSGBR);
             }
         });
 
@@ -177,21 +175,25 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 System.out.println("Saindo do sistema");
             }
         });
-    }
 
-    private void getTelaSucessoMigracao() {
-        String mensagemTela = "Migração finalizada com sucesso!";
-        String localGif = "src/imagens/icons8-ok.gif";
-        telaSucessoMigracao = new TelaSucessoMigracao(TelaPrincipal.this, mensagemTela, localGif);
-        telaSucessoMigracao.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-        telaSucessoMigracao.setModalityType(JDialog.DEFAULT_MODALITY_TYPE);
-        telaSucessoMigracao.setVisible(true);
-    }
+        // Adiciona ouvintes de eventos de mouse ao JCombobox de Empresa
+        jComboBoxEmpresas.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Obtém o índice da empresa selecionada na ComboBox
+                int selectedIndex = jComboBoxEmpresas.getSelectedIndex();
 
-    private void setLogoLc() {
-        ImageIcon icon = new ImageIcon("src/imagens/lc_logoSofthouse.gif");
-        icon.setImage(icon.getImage().getScaledInstance(280, 280, 20));
-        lblLogo.setIcon(icon);
+                // Ajusta o índice para considerar a presença do item "Selecione"
+                int adjustedIndex = selectedIndex - 1;
+
+                if (adjustedIndex >= 0 && adjustedIndex < listaDeEmpresasSGBR.size()) {
+                    Empresa empresaSelecionada = listaDeEmpresasSGBR.get(adjustedIndex);
+
+                    // Chama o método para mostrar os dados da empresa
+                    mostrarDadosEmpresaSelecionada(empresaSelecionada);
+                }
+            }
+        });
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -212,14 +214,31 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         lblLogo = new javax.swing.JLabel();
         jPanelSeletores = new javax.swing.JPanel();
-        jPanelContasReceber = new javax.swing.JPanel();
-        btnReceber = new javax.swing.JRadioButton();
-        btnRecebidas = new javax.swing.JRadioButton();
-        btnClientes = new javax.swing.JRadioButton();
-        jPanelContasAPagar = new javax.swing.JPanel();
-        btnPagar = new javax.swing.JRadioButton();
-        btnPagas = new javax.swing.JRadioButton();
-        btnFornecedores = new javax.swing.JRadioButton();
+        jComboBoxEmpresas = new javax.swing.JComboBox<>();
+        jLabel4 = new javax.swing.JLabel();
+        jPanelDadosEmpresa = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        lblRazaoSocial = new javax.swing.JLabel();
+        lblEmail = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        lblBairro = new javax.swing.JLabel();
+        lblRegime = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        lblCnpj = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        lblIe = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        lblCidade = new javax.swing.JLabel();
+        lblUf = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        lblEndereco = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        lblTelefone = new javax.swing.JLabel();
+        jPanelSelecao = new javax.swing.JPanel();
+        btnProdutos = new javax.swing.JRadioButton();
         jPanelProdutos = new javax.swing.JPanel();
         btnUnidade = new javax.swing.JRadioButton();
         btnCategoria = new javax.swing.JRadioButton();
@@ -230,11 +249,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JSeparator();
         btnEstoque = new javax.swing.JRadioButton();
         btnFabricante = new javax.swing.JRadioButton();
-        btnProdutos = new javax.swing.JRadioButton();
+        btnFornecedores = new javax.swing.JRadioButton();
+        jPanelContasAPagar = new javax.swing.JPanel();
+        btnPagar = new javax.swing.JRadioButton();
+        btnPagas = new javax.swing.JRadioButton();
+        jPanelContasReceber = new javax.swing.JPanel();
+        btnReceber = new javax.swing.JRadioButton();
+        btnRecebidas = new javax.swing.JRadioButton();
+        btnClientes = new javax.swing.JRadioButton();
         jProgressBar1 = new javax.swing.JProgressBar();
-        jComboBoxEmpresas = new javax.swing.JComboBox<>();
-        jLabel4 = new javax.swing.JLabel();
-        jPanelDadosEmpresa = new javax.swing.JPanel();
         jPanelExecutar = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
 
@@ -246,6 +269,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel3.setBackground(new java.awt.Color(106, 90, 205));
@@ -312,61 +336,111 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jPanelSeletores.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanelSeletores.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanelContasReceber.setBackground(new java.awt.Color(255, 255, 255));
-        jPanelContasReceber.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        btnReceber.setBackground(new java.awt.Color(255, 255, 255));
-        btnReceber.setFont(new java.awt.Font("Dialog", 1, 17)); // NOI18N
-        btnReceber.setForeground(new java.awt.Color(51, 51, 51));
-        btnReceber.setText(" Receber");
-        jPanelContasReceber.add(btnReceber, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 120, -1));
-
-        btnRecebidas.setBackground(new java.awt.Color(255, 255, 255));
-        btnRecebidas.setFont(new java.awt.Font("Dialog", 1, 17)); // NOI18N
-        btnRecebidas.setForeground(new java.awt.Color(51, 51, 51));
-        btnRecebidas.setText(" Recebidas");
-        jPanelContasReceber.add(btnRecebidas, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 120, -1));
-
-        jPanelSeletores.add(jPanelContasReceber, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 150, 60));
-
-        btnClientes.setBackground(new java.awt.Color(255, 255, 255));
-        btnClientes.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        btnClientes.setForeground(new java.awt.Color(0, 0, 0));
-        btnClientes.setText(" Clientes");
-        btnClientes.addActionListener(new java.awt.event.ActionListener() {
+        jComboBoxEmpresas.setBackground(new java.awt.Color(255, 255, 255));
+        jComboBoxEmpresas.setFont(new java.awt.Font("Dialog", 1, 17)); // NOI18N
+        jComboBoxEmpresas.setForeground(new java.awt.Color(0, 0, 0));
+        jComboBoxEmpresas.setToolTipText("");
+        jComboBoxEmpresas.setBorder(null);
+        jComboBoxEmpresas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnClientesActionPerformed(evt);
+                jComboBoxEmpresasActionPerformed(evt);
             }
         });
-        jPanelSeletores.add(btnClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 260, -1));
+        jPanelSeletores.add(jComboBoxEmpresas, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 1110, -1));
 
-        jPanelContasAPagar.setBackground(new java.awt.Color(255, 255, 255));
-        jPanelContasAPagar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jLabel4.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel4.setText("Empresa:");
+        jPanelSeletores.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, 30));
 
-        btnPagar.setBackground(new java.awt.Color(255, 255, 255));
-        btnPagar.setFont(new java.awt.Font("Dialog", 1, 17)); // NOI18N
-        btnPagar.setForeground(new java.awt.Color(51, 51, 51));
-        btnPagar.setText(" Pagar");
-        jPanelContasAPagar.add(btnPagar, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 0, 130, -1));
+        jPanelDadosEmpresa.setBackground(new java.awt.Color(255, 255, 255));
+        jPanelDadosEmpresa.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Informações da Empresa", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14), new java.awt.Color(102, 102, 102))); // NOI18N
+        jPanelDadosEmpresa.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnPagas.setBackground(new java.awt.Color(255, 255, 255));
-        btnPagas.setFont(new java.awt.Font("Dialog", 1, 17)); // NOI18N
-        btnPagas.setForeground(new java.awt.Color(51, 51, 51));
-        btnPagas.setText(" Pagas");
-        jPanelContasAPagar.add(btnPagas, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 30, 130, -1));
+        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel5.setText("E-mail:  ");
+        jPanelDadosEmpresa.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 70, -1, -1));
 
-        jPanelSeletores.add(jPanelContasAPagar, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 270, 150, 60));
+        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel6.setText("Razão Social:  ");
+        jPanelDadosEmpresa.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, -1, -1));
 
-        btnFornecedores.setBackground(new java.awt.Color(255, 255, 255));
-        btnFornecedores.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        btnFornecedores.setForeground(new java.awt.Color(0, 0, 0));
-        btnFornecedores.setText(" Fornecedores");
-        btnFornecedores.addActionListener(new java.awt.event.ActionListener() {
+        lblRazaoSocial.setForeground(new java.awt.Color(102, 102, 102));
+        jPanelDadosEmpresa.add(lblRazaoSocial, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 30, 310, 16));
+
+        lblEmail.setForeground(new java.awt.Color(102, 102, 102));
+        jPanelDadosEmpresa.add(lblEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(247, 70, 380, 16));
+
+        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel7.setText("Bairro:  ");
+        jPanelDadosEmpresa.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 50, -1, -1));
+
+        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel8.setText("Regime:  ");
+        jPanelDadosEmpresa.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 30, -1, -1));
+
+        lblBairro.setForeground(new java.awt.Color(102, 102, 102));
+        jPanelDadosEmpresa.add(lblBairro, new org.netbeans.lib.awtextra.AbsoluteConstraints(438, 50, 160, 16));
+
+        lblRegime.setForeground(new java.awt.Color(102, 102, 102));
+        jPanelDadosEmpresa.add(lblRegime, new org.netbeans.lib.awtextra.AbsoluteConstraints(916, 30, 210, 16));
+
+        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel9.setText("CNPJ:  ");
+        jPanelDadosEmpresa.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 30, -1, -1));
+
+        lblCnpj.setForeground(new java.awt.Color(102, 102, 102));
+        jPanelDadosEmpresa.add(lblCnpj, new org.netbeans.lib.awtextra.AbsoluteConstraints(454, 30, 180, 16));
+
+        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel10.setText("IE:  ");
+        jPanelDadosEmpresa.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 30, -1, -1));
+
+        lblIe.setForeground(new java.awt.Color(102, 102, 102));
+        jPanelDadosEmpresa.add(lblIe, new org.netbeans.lib.awtextra.AbsoluteConstraints(672, 30, 180, 16));
+
+        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel11.setText("UF:  ");
+        jPanelDadosEmpresa.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 50, -1, -1));
+
+        jLabel12.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel12.setText("Cidade:  ");
+        jPanelDadosEmpresa.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 50, -1, -1));
+
+        lblCidade.setForeground(new java.awt.Color(102, 102, 102));
+        jPanelDadosEmpresa.add(lblCidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(672, 50, 180, 16));
+
+        lblUf.setForeground(new java.awt.Color(102, 102, 102));
+        jPanelDadosEmpresa.add(lblUf, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 50, 40, 16));
+
+        jLabel13.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel13.setText("Endereço:  ");
+        jPanelDadosEmpresa.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, -1, -1));
+
+        lblEndereco.setForeground(new java.awt.Color(102, 102, 102));
+        jPanelDadosEmpresa.add(lblEndereco, new org.netbeans.lib.awtextra.AbsoluteConstraints(77, 50, 300, 16));
+
+        jLabel14.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel14.setText("Telefone:  ");
+        jPanelDadosEmpresa.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, -1));
+
+        lblTelefone.setForeground(new java.awt.Color(102, 102, 102));
+        jPanelDadosEmpresa.add(lblTelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(72, 70, 120, 16));
+
+        jPanelSeletores.add(jPanelDadosEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 1200, 100));
+
+        jPanelSelecao.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnProdutos.setBackground(new java.awt.Color(255, 255, 255));
+        btnProdutos.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        btnProdutos.setForeground(new java.awt.Color(0, 0, 0));
+        btnProdutos.setText(" Produtos");
+        btnProdutos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnFornecedoresActionPerformed(evt);
+                btnProdutosActionPerformed(evt);
             }
         });
-        jPanelSeletores.add(btnFornecedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 240, 260, -1));
+        jPanelSelecao.add(btnProdutos, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 20, 250, -1));
 
         jPanelProdutos.setBackground(new java.awt.Color(255, 255, 255));
         jPanelProdutos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -415,18 +489,63 @@ public class TelaPrincipal extends javax.swing.JFrame {
         btnFabricante.setText(" Fabricante");
         jPanelProdutos.add(btnFabricante, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 90, -1, -1));
 
-        jPanelSeletores.add(jPanelProdutos, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 280, 250, 260));
+        jPanelSelecao.add(jPanelProdutos, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 50, 250, 260));
 
-        btnProdutos.setBackground(new java.awt.Color(255, 255, 255));
-        btnProdutos.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        btnProdutos.setForeground(new java.awt.Color(0, 0, 0));
-        btnProdutos.setText(" Produtos");
-        btnProdutos.addActionListener(new java.awt.event.ActionListener() {
+        btnFornecedores.setBackground(new java.awt.Color(255, 255, 255));
+        btnFornecedores.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        btnFornecedores.setForeground(new java.awt.Color(0, 0, 0));
+        btnFornecedores.setText(" Fornecedores");
+        btnFornecedores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnProdutosActionPerformed(evt);
+                btnFornecedoresActionPerformed(evt);
             }
         });
-        jPanelSeletores.add(btnProdutos, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 250, 260, -1));
+        jPanelSelecao.add(btnFornecedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 20, 170, -1));
+
+        jPanelContasAPagar.setBackground(new java.awt.Color(255, 255, 255));
+        jPanelContasAPagar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnPagar.setBackground(new java.awt.Color(255, 255, 255));
+        btnPagar.setFont(new java.awt.Font("Dialog", 1, 17)); // NOI18N
+        btnPagar.setForeground(new java.awt.Color(51, 51, 51));
+        btnPagar.setText(" Pagar");
+        jPanelContasAPagar.add(btnPagar, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 0, 130, -1));
+
+        btnPagas.setBackground(new java.awt.Color(255, 255, 255));
+        btnPagas.setFont(new java.awt.Font("Dialog", 1, 17)); // NOI18N
+        btnPagas.setForeground(new java.awt.Color(51, 51, 51));
+        btnPagas.setText(" Pagas");
+        jPanelContasAPagar.add(btnPagas, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 30, 130, -1));
+
+        jPanelSelecao.add(jPanelContasAPagar, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 50, 150, 60));
+
+        jPanelContasReceber.setBackground(new java.awt.Color(255, 255, 255));
+        jPanelContasReceber.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnReceber.setBackground(new java.awt.Color(255, 255, 255));
+        btnReceber.setFont(new java.awt.Font("Dialog", 1, 17)); // NOI18N
+        btnReceber.setForeground(new java.awt.Color(51, 51, 51));
+        btnReceber.setText(" Receber");
+        jPanelContasReceber.add(btnReceber, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 120, -1));
+
+        btnRecebidas.setBackground(new java.awt.Color(255, 255, 255));
+        btnRecebidas.setFont(new java.awt.Font("Dialog", 1, 17)); // NOI18N
+        btnRecebidas.setForeground(new java.awt.Color(51, 51, 51));
+        btnRecebidas.setText(" Recebidas");
+        jPanelContasReceber.add(btnRecebidas, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 120, -1));
+
+        jPanelSelecao.add(jPanelContasReceber, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 150, 60));
+
+        btnClientes.setBackground(new java.awt.Color(255, 255, 255));
+        btnClientes.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        btnClientes.setForeground(new java.awt.Color(0, 0, 0));
+        btnClientes.setText(" Clientes");
+        btnClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClientesActionPerformed(evt);
+            }
+        });
+        jPanelSelecao.add(btnClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 160, -1));
 
         jProgressBar1.setBackground(new java.awt.Color(255, 255, 255));
         jProgressBar1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -435,29 +554,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jProgressBar1.setValue(55);
         jProgressBar1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jProgressBar1.setStringPainted(true);
-        jPanelSeletores.add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 572, 1200, 30));
+        jPanelSelecao.add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, 1180, 30));
 
-        jComboBoxEmpresas.setBackground(new java.awt.Color(255, 255, 255));
-        jComboBoxEmpresas.setFont(new java.awt.Font("Dialog", 1, 17)); // NOI18N
-        jComboBoxEmpresas.setForeground(new java.awt.Color(0, 0, 0));
-        jComboBoxEmpresas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione" }));
-        jComboBoxEmpresas.setToolTipText("");
-        jComboBoxEmpresas.setBorder(null);
-        jComboBoxEmpresas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxEmpresasActionPerformed(evt);
-            }
-        });
-        jPanelSeletores.add(jComboBoxEmpresas, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 1110, -1));
-
-        jLabel4.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel4.setText("Empresa:");
-        jPanelSeletores.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, 30));
-
-        jPanelDadosEmpresa.setBackground(new java.awt.Color(255, 255, 255));
-        jPanelDadosEmpresa.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Informações da Empresa", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
-        jPanelSeletores.add(jPanelDadosEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 1200, 120));
+        jPanelSeletores.add(jPanelSelecao, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 1200, 430));
 
         jPanel1.add(jPanelSeletores, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 130, 1220, 610));
 
@@ -515,12 +614,42 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnProdutosActionPerformed
 
     private void jComboBoxEmpresasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxEmpresasActionPerformed
-        if(!jComboBoxEmpresas.getSelectedItem().equals("Selecione")) {
+        if (!jComboBoxEmpresas.getSelectedItem().equals("Selecione")) {
             jPanelDadosEmpresa.setVisible(true);
+            jPanelSelecao.setVisible(true);
         } else {
             jPanelDadosEmpresa.setVisible(false);
+            jPanelSelecao.setVisible(false);
         }
     }//GEN-LAST:event_jComboBoxEmpresasActionPerformed
+
+    private void mostrarListaDeEmpresasCombobox(List<Empresa> listaDeEmpresasSGBR) {
+        jComboBoxEmpresas.removeAllItems();
+
+        jComboBoxEmpresas.addItem("Selecione");
+
+        for (Empresa empresa : listaDeEmpresasSGBR) {
+            jComboBoxEmpresas.addItem(empresa.toString().toUpperCase());
+        }
+    }
+
+    private void mostrarDadosEmpresaSelecionada(Empresa empresa) {
+        lblRazaoSocial.setText(empresa.getRazaoSocial().toUpperCase());
+        lblEmail.setText(empresa.getEndereco().toUpperCase());
+        lblBairro.setText(empresa.getBairro().toUpperCase());
+        lblEndereco.setText(empresa.getEndereco().toUpperCase());
+        lblRegime.setText(empresa.getCrt().toUpperCase());
+        lblCnpj.setText(empresa.getCnpj());
+        lblIe.setText(empresa.getIe());
+        lblCidade.setText(empresa.getCidade().toUpperCase());
+        lblUf.setText(empresa.getUf().toUpperCase());
+        lblTelefone.setText(empresa.getTelefone());
+        lblEmail.setText(empresa.getEmail());
+    }
+
+    public void setVisibilidadePainelMigracao(boolean pode) {
+        jPanelMigracao.setVisible(pode);
+    }
 
     private void setVisibilidadePaineisMigracao() {
         jPanelSeletores.setVisible(false);
@@ -529,6 +658,16 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jPanelProdutos.setVisible(false);
         jPanelExecutar.setVisible(false);
         jPanelDadosEmpresa.setVisible(false);
+        jPanelSelecao.setVisible(false);
+    }
+
+    private void getTelaSucessoMigracao() {
+        String mensagemTela = "Migração finalizada com sucesso!";
+        String localGif = "src/imagens/icons8-ok.gif";
+        telaSucessoMigracao = new TelaSucessoMigracao(TelaPrincipal.this, mensagemTela, localGif);
+        telaSucessoMigracao.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        telaSucessoMigracao.setModalityType(JDialog.DEFAULT_MODALITY_TYPE);
+        telaSucessoMigracao.setVisible(true);
     }
 
     public static void main(String args[]) {
@@ -554,9 +693,19 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JRadioButton btnUnidade;
     private javax.swing.JComboBox<String> jComboBoxEmpresas;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelConfiguracao;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
@@ -569,6 +718,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelMenus;
     private javax.swing.JPanel jPanelMigracao;
     private javax.swing.JPanel jPanelProdutos;
+    private javax.swing.JPanel jPanelSelecao;
     private javax.swing.JPanel jPanelSeletores;
     private javax.swing.JPanel jPanelsair;
     private javax.swing.JProgressBar jProgressBar1;
@@ -576,7 +726,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JLabel lblBairro;
+    private javax.swing.JLabel lblCidade;
+    private javax.swing.JLabel lblCnpj;
+    private javax.swing.JLabel lblEmail;
+    private javax.swing.JLabel lblEndereco;
+    private javax.swing.JLabel lblIe;
     private javax.swing.JLabel lblLogo;
+    private javax.swing.JLabel lblRazaoSocial;
+    private javax.swing.JLabel lblRegime;
     private javax.swing.JLabel lblSair;
+    private javax.swing.JLabel lblTelefone;
+    private javax.swing.JLabel lblUf;
     // End of variables declaration//GEN-END:variables
 }
