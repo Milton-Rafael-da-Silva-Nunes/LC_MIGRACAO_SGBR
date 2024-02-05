@@ -257,7 +257,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         btnReceber = new javax.swing.JRadioButton();
         btnRecebidas = new javax.swing.JRadioButton();
         btnClientes = new javax.swing.JRadioButton();
-        jProgressBar1 = new javax.swing.JProgressBar();
+        jProgressBarMigracao = new javax.swing.JProgressBar();
         jPanelExecutar = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
 
@@ -431,7 +431,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jPanelSelecao.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnProdutos.setBackground(new java.awt.Color(255, 255, 255));
         btnProdutos.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         btnProdutos.setForeground(new java.awt.Color(0, 0, 0));
         btnProdutos.setText(" Produtos");
@@ -442,48 +441,40 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         jPanelSelecao.add(btnProdutos, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 20, 250, -1));
 
-        jPanelProdutos.setBackground(new java.awt.Color(255, 255, 255));
         jPanelProdutos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnUnidade.setBackground(new java.awt.Color(255, 255, 255));
         btnUnidade.setFont(new java.awt.Font("Dialog", 1, 17)); // NOI18N
         btnUnidade.setForeground(new java.awt.Color(51, 51, 51));
         btnUnidade.setText(" Unidades");
         jPanelProdutos.add(btnUnidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 0, 160, -1));
 
-        btnCategoria.setBackground(new java.awt.Color(255, 255, 255));
         btnCategoria.setFont(new java.awt.Font("Dialog", 1, 17)); // NOI18N
         btnCategoria.setForeground(new java.awt.Color(51, 51, 51));
         btnCategoria.setText(" Categorias");
         jPanelProdutos.add(btnCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 30, -1, -1));
 
-        btnSubcategoria.setBackground(new java.awt.Color(255, 255, 255));
         btnSubcategoria.setFont(new java.awt.Font("Dialog", 1, 17)); // NOI18N
         btnSubcategoria.setForeground(new java.awt.Color(51, 51, 51));
         btnSubcategoria.setText(" Subcategorias");
         jPanelProdutos.add(btnSubcategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 60, -1, -1));
 
-        btnNcm.setBackground(new java.awt.Color(255, 255, 255));
         btnNcm.setFont(new java.awt.Font("Dialog", 1, 17)); // NOI18N
         btnNcm.setForeground(new java.awt.Color(51, 51, 51));
         btnNcm.setText(" Ncm");
         jPanelProdutos.add(btnNcm, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 140, -1, -1));
         jPanelProdutos.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 130, 210, 5));
 
-        btnCest.setBackground(new java.awt.Color(255, 255, 255));
         btnCest.setFont(new java.awt.Font("Dialog", 1, 17)); // NOI18N
         btnCest.setForeground(new java.awt.Color(51, 51, 51));
         btnCest.setText(" Cest");
         jPanelProdutos.add(btnCest, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 170, -1, -1));
         jPanelProdutos.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 210, 210, 5));
 
-        btnEstoque.setBackground(new java.awt.Color(255, 255, 255));
         btnEstoque.setFont(new java.awt.Font("Dialog", 1, 17)); // NOI18N
         btnEstoque.setForeground(new java.awt.Color(51, 51, 51));
         btnEstoque.setText(" Estoque");
         jPanelProdutos.add(btnEstoque, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 220, 180, -1));
 
-        btnFabricante.setBackground(new java.awt.Color(255, 255, 255));
         btnFabricante.setFont(new java.awt.Font("Dialog", 1, 17)); // NOI18N
         btnFabricante.setForeground(new java.awt.Color(51, 51, 51));
         btnFabricante.setText(" Fabricante");
@@ -491,7 +482,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jPanelSelecao.add(jPanelProdutos, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 50, 250, 260));
 
-        btnFornecedores.setBackground(new java.awt.Color(255, 255, 255));
         btnFornecedores.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         btnFornecedores.setForeground(new java.awt.Color(0, 0, 0));
         btnFornecedores.setText(" Fornecedores");
@@ -502,16 +492,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         jPanelSelecao.add(btnFornecedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 20, 170, -1));
 
-        jPanelContasAPagar.setBackground(new java.awt.Color(255, 255, 255));
         jPanelContasAPagar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnPagar.setBackground(new java.awt.Color(255, 255, 255));
         btnPagar.setFont(new java.awt.Font("Dialog", 1, 17)); // NOI18N
         btnPagar.setForeground(new java.awt.Color(51, 51, 51));
         btnPagar.setText(" Pagar");
         jPanelContasAPagar.add(btnPagar, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 0, 130, -1));
 
-        btnPagas.setBackground(new java.awt.Color(255, 255, 255));
         btnPagas.setFont(new java.awt.Font("Dialog", 1, 17)); // NOI18N
         btnPagas.setForeground(new java.awt.Color(51, 51, 51));
         btnPagas.setText(" Pagas");
@@ -519,16 +506,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jPanelSelecao.add(jPanelContasAPagar, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 50, 150, 60));
 
-        jPanelContasReceber.setBackground(new java.awt.Color(255, 255, 255));
         jPanelContasReceber.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnReceber.setBackground(new java.awt.Color(255, 255, 255));
         btnReceber.setFont(new java.awt.Font("Dialog", 1, 17)); // NOI18N
         btnReceber.setForeground(new java.awt.Color(51, 51, 51));
         btnReceber.setText(" Receber");
         jPanelContasReceber.add(btnReceber, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 120, -1));
 
-        btnRecebidas.setBackground(new java.awt.Color(255, 255, 255));
         btnRecebidas.setFont(new java.awt.Font("Dialog", 1, 17)); // NOI18N
         btnRecebidas.setForeground(new java.awt.Color(51, 51, 51));
         btnRecebidas.setText(" Recebidas");
@@ -536,7 +520,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jPanelSelecao.add(jPanelContasReceber, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 150, 60));
 
-        btnClientes.setBackground(new java.awt.Color(255, 255, 255));
         btnClientes.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         btnClientes.setForeground(new java.awt.Color(0, 0, 0));
         btnClientes.setText(" Clientes");
@@ -547,14 +530,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         jPanelSelecao.add(btnClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 160, -1));
 
-        jProgressBar1.setBackground(new java.awt.Color(255, 255, 255));
-        jProgressBar1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jProgressBar1.setForeground(new java.awt.Color(48, 47, 97));
-        jProgressBar1.setToolTipText("");
-        jProgressBar1.setValue(55);
-        jProgressBar1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jProgressBar1.setStringPainted(true);
-        jPanelSelecao.add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, 1180, 30));
+        jProgressBarMigracao.setBackground(new java.awt.Color(255, 255, 255));
+        jProgressBarMigracao.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jProgressBarMigracao.setForeground(new java.awt.Color(48, 47, 97));
+        jProgressBarMigracao.setToolTipText("");
+        jProgressBarMigracao.setValue(55);
+        jProgressBarMigracao.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jProgressBarMigracao.setStringPainted(true);
+        jPanelSelecao.add(jProgressBarMigracao, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, 1180, 30));
 
         jPanelSeletores.add(jPanelSelecao, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 1200, 430));
 
@@ -721,7 +704,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelSelecao;
     private javax.swing.JPanel jPanelSeletores;
     private javax.swing.JPanel jPanelsair;
-    private javax.swing.JProgressBar jProgressBar1;
+    private javax.swing.JProgressBar jProgressBarMigracao;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
