@@ -53,6 +53,7 @@ public class TelaSucessoMigracao extends JDialog {
             @Override
             public void mouseClicked(MouseEvent e) {
                 dispose(); 
+                System.exit(0);
             }
         });
     }

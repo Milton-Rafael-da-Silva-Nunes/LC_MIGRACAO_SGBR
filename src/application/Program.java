@@ -34,6 +34,18 @@ import sistemas.LC_SISTEMAS.model.entidades.Pagar;
 import sistemas.LC_SISTEMAS.model.entidades.Receber;
 import sistemas.LC_SISTEMAS.model.enuns.Estoque;
 import sistemas.LC_SISTEMAS.model.enuns.Regime;
+import static telas.TelaPrincipal.btnClientes;
+import static telas.TelaPrincipal.btnReceber;
+import static telas.TelaPrincipal.btnFornecedores;
+import static telas.TelaPrincipal.btnPagar;
+import static telas.TelaPrincipal.btnProdutos;
+import static telas.TelaPrincipal.btnUnidade;
+import static telas.TelaPrincipal.btnCategoria;
+import static telas.TelaPrincipal.btnSubcategoria;
+import static telas.TelaPrincipal.btnFabricante;
+import static telas.TelaPrincipal.btnNcm;
+import static telas.TelaPrincipal.btnCest;
+import static telas.TelaPrincipal.btnEstoque;
 
 /**
  *
@@ -86,66 +98,94 @@ public class Program {
                 System.out.println(obj);
             }
 
-            System.out.println("\n**** TESTE - findAll UNIDADE ****");
-            for (Unidade obj : listUnd) {
-                unidadedao.insert(obj);
-            }
-
-            System.out.println("\n**** TESTE - findAll NCM ****");
-            for (Ncm obj : listNcm) {
-                ncmdao.insert(obj);
-            }
-
-            System.out.println("\n**** TESTE - findAll CEST ****");
-            for (Cest obj : listaCest) {
-                cestdao.insert(obj);
-            }
-
-            System.out.println("\n**** TESTE - findAll CATEGORIA ****");
-            for (Categoria obj : listaCategoria) {
-                categoriadao.insert(obj);
-            }
-
-            System.out.println("\n**** TESTE - findAll FABRICANTE ****");
-            for (Fabricante obj : listaFabricante) {
-                fabricantedao.insert(obj);
-            }
-
-            System.out.println("\n**** TESTE - findAll SUBCATEGORIA ****");
-            for (SubCategoria obj : listaSubCategoria) {
-                subcategoriadao.insert(obj);
-            }
-
-            System.out.println("\n**** TESTE - findAll FORNECEDOR ****");
-            for (Fornecedor obj : listaFornecedor) {
-                fornecedordao.insert(obj);
-            }
-
-            System.out.println("\n**** TESTE - findAll PRODUTO ****");
-            Regime regime = Regime.SIMPLES;
-            Estoque estoque = Estoque.SIM;
-
-            for (Produto obj : listaProduto) {
-                produtodao.insert(obj, regime.getRegime());
-                // Inserir estoque  
-                if (estoque.getEstoque().equalsIgnoreCase("sim")) {
-                    produtodao.insertEstoqueProduto(obj);
+            if (btnProdutos.isSelected() && btnUnidade.isSelected()) {
+                System.out.println("\n**** TESTE - findAll UNIDADE ****");
+                for (Unidade obj : listUnd) {
+                    unidadedao.insert(obj);
                 }
             }
 
-            System.out.println("\n**** TESTE - findAll CLIENTE ****");
-            for (Cliente obj : listaCliente) {
-                clientedao.insert(obj);
+            if (btnProdutos.isSelected() && btnNcm.isSelected()) {
+                System.out.println("\n**** TESTE - findAll NCM ****");
+                for (Ncm obj : listNcm) {
+                    ncmdao.insert(obj);
+                }
             }
 
-            System.out.println("\n**** TESTE - findAll RECEBER ****");
-            for (Receber obj : listaReceber) {
-                receberdao.insert(obj);
+            if (btnProdutos.isSelected() && btnCest.isSelected()) {
+                System.out.println("\n**** TESTE - findAll CEST ****");
+                for (Cest obj : listaCest) {
+                    cestdao.insert(obj);
+                }
             }
 
-            System.out.println("\n**** TESTE - findAll PAGAR ****");
-            for (Pagar obj : listaPagar) {
-                pagardao.insert(obj);
+            if (btnProdutos.isSelected() && btnCategoria.isSelected()) {
+                System.out.println("\n**** TESTE - findAll CATEGORIA ****");
+                for (Categoria obj : listaCategoria) {
+                    categoriadao.insert(obj);
+                }
+            }
+
+            if (btnProdutos.isSelected() && btnFabricante.isSelected()) {
+                System.out.println("\n**** TESTE - findAll FABRICANTE ****");
+                for (Fabricante obj : listaFabricante) {
+                    fabricantedao.insert(obj);
+                }
+            }
+
+            if (btnProdutos.isSelected() && btnSubcategoria.isSelected()) {
+                System.out.println("\n**** TESTE - findAll SUBCATEGORIA ****");
+                for (SubCategoria obj : listaSubCategoria) {
+                    subcategoriadao.insert(obj);
+                }
+            }
+
+            if (btnFornecedores.isSelected()) {
+                System.out.println("\n**** TESTE - findAll FORNECEDOR ****");
+                for (Fornecedor obj : listaFornecedor) {
+                    fornecedordao.insert(obj);
+                }
+            }
+
+            if (btnProdutos.isSelected()) {
+                System.out.println("\n**** TESTE - findAll PRODUTO ****");
+                Regime regime = Regime.SIMPLES;
+                Estoque estoque;
+
+                if (btnEstoque.isSelected()) {
+                    estoque = Estoque.SIM;
+                } else {
+                    estoque = Estoque.NAO;
+                }
+
+                for (Produto obj : listaProduto) {
+                    produtodao.insert(obj, regime.getRegime());
+                    // Inserir estoque  
+                    if (estoque.getEstoque().equalsIgnoreCase("sim")) {
+                        produtodao.insertEstoqueProduto(obj);
+                    }
+                }
+            }
+
+            if (btnClientes.isSelected()) {
+                System.out.println("\n**** TESTE - findAll CLIENTE ****");
+                for (Cliente obj : listaCliente) {
+                    clientedao.insert(obj);
+                }
+            }
+
+            if (btnClientes.isSelected() && btnReceber.isSelected()) {
+                System.out.println("\n**** TESTE - findAll RECEBER ****");
+                for (Receber obj : listaReceber) {
+                    receberdao.insert(obj);
+                }
+            }
+
+            if (btnFornecedores.isSelected() && btnPagar.isSelected()) {
+                System.out.println("\n**** TESTE - findAll PAGAR ****");
+                for (Pagar obj : listaPagar) {
+                    pagardao.insert(obj);
+                }
             }
 
             System.out.println("");
@@ -157,7 +197,7 @@ public class Program {
             System.out.println("");
 
             conn2.commit();
-            
+
         } catch (Exception ex) {
             conn2.rollback();
             Logger.getLogger(Program.class.getName()).log(Level.SEVERE, null, ex);
