@@ -196,6 +196,7 @@ public class Program {
             conn2.commit();
 
         } catch (Exception ex) {
+            ex.printStackTrace();
             conn2.rollback();
             Logger.getLogger(Program.class.getName()).log(Level.SEVERE, null, ex);
         } finally {

@@ -17,7 +17,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import sistemas.SGBR.model.entidades.Empresa;
 
@@ -27,7 +26,7 @@ import sistemas.SGBR.model.entidades.Empresa;
  */
 public class TelaPrincipal extends javax.swing.JFrame {
 
-    private TelaSucessoMigracao telaSucessoMigracao;
+    private TelaMensagemPrincipal telaMensagemPrincipal;
     private FirebirdConnector firebirdConnector;
     protected String caminhoBanco;
     protected String usuario;
@@ -150,12 +149,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
             public void mouseClicked(MouseEvent e) {
                 try {
 
-                    if (btnProdutos.isSelected() || btnClientes.isSelected() || btnFornecedores.isSelected()) {
-                        System.out.println("EXECUTANDO MIGRACAO");
+                    if (btnClientes.isSelected() || btnFornecedores.isSelected() || btnProdutos.isSelected()) {
                         new Program(firebirdConnector).realizarOperacoes();
                         getTelaSucessoMigracao();
                     } else {
-                        JOptionPane.showMessageDialog(null, "Selecione uma tebela para iniciar a Migração!", "Atenção", JOptionPane.WARNING_MESSAGE);
+                        getTelaAtencao();
                     }
 
                 } catch (SQLException ex) {
@@ -334,7 +332,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jSeparator1.setForeground(new java.awt.Color(255, 255, 255));
         jPanelMenus.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 290, 10));
 
-        jPanel1.add(jPanelMenus, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 310, 760));
+        jPanel1.add(jPanelMenus, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 310, 750));
 
         lblLogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jPanel1.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 310, 110));
@@ -673,13 +671,23 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jPanelSelecao.setVisible(false);
     }
 
+    private void exibirMensagem(String mensagem, String caminhoIcone) {
+        telaMensagemPrincipal = new TelaMensagemPrincipal(TelaPrincipal.this, mensagem, caminhoIcone);
+        telaMensagemPrincipal.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        telaMensagemPrincipal.setModalityType(JDialog.DEFAULT_MODALITY_TYPE);
+        telaMensagemPrincipal.setVisible(true);
+    }
+
+    // Variaveis de icones.
+    private static final String OK_ICON_PATH = "src/imagens/icons8-ok.gif";
+    private static final String ATENCAO_ICON_PATH = "src/imagens/icons8-atencao.gif.gif";
+
     private void getTelaSucessoMigracao() {
-        String mensagemTela = "Migração finalizada com sucesso!";
-        String localGif = "src/imagens/icons8-ok.gif";
-        telaSucessoMigracao = new TelaSucessoMigracao(TelaPrincipal.this, mensagemTela, localGif);
-        telaSucessoMigracao.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-        telaSucessoMigracao.setModalityType(JDialog.DEFAULT_MODALITY_TYPE);
-        telaSucessoMigracao.setVisible(true);
+        exibirMensagem("Migração finalizada com sucesso!", OK_ICON_PATH);
+    }
+
+    private void getTelaAtencao() {
+        exibirMensagem("Selecione uma tebela!", ATENCAO_ICON_PATH);
     }
 
     public static void main(String args[]) {

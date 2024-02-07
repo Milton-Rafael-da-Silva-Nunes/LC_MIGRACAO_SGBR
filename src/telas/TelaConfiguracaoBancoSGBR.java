@@ -9,7 +9,6 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
@@ -35,7 +34,7 @@ public class TelaConfiguracaoBancoSGBR extends JDialog {
         super(telaPrincipal, "Configuração do Banco de Dados", Dialog.ModalityType.APPLICATION_MODAL);
         initComponents();
         configurarMouseListeners();
-        configurarGradienteTopo(jPanelTopo, new Color(21, 30, 60), new Color(72, 61, 139), true);
+        configurarGradienteTopo(jPanelTopo, new Color(20, 21, 81), new Color(72, 61, 139), true);
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         this.telaPrincipal = telaPrincipal;
     }
@@ -158,11 +157,10 @@ public class TelaConfiguracaoBancoSGBR extends JDialog {
 
                 FirebirdConnector firebirdConnector = new FirebirdConnector(porta, caminhoBanco, usuario, senha);
                 boolean validarConexao = firebirdConnector.testarConexao(porta, usuario, senha, caminhoBanco);
-                List<Empresa> listaDeEmpresas = new ArrayList<>();
 
                 if (validarConexao) {
-                    EmpresaDaoJDBC t = new EmpresaDaoJDBC(firebirdConnector.getConnection());
-                    listaDeEmpresas = t.findAll();
+                    EmpresaDaoJDBC empresas = new EmpresaDaoJDBC(firebirdConnector.getConnection());
+                    List<Empresa> listaDeEmpresas = empresas.findAll();
                     configurarTelaPrincipal(firebirdConnector, caminhoBanco, usuario, senha, porta, listaDeEmpresas);
                 } else {
                     getTelaLoginNaoSalvo();
@@ -398,7 +396,7 @@ public class TelaConfiguracaoBancoSGBR extends JDialog {
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/logo SGBR.png"))); // NOI18N
-        jLabel7.setText(" Configuração do Banco de Dados");
+        jLabel7.setText("   Configuração do Banco de Dados");
 
         javax.swing.GroupLayout jPanelTopoLayout = new javax.swing.GroupLayout(jPanelTopo);
         jPanelTopo.setLayout(jPanelTopoLayout);

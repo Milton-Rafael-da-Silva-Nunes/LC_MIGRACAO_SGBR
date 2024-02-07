@@ -14,9 +14,9 @@ import javax.swing.JLabel;
  *
  * @author Rafael Nunes
  */
-public class TelaSucessoMigracao extends JDialog {
+public class TelaMensagemPrincipal extends JDialog {
 
-    public TelaSucessoMigracao(TelaPrincipal telaPrincipal, String mensagemTela, String caminhoGif) {
+    public TelaMensagemPrincipal(TelaPrincipal telaPrincipal, String mensagemTela, String caminhoGif) {
         super(telaPrincipal, "Tela de Sucesso Migração", Dialog.ModalityType.APPLICATION_MODAL);
         initComponents();
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -68,7 +68,6 @@ public class TelaSucessoMigracao extends JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(480, 198));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());

@@ -14,7 +14,7 @@ import sistemas.LC_SISTEMAS.model.entidades.Cest;
 
 /**
  *
- * @author supor
+ * @author Rafael Nunes
  */
 public class CestDaoJDBC implements CestDao {
 
@@ -62,8 +62,8 @@ public class CestDaoJDBC implements CestDao {
 
             if (!cestExiste(cest.getCest())) { // // Verificar se o Cest já existe antes de inserir no LC.
                 st.setString(1, cest.getCest());
-                st.setString(2, "00000000");
-                st.setString(3, "");
+                st.setString(2, cest.getNcm());
+                st.setString(3, cest.getDescricao());
                 st.executeUpdate();
                 System.out.println("CEST inserido: " + cest.getCest());
             }
@@ -78,6 +78,8 @@ public class CestDaoJDBC implements CestDao {
     private Cest instanciacaoCest(ResultSet rs) throws SQLException {
         Cest cest = new Cest();
         cest.setCest(rs.getString("cest").trim());
+        cest.setNcm("00000000");
+        cest.setDescricao("");
         return cest;
     }
 
