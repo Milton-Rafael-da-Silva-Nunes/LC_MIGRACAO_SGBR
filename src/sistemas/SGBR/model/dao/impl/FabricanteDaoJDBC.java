@@ -15,7 +15,7 @@ import util.ObjetoUtil;
 
 /**
  *
- * @author supor
+ * @author Rafael Nunes
  */
 public class FabricanteDaoJDBC implements FabricanteDao {
 

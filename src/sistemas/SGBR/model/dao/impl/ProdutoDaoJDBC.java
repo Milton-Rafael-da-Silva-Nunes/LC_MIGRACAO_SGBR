@@ -21,7 +21,7 @@ import util.ObjetoUtil;
 
 /**
  *
- * @author supor
+ * @author Rafael Nunes
  */
 public class ProdutoDaoJDBC implements ProdutoDao {
 

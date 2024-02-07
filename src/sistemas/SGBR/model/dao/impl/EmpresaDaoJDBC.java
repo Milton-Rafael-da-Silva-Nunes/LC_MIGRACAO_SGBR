@@ -14,7 +14,7 @@ import util.ObjetoUtil;
 
 /**
  *
- * @author supor
+ * @author Rafael Nunes
  */
 public class EmpresaDaoJDBC implements EmpresaDao {
 

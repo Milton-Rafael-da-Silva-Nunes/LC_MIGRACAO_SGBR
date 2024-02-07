@@ -14,7 +14,7 @@ import sistemas.LC_SISTEMAS.model.entidades.Ncm;
 
 /**
  *
- * @author supor
+ * @author Rafael Nunes
  */
 public class NcmDaoJDBC implements NcmDao {
 
@@ -61,17 +61,17 @@ public class NcmDaoJDBC implements NcmDao {
 
             if (!ncmExiste(ncm.getNcm())) {
                 st.setString(1, ncm.getNcm());
-                st.setString(2, "");
-                st.setString(3, "");
-                st.setDouble(4, 0.0);
-                st.setDouble(5, 0.0);
-                st.setDouble(6, 0.0);
-                st.setDouble(7, 0.0);
-                st.setString(8, null);
-                st.setString(9, null);
-                st.setString(10, "");
-                st.setString(11, "");
-                st.setInt(12, 1);
+                st.setString(2, ncm.getEx());
+                st.setString(3, ncm.getDescricao());
+                st.setDouble(4, ncm.getAliquotaNacional());
+                st.setDouble(5, ncm.getAliquotaInternacional());
+                st.setDouble(6, ncm.getAliquotaEstadual());
+                st.setDouble(7, ncm.getAliquotaNacional());
+                st.setString(8, ncm.getVigencialInicio());
+                st.setString(9, ncm.getVigenciaFim());
+                st.setString(10, ncm.getChave());
+                st.setString(11, ncm.getVersao());
+                st.setInt(12, ncm.getAtivo());
                 st.executeUpdate();
                 System.out.println("NCM inserido: " + ncm.getNcm());
             }
@@ -86,6 +86,15 @@ public class NcmDaoJDBC implements NcmDao {
     private Ncm instaciacaoNcm(ResultSet rs) throws SQLException {
         Ncm ncm = new Ncm();
         ncm.setNcm(rs.getString("ncm").trim());
+        ncm.setEx("");
+        ncm.setDescricao("");
+        ncm.setAliquotaNacional(0.0);
+        ncm.setAliquotaEstadual(0.0);
+        ncm.setAliquotaMunicipal(0.0);
+        ncm.setAliquotaInternacional(0.0);
+        ncm.setVersao("");
+        ncm.setChave("");
+        ncm.setAtivo(1);
         return ncm;
     }
 

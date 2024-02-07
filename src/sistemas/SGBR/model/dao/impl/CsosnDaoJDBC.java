@@ -13,7 +13,7 @@ import sistemas.LC_SISTEMAS.model.entidades.Csosn;
 
 /**
  *
- * @author supor
+ * @author Rafael Nunes
  */
 public class CsosnDaoJDBC implements CsosnDao {
 
