@@ -145,6 +145,7 @@ public class Program {
                 for (Fornecedor obj : listaFornecedor) {
                     fornecedordao.insert(obj);
                 }
+                contadorDeObjetosMigrados(listaFornecedor.size(), "F");
             }
 
             if (btnProdutos.isSelected()) {
@@ -165,6 +166,7 @@ public class Program {
                         produtodao.insertEstoqueProduto(obj);
                     }
                 }
+                contadorDeObjetosMigrados(listaProduto.size(), "P");
             }
 
             if (btnClientes.isSelected()) {
@@ -172,6 +174,7 @@ public class Program {
                 for (Cliente obj : listaCliente) {
                     clientedao.insert(obj);
                 }
+                contadorDeObjetosMigrados(listaCliente.size(), "C");
             }
 
             if (btnClientes.isSelected() && btnReceber.isSelected()) {
@@ -179,6 +182,7 @@ public class Program {
                 for (Receber obj : listaReceber) {
                     receberdao.insert(obj);
                 }
+                contadorDeObjetosMigrados(listaReceber.size(), "RC");
             }
 
             if (btnFornecedores.isSelected() && btnPagar.isSelected()) {
@@ -186,15 +190,8 @@ public class Program {
                 for (Pagar obj : listaPagar) {
                     pagardao.insert(obj);
                 }
+                contadorDeObjetosMigrados(listaPagar.size(), "PG");
             }
-
-            System.out.println("");
-            System.out.println("Total de produtos Migrados: " + listaProduto.size());
-            System.out.println("Total de clientes Migrados: " + listaCliente.size());
-            System.out.println("Total de forneced Migrados: " + listaFornecedor.size());
-            System.out.println("Total de Receber  Migrados: " + listaReceber.size());
-            System.out.println("Total de Pagar    Migrados: " + listaPagar.size());
-            System.out.println("");
 
             conn2.commit();
 
@@ -205,5 +202,21 @@ public class Program {
             FirebirdConnector.closeConnection(conn1);
             MysqlConnector.closeConnection(conn2);
         }
+    }
+
+    private void contadorDeObjetosMigrados(int size, String tipo) {
+        System.out.println("");
+        if (tipo.equals("P")) {
+            System.out.println("Total de produtos Migrados: " + size);
+        } else if (tipo.equals("C")) {
+            System.out.println("Total de clientes Migrados: " + size);
+        } else if (tipo.equals("F")) {
+            System.out.println("Total de forneced Migrados: " + size);
+        } else if (tipo.equals("RC")) {
+            System.out.println("Total de Receber  Migrados: " + size);
+        } else if (tipo.equals("PG")) {
+            System.out.println("Total de Pagar    Migrados: " + size);
+        }
+        System.out.println("");
     }
 }

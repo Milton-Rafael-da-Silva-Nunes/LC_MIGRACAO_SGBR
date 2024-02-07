@@ -176,6 +176,7 @@ public class TelaConfiguracaoBancoSGBR extends JDialog {
         getTelaLoginSalvo();
         dispose();
         telaPrincipal.setVisibilidadePainelMigracao(true);
+        telaPrincipal.setVisibilidadePainelConfiguracao(false);
     }
 
     private void exibirMensagem(String mensagem, String caminhoIcone) {
@@ -426,13 +427,7 @@ public class TelaConfiguracaoBancoSGBR extends JDialog {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaConfiguracaoBancoSGBR.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaConfiguracaoBancoSGBR.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaConfiguracaoBancoSGBR.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(TelaConfiguracaoBancoSGBR.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
     }

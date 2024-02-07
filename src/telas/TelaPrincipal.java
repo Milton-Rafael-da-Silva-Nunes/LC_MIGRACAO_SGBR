@@ -17,6 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import sistemas.SGBR.model.entidades.Empresa;
 
@@ -147,10 +148,16 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
             @Override
             public void mouseClicked(MouseEvent e) {
-                System.out.println("EXECUTANDO MIGRACAO");
                 try {
-                    new Program(firebirdConnector).realizarOperacoes();
-                    getTelaSucessoMigracao();
+
+                    if (btnProdutos.isSelected() || btnClientes.isSelected() || btnFornecedores.isSelected()) {
+                        System.out.println("EXECUTANDO MIGRACAO");
+                        new Program(firebirdConnector).realizarOperacoes();
+                        getTelaSucessoMigracao();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Selecione uma tebela para iniciar a Migração!", "Atenção", JOptionPane.WARNING_MESSAGE);
+                    }
+
                 } catch (SQLException ex) {
                     Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -629,9 +636,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jComboBoxEmpresas.addItem("Selecione");
 
-        for (Empresa empresa : listaDeEmpresasSGBR) {
+        listaDeEmpresasSGBR.forEach((empresa) -> {
             jComboBoxEmpresas.addItem(empresa.toString().toUpperCase());
-        }
+        });
     }
 
     private void mostrarDadosEmpresaSelecionada(Empresa empresa) {
@@ -650,6 +657,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     public void setVisibilidadePainelMigracao(boolean pode) {
         jPanelMigracao.setVisible(pode);
+    }
+
+    public void setVisibilidadePainelConfiguracao(boolean pode) {
+        jPanelConfiguracao.setVisible(pode);
     }
 
     private void setVisibilidadePaineisMigracao() {
