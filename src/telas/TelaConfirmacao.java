@@ -1,6 +1,5 @@
 package telas;
 
-import java.awt.Color;
 import java.awt.Dialog;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -9,6 +8,8 @@ import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import static telas.TelaPrincipal.cinza;
+import static telas.TelaPrincipal.roxo;
 
 /**
  *
@@ -42,17 +43,17 @@ public class TelaConfirmacao extends JDialog {
         jPanelOk.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                jPanelOk.setBackground(new Color(182, 187, 187));  // Cor ao passar o mouse
+                jPanelOk.setBackground(cinza);  // Cor ao passar o mouse
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                jPanelOk.setBackground(new Color(48, 47, 97));  // Cor original
+                jPanelOk.setBackground(roxo);  // Cor original
             }
 
             @Override
             public void mouseClicked(MouseEvent e) {
-                dispose(); 
+                dispose();
             }
         });
     }
@@ -79,7 +80,7 @@ public class TelaConfirmacao extends JDialog {
         jLabelTexto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jPanel1.add(jLabelTexto, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 440, 60));
 
-        jPanelOk.setBackground(new java.awt.Color(48, 47, 97));
+        jPanelOk.setBackground(new java.awt.Color(99, 49, 148));
         jPanelOk.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N

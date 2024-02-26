@@ -16,6 +16,8 @@ import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import sistemas.SGBR.model.dao.impl.EmpresaDaoJDBC;
 import sistemas.SGBR.model.entidades.Empresa;
+import static telas.TelaPrincipal.cinza;
+import static telas.TelaPrincipal.roxo;
 
 /**
  *
@@ -29,12 +31,13 @@ public class TelaConfiguracaoBancoSGBR extends JDialog {
     private String porta;
     private TelaConfirmacao telaConfirmacao;
     private TelaPrincipal telaPrincipal;
+    Color branco = new Color(255, 255, 255);
 
     public TelaConfiguracaoBancoSGBR(TelaPrincipal telaPrincipal) {
         super(telaPrincipal, "Configuração do Banco de Dados", Dialog.ModalityType.APPLICATION_MODAL);
         initComponents();
         configurarMouseListeners();
-        configurarGradienteTopo(jPanelTopo, new Color(20, 21, 81), new Color(72, 61, 139), true);
+        //configurarGradienteTopo(jPanelTopo, new Color(20, 21, 81), new Color(72, 61, 139), true);
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         this.telaPrincipal = telaPrincipal;
     }
@@ -75,12 +78,12 @@ public class TelaConfiguracaoBancoSGBR extends JDialog {
         jPanelPesquisar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                jPanelPesquisar.setBackground(new Color(182, 187, 187));  // Cor ao passar o mouse
+                jPanelPesquisar.setBackground(cinza);  // Cor ao passar o mouse
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                jPanelPesquisar.setBackground(new Color(255, 255, 255));  // Cor original
+                jPanelPesquisar.setBackground(branco);  // Cor original
             }
 
             @Override
@@ -94,12 +97,12 @@ public class TelaConfiguracaoBancoSGBR extends JDialog {
         jPanelSair.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                jPanelSair.setBackground(new Color(182, 187, 187));  // Cor ao passar o mouse
+                jPanelSair.setBackground(cinza);  // Cor ao passar o mouse
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                jPanelSair.setBackground(new Color(106, 90, 205));  // Cor original
+                jPanelSair.setBackground(roxo);  // Cor original
             }
 
             @Override
@@ -111,12 +114,12 @@ public class TelaConfiguracaoBancoSGBR extends JDialog {
         jPanelTestarConexao.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                jPanelTestarConexao.setBackground(new Color(182, 187, 187));  // Cor ao passar o mouse
+                jPanelTestarConexao.setBackground(cinza);  // Cor ao passar o mouse
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                jPanelTestarConexao.setBackground(new Color(106, 90, 205));  // Cor original
+                jPanelTestarConexao.setBackground(roxo);  // Cor original
             }
 
             @Override
@@ -141,12 +144,12 @@ public class TelaConfiguracaoBancoSGBR extends JDialog {
         jPanelSalvar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                jPanelSalvar.setBackground(new Color(182, 187, 187));  // Cor ao passar o mouse
+                jPanelSalvar.setBackground(cinza);  // Cor ao passar o mouse
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                jPanelSalvar.setBackground(new Color(106, 90, 205));  // Cor original
+                jPanelSalvar.setBackground(roxo);  // Cor original
             }
 
             @Override
@@ -259,7 +262,7 @@ public class TelaConfiguracaoBancoSGBR extends JDialog {
         jLabel1.setText("Local:");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 59, 60, 30));
 
-        jPanel2.setBackground(new java.awt.Color(106, 90, 205));
+        jPanel2.setBackground(new java.awt.Color(99, 49, 148));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabelLocalbanco.setBackground(new java.awt.Color(255, 255, 255));
@@ -273,7 +276,7 @@ public class TelaConfiguracaoBancoSGBR extends JDialog {
         jPanelPesquisar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icons8-pesquisar-35.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icons8-pesquisar-33.png"))); // NOI18N
         jPanelPesquisar.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 50, 50));
 
         jPanel1.add(jPanelPesquisar, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 82, 50, 50));
@@ -294,11 +297,13 @@ public class TelaConfiguracaoBancoSGBR extends JDialog {
         jLabel9.setText("Senha");
 
         txtServidor.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        txtServidor.setForeground(new java.awt.Color(0, 0, 0));
 
         txtUsuario.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        txtUsuario.setForeground(new java.awt.Color(0, 0, 0));
         txtUsuario.setText("SYSDBA");
 
-        jPanelTestarConexao.setBackground(new java.awt.Color(106, 90, 205));
+        jPanelTestarConexao.setBackground(new java.awt.Color(99, 49, 148));
         jPanelTestarConexao.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -308,6 +313,7 @@ public class TelaConfiguracaoBancoSGBR extends JDialog {
         jPanelTestarConexao.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 90, 50));
 
         txtSenha.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        txtSenha.setForeground(new java.awt.Color(0, 0, 0));
         txtSenha.setText("masterkey");
 
         jLabel10.setBackground(new java.awt.Color(153, 153, 153));
@@ -315,6 +321,7 @@ public class TelaConfiguracaoBancoSGBR extends JDialog {
         jLabel10.setText("Porta");
 
         txtPorta.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        txtPorta.setForeground(new java.awt.Color(0, 0, 0));
         txtPorta.setText("3050");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -366,7 +373,7 @@ public class TelaConfiguracaoBancoSGBR extends JDialog {
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 660, 250));
 
-        jPanelSair.setBackground(new java.awt.Color(106, 90, 205));
+        jPanelSair.setBackground(new java.awt.Color(99, 49, 148));
         jPanelSair.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -378,7 +385,7 @@ public class TelaConfiguracaoBancoSGBR extends JDialog {
 
         jPanel1.add(jPanelSair, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 420, 90, 50));
 
-        jPanelSalvar.setBackground(new java.awt.Color(106, 90, 205));
+        jPanelSalvar.setBackground(new java.awt.Color(99, 49, 148));
         jPanelSalvar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel5.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -390,7 +397,7 @@ public class TelaConfiguracaoBancoSGBR extends JDialog {
 
         jPanel1.add(jPanelSalvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 420, 90, 50));
 
-        jPanelTopo.setBackground(new java.awt.Color(204, 204, 204));
+        jPanelTopo.setBackground(new java.awt.Color(37, 37, 37));
 
         jLabel7.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));

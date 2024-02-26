@@ -1,6 +1,5 @@
 package telas;
 
-import java.awt.Color;
 import java.awt.Dialog;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -9,6 +8,8 @@ import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import static telas.TelaPrincipal.cinza;
+import static telas.TelaPrincipal.roxo;
 
 /**
  *
@@ -23,7 +24,7 @@ public class TelaMensagemPrincipal extends JDialog {
         configurarMouseListeners();
         ajustarTextoImagem(mensagemTela, caminhoGif);
     }
-    
+
     private void ajustarTextoImagem(String mensagemTela, String caminhoGif) {
         JLabel textoLabel = new JLabel(mensagemTela + " ");
         textoLabel.setFont(new Font("Arial", Font.BOLD, 18));
@@ -37,22 +38,22 @@ public class TelaMensagemPrincipal extends JDialog {
         jLabelMensagemTela.add(textoLabel);
         jLabelMensagemTela.add(imagemLabel);
     }
-    
+
     private void configurarMouseListeners() {
         jPanelOK.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                jPanelOK.setBackground(new Color(182, 187, 187));  // Cor ao passar o mouse
+                jPanelOK.setBackground(cinza);  // Cor ao passar o mouse
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                jPanelOK.setBackground(new Color(48, 47, 97));  // Cor original
+                jPanelOK.setBackground(roxo);  // Cor original
             }
 
             @Override
             public void mouseClicked(MouseEvent e) {
-                dispose(); 
+                dispose();
             }
         });
     }
@@ -77,7 +78,7 @@ public class TelaMensagemPrincipal extends JDialog {
         jLabelMensagemTela.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jPanel1.add(jLabelMensagemTela, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 440, 60));
 
-        jPanelOK.setBackground(new java.awt.Color(48, 47, 97));
+        jPanelOK.setBackground(new java.awt.Color(99, 49, 148));
         jPanelOK.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
