@@ -242,6 +242,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         lblEndereco = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         lblTelefone = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jComboBoxRegimeEmpresa = new javax.swing.JComboBox<>();
         jPanelSelecao = new javax.swing.JPanel();
         btnProdutos = new javax.swing.JRadioButton();
         jPanelProdutos = new javax.swing.JPanel();
@@ -262,7 +264,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         btnReceber = new javax.swing.JRadioButton();
         btnRecebidas = new javax.swing.JRadioButton();
         btnClientes = new javax.swing.JRadioButton();
-        jProgressBarMigracao = new javax.swing.JProgressBar();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea2 = new javax.swing.JTextArea();
         jPanelExecutar = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
 
@@ -432,7 +435,19 @@ public class TelaPrincipal extends javax.swing.JFrame {
         lblTelefone.setForeground(new java.awt.Color(102, 102, 102));
         jPanelDadosEmpresa.add(lblTelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(72, 70, 120, 16));
 
-        jPanelSeletores.add(jPanelDadosEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 1200, 100));
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Regime da Empresa", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 13), new java.awt.Color(0, 0, 0))); // NOI18N
+        jPanel2.setLayout(null);
+
+        jComboBoxRegimeEmpresa.setBackground(new java.awt.Color(255, 255, 255));
+        jComboBoxRegimeEmpresa.setForeground(new java.awt.Color(0, 0, 0));
+        jComboBoxRegimeEmpresa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Simples Nacional", "Regime Normal" }));
+        jPanel2.add(jComboBoxRegimeEmpresa);
+        jComboBoxRegimeEmpresa.setBounds(10, 25, 1160, 26);
+
+        jPanelDadosEmpresa.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 1180, 60));
+
+        jPanelSeletores.add(jPanelDadosEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 1200, 170));
 
         jPanelSelecao.setBackground(new java.awt.Color(238, 238, 238));
         jPanelSelecao.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -553,18 +568,18 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         jPanelSelecao.add(btnClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 160, -1));
 
-        jProgressBarMigracao.setBackground(new java.awt.Color(255, 255, 255));
-        jProgressBarMigracao.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jProgressBarMigracao.setForeground(new java.awt.Color(48, 47, 97));
-        jProgressBarMigracao.setToolTipText("");
-        jProgressBarMigracao.setValue(25);
-        jProgressBarMigracao.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jProgressBarMigracao.setStringPainted(true);
-        jPanelSelecao.add(jProgressBarMigracao, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, 1180, 30));
+        jPanelSeletores.add(jPanelSelecao, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, 1200, 310));
 
-        jPanelSeletores.add(jPanelSelecao, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 1200, 430));
+        jTextArea2.setBackground(new java.awt.Color(35, 36, 77));
+        jTextArea2.setColumns(20);
+        jTextArea2.setForeground(new java.awt.Color(255, 51, 51));
+        jTextArea2.setRows(5);
+        jTextArea2.setText("Log:\n");
+        jScrollPane2.setViewportView(jTextArea2);
 
-        jPanel1.add(jPanelSeletores, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 130, 1220, 610));
+        jPanelSeletores.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 550, 1200, -1));
+
+        jPanel1.add(jPanelSeletores, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 130, 1220, 650));
 
         jPanelExecutar.setBackground(new java.awt.Color(106, 90, 205));
         jPanelExecutar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -576,7 +591,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel3.setText(" Executar");
         jPanelExecutar.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(-2, 0, 180, 50));
 
-        jPanel1.add(jPanelExecutar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1370, 780, 180, 50));
+        jPanel1.add(jPanelExecutar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1370, 795, 180, 50));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1570, 860));
 
@@ -712,6 +727,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     public static javax.swing.JRadioButton btnSubcategoria;
     public static javax.swing.JRadioButton btnUnidade;
     private javax.swing.JComboBox<String> jComboBoxEmpresas;
+    public static javax.swing.JComboBox<String> jComboBoxRegimeEmpresa;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -728,6 +744,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelConfiguracao;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanelConfiguracao;
@@ -741,10 +758,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelSelecao;
     private javax.swing.JPanel jPanelSeletores;
     private javax.swing.JPanel jPanelsair;
-    private javax.swing.JProgressBar jProgressBarMigracao;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JTextArea jTextArea2;
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JLabel lblBairro;
     private javax.swing.JLabel lblCidade;

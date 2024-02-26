@@ -46,6 +46,7 @@ import static telas.TelaPrincipal.btnFabricante;
 import static telas.TelaPrincipal.btnNcm;
 import static telas.TelaPrincipal.btnCest;
 import static telas.TelaPrincipal.btnEstoque;
+import static telas.TelaPrincipal.jComboBoxRegimeEmpresa;
 
 /**
  *
@@ -150,8 +151,14 @@ public class Program {
 
             if (btnProdutos.isSelected()) {
                 System.out.println("\n**** TESTE - findAll PRODUTO ****");
-                Regime regime = Regime.SIMPLES;
+                Regime regime = null;
                 Estoque estoque;
+                
+                if(jComboBoxRegimeEmpresa.getSelectedItem().equals("Simples Nacional")) {
+                    regime = Regime.SIMPLES;
+                } else if(jComboBoxRegimeEmpresa.getSelectedItem().equals("Regime Normal")) {
+                    regime = Regime.NORMAL;
+                }
 
                 if (btnEstoque.isSelected()) {
                     estoque = Estoque.SIM;
