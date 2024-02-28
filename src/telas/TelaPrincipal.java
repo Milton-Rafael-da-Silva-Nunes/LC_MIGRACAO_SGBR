@@ -40,9 +40,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
     public TelaPrincipal() {
         initComponents();
         setLogoLc();
-        setVisibilidadePaineisMigracao();
+        setVisibilidadeBotoesDeSelecaoParaMigracao(false);
         configurarMouseListeners();
-        //configurarGradienteMenus(jPanelMenus, new Color(37,37,37), new Color(129, 88, 169), false);
         jPanelMigracao.setVisible(false);
     }
 
@@ -61,38 +60,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         ImageIcon icon = new ImageIcon("src/imagens/novaLogoLC.gif");
         icon.setImage(icon.getImage().getScaledInstance(200, 70, 20));
         lblLogo.setIcon(icon);
-    }
-
-    private void configurarGradienteMenus(JPanel panel, Color startColor, Color endColor, boolean horizontal) {
-        panel.setOpaque(false);
-        panel.setLayout(new BorderLayout());
-
-        JPanel gradientPanel = new JPanel() {
-            @Override
-            protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                Graphics2D g2d = (Graphics2D) g.create();
-                int w = getWidth();
-                int h = getHeight();
-
-                // Ajuste para tornar o final do gradiente mais escuro
-                Color darkerEndColor = endColor.darker();
-
-                GradientPaint gradientPaint;
-
-                if (horizontal) {
-                    gradientPaint = new GradientPaint(w, 0, startColor, 0, 0, darkerEndColor);
-                } else {
-                    gradientPaint = new GradientPaint(0, 0, startColor, 0, h, darkerEndColor);
-                }
-
-                g2d.setPaint(gradientPaint);
-                g2d.fillRect(0, 0, w, h);
-                g2d.dispose();
-            }
-        };
-
-        panel.add(gradientPanel);
     }
 
     private void configurarMouseListeners() {
@@ -607,36 +574,25 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void btnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesActionPerformed
         if (btnClientes.isSelected()) {
-            jPanelContasReceber.setVisible(true);
+            setVisibilidadeBotoesDeClientes(true, "N");
         } else {
-            jPanelContasReceber.setVisible(false);
-            btnReceber.setSelected(false);
-            btnRecebidas.setSelected(false);
+            setVisibilidadeBotoesDeClientes(false, "S");
         }
     }//GEN-LAST:event_btnClientesActionPerformed
 
     private void btnFornecedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFornecedoresActionPerformed
         if (btnFornecedores.isSelected()) {
-            jPanelContasAPagar.setVisible(true);
+            setVisibilidadeBotoesDeFornecedores(true, "N");
         } else {
-            jPanelContasAPagar.setVisible(false);
-            btnPagar.setSelected(false);
-            btnPagas.setSelected(false);
+            setVisibilidadeBotoesDeFornecedores(false, "S");
         }
     }//GEN-LAST:event_btnFornecedoresActionPerformed
 
     private void btnProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdutosActionPerformed
         if (btnProdutos.isSelected()) {
-            jPanelProdutos.setVisible(true);
+            setVisibilidadeBotoesDeProdutos(true, "N");
         } else {
-            jPanelProdutos.setVisible(false);
-            btnUnidade.setSelected(false);
-            btnCategoria.setSelected(false);
-            btnSubcategoria.setSelected(false);
-            btnFabricante.setSelected(false);
-            btnNcm.setSelected(false);
-            btnCest.setSelected(false);
-            btnEstoque.setSelected(false);
+            setVisibilidadeBotoesDeProdutos(false, "S");
         }
     }//GEN-LAST:event_btnProdutosActionPerformed
 
@@ -682,17 +638,72 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jPanelConfiguracao.setVisible(pode);
     }
 
-    private void setVisibilidadePaineisMigracao() {
-        jPanelSeletores.setVisible(false);
-        jPanelContasReceber.setVisible(false);
-        jPanelContasAPagar.setVisible(false);
-        jPanelProdutos.setVisible(false);
-        jPanelExecutar.setVisible(false);
-        jPanelDadosEmpresa.setVisible(false);
-        jPanelSelecao.setVisible(false);
+    private void setVisibilidadeBotoesDeSelecaoParaMigracao(boolean pode) {
+        btnReceber.setEnabled(pode);
+        btnRecebidas.setEnabled(pode);
+        btnPagar.setEnabled(pode);
+        btnPagas.setEnabled(pode);
+        btnUnidade.setEnabled(pode);
+        btnCategoria.setEnabled(pode);
+        btnSubcategoria.setEnabled(pode);
+        btnFabricante.setEnabled(pode);
+        btnNcm.setEnabled(pode);
+        btnCest.setEnabled(pode);
+        btnEstoque.setEnabled(pode);
     }
 
-    private void exibirMensagem(String mensagem, String caminhoIcone) {
+    private void setVisibilidadeBotoesDeClientes(boolean pode, String desmarcar) {
+        if (desmarcar.equalsIgnoreCase("N")) {
+            btnReceber.setEnabled(pode);
+            btnRecebidas.setEnabled(pode);
+        } else {
+            btnReceber.setEnabled(pode);
+            btnRecebidas.setEnabled(pode);
+            btnReceber.setSelected(pode);
+            btnRecebidas.setSelected(pode);
+        }
+    }
+
+    private void setVisibilidadeBotoesDeFornecedores(boolean pode, String desmarcar) {
+        if (desmarcar.equalsIgnoreCase("N")) {
+            btnPagar.setEnabled(pode);
+            btnPagas.setEnabled(pode);
+        } else {
+            btnPagar.setEnabled(pode);
+            btnPagas.setEnabled(pode);
+            btnPagar.setSelected(pode);
+            btnPagas.setSelected(pode);
+        }
+    }
+
+    private void setVisibilidadeBotoesDeProdutos(boolean pode, String desmarcar) {
+        if (desmarcar.equalsIgnoreCase("N")) {
+            btnUnidade.setEnabled(pode);
+            btnCategoria.setEnabled(pode);
+            btnSubcategoria.setEnabled(pode);
+            btnFabricante.setEnabled(pode);
+            btnNcm.setEnabled(pode);
+            btnCest.setEnabled(pode);
+            btnEstoque.setEnabled(pode);
+        } else {
+            btnUnidade.setEnabled(false);
+            btnCategoria.setEnabled(false);
+            btnSubcategoria.setEnabled(false);
+            btnFabricante.setEnabled(false);
+            btnNcm.setEnabled(false);
+            btnCest.setEnabled(false);
+            btnEstoque.setEnabled(false);
+            btnUnidade.setSelected(false);
+            btnCategoria.setSelected(false);
+            btnSubcategoria.setSelected(false);
+            btnFabricante.setSelected(false);
+            btnNcm.setSelected(false);
+            btnCest.setSelected(false);
+            btnEstoque.setSelected(false);
+        }
+    }
+
+    private void exibirMensagemEmTela(String mensagem, String caminhoIcone) {
         telaMensagemPrincipal = new TelaMensagemPrincipal(TelaPrincipal.this, mensagem, caminhoIcone);
         telaMensagemPrincipal.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         telaMensagemPrincipal.setModalityType(JDialog.DEFAULT_MODALITY_TYPE);
@@ -704,11 +715,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private static final String ATENCAO_ICON_PATH = "src/imagens/icons8-atencao.gif.gif";
 
     private void getTelaSucessoMigracao() {
-        exibirMensagem("Migração finalizada com sucesso!", OK_ICON_PATH);
+        exibirMensagemEmTela("Migração finalizada com sucesso!", OK_ICON_PATH);
     }
 
     private void getTelaAtencao() {
-        exibirMensagem("Selecione uma tebela!", ATENCAO_ICON_PATH);
+        exibirMensagemEmTela("Selecione uma tebela!", ATENCAO_ICON_PATH);
     }
 
     public static void main(String args[]) {
